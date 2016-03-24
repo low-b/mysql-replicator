@@ -1,0 +1,105 @@
+package binlog_listener;
+enum MysqlType{
+	MYSQL_TYPE_DECIMAL = 0;//not exist in binlog.
+	MYSQL_TYPE_TINY = 1;
+	MYSQL_TYPE_SHORT = 2;
+	MYSQL_TYPE_LONG = 3;
+	MYSQL_TYPE_FLOAT = 4;
+	MYSQL_TYPE_DOUBLE = 5;
+	MYSQL_TYPE_NULL = 6;//not exist in binlog.
+	MYSQL_TYPE_TIMESTAMP = 7;
+	MYSQL_TYPE_LONGLONG = 8;
+	MYSQL_TYPE_INT24 = 9;
+	MYSQL_TYPE_DATE = 10;
+	MYSQL_TYPE_TIME = 11;
+	MYSQL_TYPE_DATETIME = 12;
+	MYSQL_TYPE_YEAR = 13;
+	MYSQL_TYPE_NEWDATE = 14;//not exist in binlog.
+	MYSQL_TYPE_VARCHAR = 15;
+	MYSQL_TYPE_BIT = 16;
+	MYSQL_TYPE_NEWDECIMAL = 246;
+	MYSQL_TYPE_ENUM = 247;
+	MYSQL_TYPE_SET = 248;
+	MYSQL_TYPE_TINY_BLOB = 249;//not exist in binlog
+	MYSQL_TYPE_MEDIUM_BLOB = 250;//not exist in binlog
+	MYSQL_TYPE_LONG_BLOB = 251;//not exist in binlog
+	MYSQL_TYPE_BLOB = 252;
+	MYSQL_TYPE_VAR_STRING = 253;
+	MYSQL_TYPE_STRING = 254;
+	MYSQL_TYPE_GEOMETRY = 255;
+}
+enum EventType{
+	UPDATE_EVENT = 0;
+	INSERT_EVENT = 1;
+	DELETE_EVENT = 2;
+}
+message Field {
+	//@name field name
+	required string name = 1;
+
+	//@mysql_type is field type in binary log of mysql.
+	required MysqlType mysql_type = 2;
+
+	//@is_signed can be true only when mysql_type is one of the following values.
+	// MYSQL_TYPE_TINY
+	// MYSQL_TYPE_SHORT
+	// MYSQL_TYPE_INT24
+	// MYSQL_TYPE_LONG
+	// MYSQL_TYPE_LONGLONG
+	// true : when field is signed field.
+	// false : when field is unsigned field, or not one of them.
+	required bool is_signed = 3[default = false];
+
+	//@is_pk 0:not primary key, 1:is primary key
+	required bool is_pk = 4;
+
+	optional bytes old_value = 5;
+	optional bytes is_old_null = 6;
+
+	optional bytes new_value = 7;
+	optional bytes is_new_null = 8;
+
+	optional string charset = 9;
+}
+
+message Row {
+	repeated Field field = 1;
+}
+message MysubStatus {
+	//@log_file binlog file name of this binlog event
+	required string log_file = 1;
+
+	//@offset binlog offset of this binlog event
+	required uint32 offset = 2;
+
+	//@timestamp timestamp of this binlog event.
+	required uint32 timestamp = 3;
+
+	//@safe_offset when publish failed, use this value to recover.
+	required uint32 safe_offset = 4;
+
+	//@safe_timestamp when publish failed, use this value to recover.
+	required uint32 safe_timestamp = 5;
+
+	required string host = 6;
+
+	required uint32 port = 7;
+	
+	optional uint64 progress = 8;
+}
+message BinlogEvent
+{
+	//@db database name of the table which this event happened on.
+	required string db = 1;
+
+	//@table table name of the table which this event happened on.
+	required string table = 2;
+
+	required EventType event_type = 3;
+
+	optional MysubStatus mysub_status = 4;
+
+	optional string charset = 5;
+
+	optional Row row = 6;
+}

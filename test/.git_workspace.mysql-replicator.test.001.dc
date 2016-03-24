@@ -1,0 +1,5 @@
+===DumpCollectedConfigs===
+git_workspace/mysql-replicator/test@???@comake
+    third-64/protobuf@protobuf_2-4-1-500_PD_BL@protobuf_2-4-1-500_PD_BL
+    third-64/boost@boost_1-57-0-100_PD_BL@boost_1-57-0-100_PD_BL
+    third-64/gtest@gtest_1-6-0-100_PD_BL@gtest_1-6-0-100_PD_BL

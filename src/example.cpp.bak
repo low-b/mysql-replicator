@@ -1,0 +1,12 @@
+#include "network_driver.h"
+
+int main() {
+//    NetworkDriver<BinlogPosition> driver;
+//    BinlogPosition pos("mysql-bin.000009", 4);
+//    driver.init();
+//    driver.connect();
+//    while(1) {
+//        shared_ptr<BinlogEvent> event = driver.take_binlog_event();
+//        cout << event->DebugString() << endl;
+//    }
+}
