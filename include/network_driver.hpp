@@ -7,13 +7,10 @@ void
 NetworkDriver<BinlogStartPoint, BinlogParser>::
 init() {
     conn_->connect();
-    printf("aaaaa\n");
-    shared_ptr<MySQLReplicatorStatement> state(conn_->createStatement());
-    printf("bbbbb\n");
-    shared_ptr<MySQLReplicatorResultSet> result(state->executeQuery("set names gb"));
-    printf("ccccc\n");
-    //db_meta_ = shared_ptr<DbMeta>(new DbMeta);
-    //db_meta_->build(conn_);
+    //shared_ptr<MySQLReplicatorStatement> state(conn_->createStatement());
+    //shared_ptr<MySQLReplicatorResultset> result(state->executeQuery("select column_name,is_nullable,column_key,data_type from information_schema.columns where table_schema=\'FC_Word\' and table_name=\'test_double\'"));
+    db_meta_ = shared_ptr<DbMeta>(new DbMeta);
+    db_meta_->build(conn_);
     //start_point_.send_binlog_dump();
 
 }

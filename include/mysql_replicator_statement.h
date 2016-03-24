@@ -11,7 +11,7 @@ class MySQLReplicatorStatement {
 public:
     MySQLReplicatorStatement(std::shared_ptr<boost::asio::ip::tcp::socket> socket)
         :socket_(socket) {}
-    std::shared_ptr<MySQLReplicatorResultSet> executeQuery(const std::string& sql);
+    std::shared_ptr<MySQLReplicatorResultset> executeQuery(const std::string& sql);
     int executeUpdate(const std::string& sql);
 private:
     std::shared_ptr<boost::asio::ip::tcp::socket> socket_;
