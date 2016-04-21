@@ -1,13 +1,14 @@
 #include "mysql_replicator_resultset.h"
 
 namespace mysql_replicator {
-std::string MySQLReplicatorResultSet::getString(uint32_t column_index){
-    return "";
+std::string MySQLReplicatorResultset::getString(uint32_t column_index) {
+    return rows_[index_]->get_data(column_index);
 }
-bool MySQLReplicatorResultSet::next(){
-    return true;
+bool MySQLReplicatorResultset::getBoolean(uint32_t column_index) {
+    return (rows_[index_]->get_data(column_index)=="YES")?true:false;
 }
-bool MySQLReplicatorResultSet::getBoolean(uint32_t column_index) {
-    return true;
+bool MySQLReplicatorResultset::next() {
+    ++index_;
+    return index_ < rows_.size();
 }
 }

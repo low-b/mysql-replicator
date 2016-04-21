@@ -5,7 +5,7 @@
 #include "network_exception.h"
 
 namespace mysql_replicator {
-struct Packet {
+class Packet {
 public:
     virtual void fromStream(std::istream&) {
         throw NetworkException("unsupported methods:fromStream");

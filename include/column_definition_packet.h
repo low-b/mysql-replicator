@@ -18,7 +18,7 @@ private:
     std::string org_name_;
     uint8_t next_length_;
     uint16_t charset_;
-    uint32_t column_length_;
+    uint32_t column_len_;
     uint8_t type_;
     uint16_t flags_;
     uint8_t decimals_;

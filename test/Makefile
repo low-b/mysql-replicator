@@ -72,19 +72,34 @@ clean:ccpclean
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mclean[0m']"
 	rm -rf gtest
 	rm -rf ./output/bin/gtest
+	rm -rf ../src/gtest_binlog_dump_gtid_packet.o
+	rm -rf ../src/gtest_binlog_dump_packet.o
+	rm -rf ../src/gtest_binlog_event_header.o
+	rm -rf ../src/gtest_binlog_position.o
 	rm -rf ../src/gtest_bytes_helper.o
+	rm -rf ../src/gtest_column_definition_packet.o
 	rm -rf ../src/gtest_db_meta.o
 	rm -rf ../src/gtest_eof_packet.o
 	rm -rf ../src/gtest_err_packet.o
+	rm -rf ../src/gtest_format_description_event.o
 	rm -rf ../src/gtest_handshake_init_packet.o
 	rm -rf ../src/gtest_handshake_response_packet.o
+	rm -rf ../src/gtest_intvar_event.o
+	rm -rf ../src/gtest_load_event.o
 	rm -rf ../src/gtest_mysql_replicator_connector.o
+	rm -rf ../src/gtest_mysql_replicator_dumper.o
 	rm -rf ../src/gtest_mysql_replicator_resultset.o
 	rm -rf ../src/gtest_mysql_replicator_statement.o
+	rm -rf ../src/gtest_network_driver.o
 	rm -rf ../src/gtest_ok_packet.o
 	rm -rf ../src/gtest_packet_header.o
+	rm -rf ../src/gtest_query_event.o
 	rm -rf ../src/gtest_query_packet.o
-	rm -rf ../src/gtest_query_response_packet.o
+	rm -rf ../src/gtest_resultset_row_packet.o
+	rm -rf ../src/gtest_rotate_event.o
+	rm -rf ../src/gtest_start_event_v3.o
+	rm -rf ../src/gtest_table_map_event.o
+	rm -rf ../src/gtest_xid_event.o
 	rm -rf gtest_network_driver_test.o
 
 .PHONY:dist
@@ -104,34 +119,64 @@ love:
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mlove[0m']"
 	@echo "make love done"
 
-gtest:../src/gtest_bytes_helper.o \
+gtest:../src/gtest_binlog_dump_gtid_packet.o \
+  ../src/gtest_binlog_dump_packet.o \
+  ../src/gtest_binlog_event_header.o \
+  ../src/gtest_binlog_position.o \
+  ../src/gtest_bytes_helper.o \
+  ../src/gtest_column_definition_packet.o \
   ../src/gtest_db_meta.o \
   ../src/gtest_eof_packet.o \
   ../src/gtest_err_packet.o \
+  ../src/gtest_format_description_event.o \
   ../src/gtest_handshake_init_packet.o \
   ../src/gtest_handshake_response_packet.o \
+  ../src/gtest_intvar_event.o \
+  ../src/gtest_load_event.o \
   ../src/gtest_mysql_replicator_connector.o \
+  ../src/gtest_mysql_replicator_dumper.o \
   ../src/gtest_mysql_replicator_resultset.o \
   ../src/gtest_mysql_replicator_statement.o \
+  ../src/gtest_network_driver.o \
   ../src/gtest_ok_packet.o \
   ../src/gtest_packet_header.o \
+  ../src/gtest_query_event.o \
   ../src/gtest_query_packet.o \
-  ../src/gtest_query_response_packet.o \
+  ../src/gtest_resultset_row_packet.o \
+  ../src/gtest_rotate_event.o \
+  ../src/gtest_start_event_v3.o \
+  ../src/gtest_table_map_event.o \
+  ../src/gtest_xid_event.o \
   gtest_network_driver_test.o
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mgtest[0m']"
-	$(CXX) ../src/gtest_bytes_helper.o \
+	$(CXX) ../src/gtest_binlog_dump_gtid_packet.o \
+  ../src/gtest_binlog_dump_packet.o \
+  ../src/gtest_binlog_event_header.o \
+  ../src/gtest_binlog_position.o \
+  ../src/gtest_bytes_helper.o \
+  ../src/gtest_column_definition_packet.o \
   ../src/gtest_db_meta.o \
   ../src/gtest_eof_packet.o \
   ../src/gtest_err_packet.o \
+  ../src/gtest_format_description_event.o \
   ../src/gtest_handshake_init_packet.o \
   ../src/gtest_handshake_response_packet.o \
+  ../src/gtest_intvar_event.o \
+  ../src/gtest_load_event.o \
   ../src/gtest_mysql_replicator_connector.o \
+  ../src/gtest_mysql_replicator_dumper.o \
   ../src/gtest_mysql_replicator_resultset.o \
   ../src/gtest_mysql_replicator_statement.o \
+  ../src/gtest_network_driver.o \
   ../src/gtest_ok_packet.o \
   ../src/gtest_packet_header.o \
+  ../src/gtest_query_event.o \
   ../src/gtest_query_packet.o \
-  ../src/gtest_query_response_packet.o \
+  ../src/gtest_resultset_row_packet.o \
+  ../src/gtest_rotate_event.o \
+  ../src/gtest_start_event_v3.o \
+  ../src/gtest_table_map_event.o \
+  ../src/gtest_xid_event.o \
   gtest_network_driver_test.o -Xlinker "-(" ../../../third-64/boost/lib/libboost_atomic.a \
   ../../../third-64/boost/lib/libboost_chrono.a \
   ../../../third-64/boost/lib/libboost_container.a \
@@ -158,7 +203,6 @@ gtest:../src/gtest_bytes_helper.o \
   ../../../third-64/boost/lib/libboost_system.a \
   ../../../third-64/boost/lib/libboost_thread.a \
   ../../../third-64/boost/lib/libboost_timer.a \
-  ../../../third-64/boost/lib/libboost_wave.a \
   ../../../third-64/boost/lib/libboost_wserialization.a \
   ../../../third-64/gtest/lib/libgtest.a \
   ../../../third-64/gtest/lib/libgtest_main.a \
@@ -171,9 +215,29 @@ gtest:../src/gtest_bytes_helper.o \
 	mkdir -p ./output/bin
 	cp -f --link gtest ./output/bin
 
+../src/gtest_binlog_dump_gtid_packet.o:../src/binlog_dump_gtid_packet.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_binlog_dump_gtid_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_binlog_dump_gtid_packet.o ../src/binlog_dump_gtid_packet.cpp
+
+../src/gtest_binlog_dump_packet.o:../src/binlog_dump_packet.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_binlog_dump_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_binlog_dump_packet.o ../src/binlog_dump_packet.cpp
+
+../src/gtest_binlog_event_header.o:../src/binlog_event_header.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_binlog_event_header.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_binlog_event_header.o ../src/binlog_event_header.cpp
+
+../src/gtest_binlog_position.o:../src/binlog_position.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_binlog_position.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_binlog_position.o ../src/binlog_position.cpp
+
 ../src/gtest_bytes_helper.o:../src/bytes_helper.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_bytes_helper.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_bytes_helper.o ../src/bytes_helper.cpp
+
+../src/gtest_column_definition_packet.o:../src/column_definition_packet.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_column_definition_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_column_definition_packet.o ../src/column_definition_packet.cpp
 
 ../src/gtest_db_meta.o:../src/db_meta.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_db_meta.o[0m']"
@@ -187,6 +251,10 @@ gtest:../src/gtest_bytes_helper.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_err_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_err_packet.o ../src/err_packet.cpp
 
+../src/gtest_format_description_event.o:../src/format_description_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_format_description_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_format_description_event.o ../src/format_description_event.cpp
+
 ../src/gtest_handshake_init_packet.o:../src/handshake_init_packet.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_handshake_init_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_handshake_init_packet.o ../src/handshake_init_packet.cpp
@@ -195,9 +263,21 @@ gtest:../src/gtest_bytes_helper.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_handshake_response_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_handshake_response_packet.o ../src/handshake_response_packet.cpp
 
+../src/gtest_intvar_event.o:../src/intvar_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_intvar_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_intvar_event.o ../src/intvar_event.cpp
+
+../src/gtest_load_event.o:../src/load_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_load_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_load_event.o ../src/load_event.cpp
+
 ../src/gtest_mysql_replicator_connector.o:../src/mysql_replicator_connector.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_mysql_replicator_connector.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_mysql_replicator_connector.o ../src/mysql_replicator_connector.cpp
+
+../src/gtest_mysql_replicator_dumper.o:../src/mysql_replicator_dumper.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_mysql_replicator_dumper.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_mysql_replicator_dumper.o ../src/mysql_replicator_dumper.cpp
 
 ../src/gtest_mysql_replicator_resultset.o:../src/mysql_replicator_resultset.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_mysql_replicator_resultset.o[0m']"
@@ -207,6 +287,10 @@ gtest:../src/gtest_bytes_helper.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_mysql_replicator_statement.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_mysql_replicator_statement.o ../src/mysql_replicator_statement.cpp
 
+../src/gtest_network_driver.o:../src/network_driver.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_network_driver.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_network_driver.o ../src/network_driver.cpp
+
 ../src/gtest_ok_packet.o:../src/ok_packet.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_ok_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_ok_packet.o ../src/ok_packet.cpp
@@ -215,13 +299,33 @@ gtest:../src/gtest_bytes_helper.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_packet_header.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_packet_header.o ../src/packet_header.cpp
 
+../src/gtest_query_event.o:../src/query_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_query_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_query_event.o ../src/query_event.cpp
+
 ../src/gtest_query_packet.o:../src/query_packet.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_query_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_query_packet.o ../src/query_packet.cpp
 
-../src/gtest_query_response_packet.o:../src/query_response_packet.cpp
-	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_query_response_packet.o[0m']"
-	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_query_response_packet.o ../src/query_response_packet.cpp
+../src/gtest_resultset_row_packet.o:../src/resultset_row_packet.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_resultset_row_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_resultset_row_packet.o ../src/resultset_row_packet.cpp
+
+../src/gtest_rotate_event.o:../src/rotate_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_rotate_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_rotate_event.o ../src/rotate_event.cpp
+
+../src/gtest_start_event_v3.o:../src/start_event_v3.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_start_event_v3.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_start_event_v3.o ../src/start_event_v3.cpp
+
+../src/gtest_table_map_event.o:../src/table_map_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_table_map_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_table_map_event.o ../src/table_map_event.cpp
+
+../src/gtest_xid_event.o:../src/xid_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_xid_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_xid_event.o ../src/xid_event.cpp
 
 gtest_network_driver_test.o:network_driver_test.cpp \
   network_driver_test.h

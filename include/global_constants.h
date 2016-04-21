@@ -12,6 +12,10 @@ const std::string TABLE_SQL =
 const std::string COLOMUN_SQL =
     "select column_name,is_nullable,column_key,data_type \
     from information_schema.columns where table_schema='%1%' and table_name='%2%'";
+
+const size_t PACKET_HEADER_LENTH = 4;
+const size_t EVENT_HEADER_LENTH = 20;
+
 }
 }
 #endif //_GLOBAL_CONSTANTS_H_

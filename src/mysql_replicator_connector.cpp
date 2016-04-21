@@ -7,6 +7,7 @@
 #include "eof_packet.h"
 #include "network_exception.h"
 #include "bytes_helper.h"
+#include "binlog_dump_exception.h"
 
 namespace mysql_replicator {
 void MySQLReplicatorConnector::connect() {
@@ -43,14 +44,12 @@ void MySQLReplicatorConnector::connect() {
     //authenticate
 
     //get init pacakge
+    std::shared_ptr<PacketHeader> handshake_init_header(new PacketHeader);
+    BytesHelper::readHeader(socket_, handshake_init_header);
     boost::asio::streambuf init_mesasge;
     std::istream init_stream(&init_mesasge);
-    boost::asio::read(*socket_, init_mesasge, boost::asio::transfer_exactly(4));
-    PacketHeader handshake_init_header;
-    handshake_init_header.fromStream(init_stream);
-    //handshake_init_header.printPacket();
     boost::asio::read(*socket_, init_mesasge,
-            boost::asio::transfer_exactly(handshake_init_header.get_packet_len()));
+            boost::asio::transfer_exactly(handshake_init_header->get_packet_len()));
     HandshakeInitPacket handshake_init_packet;
     handshake_init_packet.fromStream(init_stream);
     //handshake_init_packet.printPacket();
@@ -61,18 +60,16 @@ void MySQLReplicatorConnector::connect() {
     handshake_response_packet->set_username(username_);
     handshake_response_packet->set_password(password_);
     handshake_response_packet->set_auth_reponse_data(handshake_init_packet.get_auth_data());
-    BytesHelper::write(socket_, handshake_response_packet, handshake_init_header.get_seq_num() + 1);
+    BytesHelper::write(socket_, handshake_response_packet, handshake_init_header->get_seq_num() + 1);
 
     //get auth result packet
+    std::shared_ptr<PacketHeader> handshake_result_header(new PacketHeader);
+    BytesHelper::readHeader(socket_, handshake_result_header);
     boost::asio::streambuf result_message;
     std::istream result_stream(&result_message);
-    boost::asio::read(*socket_, result_message, boost::asio::transfer_exactly(4));
-    PacketHeader handshake_result_header;
-    handshake_result_header.fromStream(result_stream);
-    //handshake_result_header.printPacket();
     boost::asio::read(*socket_, result_message,
-            boost::asio::transfer_exactly(handshake_result_header.get_packet_len()));
-    uint8_t auth_error_code = boost::asio::buffer_cast<const char*>(result_message.data())[0];
+            boost::asio::transfer_exactly(handshake_result_header->get_packet_len()));
+    uint8_t auth_error_code = result_stream.peek();
     if (auth_error_code == 0) {
         OkPacket ok_packet;
         ok_packet.fromStream(result_stream);

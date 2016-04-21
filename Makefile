@@ -72,19 +72,26 @@ clean:ccpclean
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mclean[0m']"
 	rm -rf binlog_listener
 	rm -rf ./output/bin/binlog_listener
+	rm -rf src/binlog_listener_binlog_dump_gtid_packet.o
+	rm -rf src/binlog_listener_binlog_dump_packet.o
+	rm -rf src/binlog_listener_binlog_event_header.o
+	rm -rf src/binlog_listener_binlog_position.o
 	rm -rf src/binlog_listener_bytes_helper.o
+	rm -rf src/binlog_listener_column_definition_packet.o
 	rm -rf src/binlog_listener_db_meta.o
 	rm -rf src/binlog_listener_eof_packet.o
 	rm -rf src/binlog_listener_err_packet.o
 	rm -rf src/binlog_listener_handshake_init_packet.o
 	rm -rf src/binlog_listener_handshake_response_packet.o
 	rm -rf src/binlog_listener_mysql_replicator_connector.o
+	rm -rf src/binlog_listener_mysql_replicator_dumper.o
 	rm -rf src/binlog_listener_mysql_replicator_resultset.o
 	rm -rf src/binlog_listener_mysql_replicator_statement.o
+	rm -rf src/binlog_listener_network_driver.o
 	rm -rf src/binlog_listener_ok_packet.o
 	rm -rf src/binlog_listener_packet_header.o
 	rm -rf src/binlog_listener_query_packet.o
-	rm -rf src/binlog_listener_query_response_packet.o
+	rm -rf src/binlog_listener_resultset_row_packet.o
 
 .PHONY:dist
 dist:
@@ -103,33 +110,47 @@ love:
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mlove[0m']"
 	@echo "make love done"
 
-binlog_listener:src/binlog_listener_bytes_helper.o \
+binlog_listener:src/binlog_listener_binlog_dump_gtid_packet.o \
+  src/binlog_listener_binlog_dump_packet.o \
+  src/binlog_listener_binlog_event_header.o \
+  src/binlog_listener_binlog_position.o \
+  src/binlog_listener_bytes_helper.o \
+  src/binlog_listener_column_definition_packet.o \
   src/binlog_listener_db_meta.o \
   src/binlog_listener_eof_packet.o \
   src/binlog_listener_err_packet.o \
   src/binlog_listener_handshake_init_packet.o \
   src/binlog_listener_handshake_response_packet.o \
   src/binlog_listener_mysql_replicator_connector.o \
+  src/binlog_listener_mysql_replicator_dumper.o \
   src/binlog_listener_mysql_replicator_resultset.o \
   src/binlog_listener_mysql_replicator_statement.o \
+  src/binlog_listener_network_driver.o \
   src/binlog_listener_ok_packet.o \
   src/binlog_listener_packet_header.o \
   src/binlog_listener_query_packet.o \
-  src/binlog_listener_query_response_packet.o
+  src/binlog_listener_resultset_row_packet.o
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbinlog_listener[0m']"
-	$(CXX) src/binlog_listener_bytes_helper.o \
+	$(CXX) src/binlog_listener_binlog_dump_gtid_packet.o \
+  src/binlog_listener_binlog_dump_packet.o \
+  src/binlog_listener_binlog_event_header.o \
+  src/binlog_listener_binlog_position.o \
+  src/binlog_listener_bytes_helper.o \
+  src/binlog_listener_column_definition_packet.o \
   src/binlog_listener_db_meta.o \
   src/binlog_listener_eof_packet.o \
   src/binlog_listener_err_packet.o \
   src/binlog_listener_handshake_init_packet.o \
   src/binlog_listener_handshake_response_packet.o \
   src/binlog_listener_mysql_replicator_connector.o \
+  src/binlog_listener_mysql_replicator_dumper.o \
   src/binlog_listener_mysql_replicator_resultset.o \
   src/binlog_listener_mysql_replicator_statement.o \
+  src/binlog_listener_network_driver.o \
   src/binlog_listener_ok_packet.o \
   src/binlog_listener_packet_header.o \
   src/binlog_listener_query_packet.o \
-  src/binlog_listener_query_response_packet.o -Xlinker "-(" ../../third-64/boost/lib/libboost_atomic.a \
+  src/binlog_listener_resultset_row_packet.o -Xlinker "-(" ../../third-64/boost/lib/libboost_atomic.a \
   ../../third-64/boost/lib/libboost_chrono.a \
   ../../third-64/boost/lib/libboost_container.a \
   ../../third-64/boost/lib/libboost_context.a \
@@ -171,14 +192,73 @@ binlog_listener:src/binlog_listener_bytes_helper.o \
 	mkdir -p ./output/bin
 	cp -f --link binlog_listener ./output/bin
 
+src/binlog_listener_binlog_dump_gtid_packet.o:src/binlog_dump_gtid_packet.cpp \
+  include/binlog_dump_gtid_packet.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_binlog_dump_gtid_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_binlog_dump_gtid_packet.o src/binlog_dump_gtid_packet.cpp
+
+src/binlog_listener_binlog_dump_packet.o:src/binlog_dump_packet.cpp \
+  include/binlog_dump_packet.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/mysql_replicator_com.h \
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_binlog_dump_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_binlog_dump_packet.o src/binlog_dump_packet.cpp
+
+src/binlog_listener_binlog_event_header.o:src/binlog_event_header.cpp \
+  include/binlog_event_header.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_binlog_event_header.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_binlog_event_header.o src/binlog_event_header.cpp
+
+src/binlog_listener_binlog_position.o:src/binlog_position.cpp \
+  include/binlog_position.h \
+  include/binlog_check_point.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/binlog_dump_packet.h \
+  include/mysql_replicator_com.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_binlog_position.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_binlog_position.o src/binlog_position.cpp
+
 src/binlog_listener_bytes_helper.o:src/bytes_helper.cpp \
   include/bytes_helper.h \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/packet_header.h
+  include/packet_header.h \
+  include/binlog_event_header.h \
+  include/packet_header.h \
+  include/global_constants.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_bytes_helper.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_bytes_helper.o src/bytes_helper.cpp
+
+src/binlog_listener_column_definition_packet.o:src/column_definition_packet.cpp \
+  include/column_definition_packet.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_column_definition_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_column_definition_packet.o src/column_definition_packet.cpp
 
 src/binlog_listener_db_meta.o:src/db_meta.cpp \
   include/db_meta.h \
@@ -186,6 +266,11 @@ src/binlog_listener_db_meta.o:src/db_meta.cpp \
   include/mysql_replicator_connector.h \
   include/mysql_replicator_statement.h \
   include/mysql_replicator_resultset.h \
+  include/column_definition_packet.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/resultset_row_packet.h \
   include/mysql_replicator_statement.h \
   include/mysql_replicator_resultset.h \
   include/global_constants.h
@@ -197,7 +282,9 @@ src/binlog_listener_eof_packet.o:src/eof_packet.cpp \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_eof_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_eof_packet.o src/eof_packet.cpp
 
@@ -206,7 +293,9 @@ src/binlog_listener_err_packet.o:src/err_packet.cpp \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_err_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_err_packet.o src/err_packet.cpp
 
@@ -215,7 +304,9 @@ src/binlog_listener_handshake_init_packet.o:src/handshake_init_packet.cpp \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_handshake_init_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_handshake_init_packet.o src/handshake_init_packet.cpp
 
@@ -224,7 +315,9 @@ src/binlog_listener_handshake_response_packet.o:src/handshake_response_packet.cp
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_handshake_response_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_handshake_response_packet.o src/handshake_response_packet.cpp
 
@@ -232,47 +325,104 @@ src/binlog_listener_mysql_replicator_connector.o:src/mysql_replicator_connector.
   include/mysql_replicator_connector.h \
   include/mysql_replicator_statement.h \
   include/mysql_replicator_resultset.h \
-  include/packet_header.h \
+  include/column_definition_packet.h \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
+  include/resultset_row_packet.h \
+  include/packet_header.h \
   include/handshake_init_packet.h \
   include/handshake_response_packet.h \
   include/ok_packet.h \
   include/err_packet.h \
   include/eof_packet.h \
   include/network_exception.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h \
+  include/binlog_dump_exception.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_mysql_replicator_connector.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_mysql_replicator_connector.o src/mysql_replicator_connector.cpp
 
+src/binlog_listener_mysql_replicator_dumper.o:src/mysql_replicator_dumper.cpp \
+  include/mysql_replicator_dumper.h \
+  include/binlog_check_point.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/log_event.h \
+  include/packet_header.h \
+  include/eof_packet.h \
+  include/binlog_event_header.h \
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h \
+  include/network_exception.h \
+  include/binlog_dump_exception.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_mysql_replicator_dumper.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_mysql_replicator_dumper.o src/mysql_replicator_dumper.cpp
+
 src/binlog_listener_mysql_replicator_resultset.o:src/mysql_replicator_resultset.cpp \
-  include/mysql_replicator_resultset.h
+  include/mysql_replicator_resultset.h \
+  include/column_definition_packet.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/resultset_row_packet.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_mysql_replicator_resultset.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_mysql_replicator_resultset.o src/mysql_replicator_resultset.cpp
 
 src/binlog_listener_mysql_replicator_statement.o:src/mysql_replicator_statement.cpp \
   include/mysql_replicator_statement.h \
   include/mysql_replicator_resultset.h \
-  include/bytes_helper.h \
+  include/column_definition_packet.h \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
+  include/resultset_row_packet.h \
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h \
   include/query_packet.h \
   include/mysql_replicator_com.h \
   include/ok_packet.h \
   include/err_packet.h \
-  include/query_response_packet.h \
-  include/packet_header.h
+  include/eof_packet.h \
+  include/packet_header.h \
+  include/column_definition_packet.h \
+  include/resultset_row_packet.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_mysql_replicator_statement.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_mysql_replicator_statement.o src/mysql_replicator_statement.cpp
+
+src/binlog_listener_network_driver.o:src/network_driver.cpp \
+  include/network_driver.h \
+  proto/binlog_event.pb.h \
+  include/mysql_replicator_connector.h \
+  include/mysql_replicator_statement.h \
+  include/mysql_replicator_resultset.h \
+  include/column_definition_packet.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/resultset_row_packet.h \
+  include/mysql_replicator_dumper.h \
+  include/binlog_check_point.h \
+  include/log_event.h \
+  include/db_meta.h \
+  include/mysql_replicator_com.h \
+  include/mysql_replicator_statement.h \
+  include/mysql_replicator_resultset.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_network_driver.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_network_driver.o src/network_driver.cpp
 
 src/binlog_listener_ok_packet.o:src/ok_packet.cpp \
   include/ok_packet.h \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_ok_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_ok_packet.o src/ok_packet.cpp
 
@@ -281,7 +431,9 @@ src/binlog_listener_packet_header.o:src/packet_header.cpp \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_packet_header.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_packet_header.o src/packet_header.cpp
 
@@ -291,18 +443,22 @@ src/binlog_listener_query_packet.o:src/query_packet.cpp \
   include/network_exception.h \
   include/myexception.h \
   include/mysql_replicator_com.h \
-  include/bytes_helper.h
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_query_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_query_packet.o src/query_packet.cpp
 
-src/binlog_listener_query_response_packet.o:src/query_response_packet.cpp \
-  include/query_response_packet.h \
+src/binlog_listener_resultset_row_packet.o:src/resultset_row_packet.cpp \
+  include/resultset_row_packet.h \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
-  include/bytes_helper.h
-	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_query_response_packet.o[0m']"
-	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_query_response_packet.o src/query_response_packet.cpp
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/binlog_event_header.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_resultset_row_packet.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_resultset_row_packet.o src/resultset_row_packet.cpp
 
 endif #ifeq ($(shell uname -m),x86_64)
 

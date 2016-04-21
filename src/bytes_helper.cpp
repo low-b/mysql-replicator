@@ -1,5 +1,6 @@
 #include "bytes_helper.h"
 #include "packet_header.h"
+#include "global_constants.h"
 
 namespace mysql_replicator {
 void BytesHelper::readValueByLength(std::istream &is, char* value, size_t length) {
@@ -68,6 +69,16 @@ void BytesHelper::readNullString(std::istream &is, std::string& value) {
     }
     value = out.str();
 }
+void BytesHelper::readEofString(std::istream &is, std::string& value) {
+    char ch;
+    std::ostringstream out;
+    is.get(ch);
+    while(is.good()){
+        out.put(ch);
+        is.get(ch);
+    }
+    value = out.str();
+}
 void BytesHelper::readFixString(std::istream &is, std::string& value, size_t length) {
     char ch;
     size_t ct = 0;
@@ -79,8 +90,11 @@ void BytesHelper::readFixString(std::istream &is, std::string& value, size_t len
     }
     value = out.str();
 }
-//void BytesHelper::readLenencString(std::istream &is, std::string& value) {
-//}
+void BytesHelper::readLenencString(std::istream &is, std::string& value) {
+    uint64_t length = 0;
+    readLenencUint(is, length);
+    readFixString(is, value, length);
+}
 void BytesHelper::writeFixUint8(std::ostream &os, const uint8_t& value) {
     const char *ptr= (const char*)(&value);
     writeValueByLength(os, ptr, sizeof(value));
@@ -151,5 +165,21 @@ void BytesHelper::write(
     packet_with_header.push_back(packet_message.data());
     boost::asio::write(*socket, packet_with_header,
             boost::asio::transfer_at_least(4 + packet_size));
+}
+void BytesHelper::readHeader(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
+            std::shared_ptr<PacketHeader> packet_header) {
+    boost::asio::streambuf packet_message;
+    std::istream packet_stream(&packet_message);
+    boost::asio::read(*socket, packet_message,
+            boost::asio::transfer_exactly(global_constants::PACKET_HEADER_LENTH));
+    packet_header->fromStream(packet_stream);
+}
+void BytesHelper::readEventHeader(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
+            std::shared_ptr<BinlogEventHeader> event_header) {
+    boost::asio::streambuf packet_message;
+    std::istream packet_stream(&packet_message);
+    boost::asio::read(*socket, packet_message,
+            boost::asio::transfer_exactly(global_constants::EVENT_HEADER_LENTH));
+    event_header->fromStream(packet_stream);
 }
 }

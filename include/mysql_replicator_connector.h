@@ -19,7 +19,9 @@ public:
     void connect();
     std::shared_ptr<MySQLReplicatorStatement> createStatement() {
         return std::make_shared<MySQLReplicatorStatement>(socket_);
-
+    }
+    std::shared_ptr<boost::asio::ip::tcp::socket> get_socket() {
+        return socket_;
     }
 private:
     boost::asio::io_service io_service_;

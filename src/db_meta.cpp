@@ -68,7 +68,7 @@ void TableMeta::build(const std::string& schema_name,
     string sql = boost::str(
             boost::format(global_constants::COLOMUN_SQL) % schema_name % table_name);
     shared_ptr<MySQLReplicatorStatement> state(conn->createStatement());
-    shared_ptr<MySQLReplicatorResultSet> result(state->executeQuery(sql));
+    shared_ptr<MySQLReplicatorResultset> result(state->executeQuery(sql));
     while (result->next()) {
         string column_name = result->getString(1);
         shared_ptr<ColumnMeta> c(new ColumnMeta);
@@ -84,7 +84,7 @@ void SchemaMeta::build(const std::string& schema_name,
     shared_ptr<MySQLReplicatorStatement> state(conn->createStatement());
     string sql = boost::str(
             boost::format(global_constants::TABLE_SQL) % schema_name);
-    shared_ptr<MySQLReplicatorResultSet> result(state->executeQuery(sql));
+    shared_ptr<MySQLReplicatorResultset> result(state->executeQuery(sql));
     while (result->next()) {
         string table_name = result->getString(1);
         shared_ptr<TableMeta> t(new TableMeta);
@@ -94,7 +94,7 @@ void SchemaMeta::build(const std::string& schema_name,
 }
 void DbMeta::build(std::shared_ptr<MySQLReplicatorConnector> conn) {
     shared_ptr<MySQLReplicatorStatement> state(conn->createStatement());
-    shared_ptr<MySQLReplicatorResultSet> result(state->executeQuery(global_constants::SCHEMA_SQL));
+    shared_ptr<MySQLReplicatorResultset> result(state->executeQuery(global_constants::SCHEMA_SQL));
     while (result->next()) {
         string schema_name = result->getString(1);
         shared_ptr<SchemaMeta> s(new SchemaMeta);
