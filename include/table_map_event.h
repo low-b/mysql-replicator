@@ -2,6 +2,7 @@
 #define __TABLE_MAP_EVENT_H__
 
 #include <vector>
+#include <boost/dynamic_bitset.hpp>
 #include "log_event.h"
 
 namespace mysql_replicator {
@@ -22,7 +23,7 @@ private:
     uint64_t column_count_;
     std::vector<uint8_t> column_type_def_;
     std::vector<uint16_t> column_meta_def_;
-    std::vector<uint8_t> null_bitmap_;
+    boost::dynamic_bitset<> null_bitmap_;
 };
 }
 #endif //__TABLE_MAP_EVENT_H__

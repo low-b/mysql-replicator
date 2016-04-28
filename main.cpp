@@ -1,19 +1,3 @@
-/***************************************************************************
- * 
- * Copyright (c) 2015 Baidu.com, Inc. All Rights Reserved
- * 
- **************************************************************************/
- 
- 
- 
-/**
- * @file main.cpp
- * @author qianhan(com@baidu.com)
- * @date 2015/12/09 15:45:22
- * @brief 
- *  
- **/
-
 #include "chunk_list.h"
 #include <string>
 #include <iostream>
@@ -35,6 +19,3 @@ int main() {
     cout << cl.t << endl << cl.u.t << endl;
     return 0;
 }
-
-
-/* vim: set expandtab ts=4 sw=4 sts=4 tw=100: */

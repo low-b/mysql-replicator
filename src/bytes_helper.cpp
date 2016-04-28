@@ -2,6 +2,8 @@
 #include "packet_header.h"
 #include "global_constants.h"
 
+using namespace std;
+
 namespace mysql_replicator {
 void BytesHelper::readValueByLength(std::istream &is, char* value, size_t length) {
     char ch;
@@ -181,5 +183,21 @@ void BytesHelper::readEventHeader(std::shared_ptr<boost::asio::ip::tcp::socket> 
     boost::asio::read(*socket, packet_message,
             boost::asio::transfer_exactly(global_constants::EVENT_HEADER_LENTH));
     event_header->fromStream(packet_stream);
+}
+void BytesHelper::fillBitmap(const std::string& byte_buffer, boost::dynamic_bitset<>& bitmap) {
+    bitmap.resize(byte_buffer.length() * 8, false);
+    for (size_t i = 0; i < byte_buffer.length(); ++i) {
+        uint8_t tmp = byte_buffer[i];
+        boost::dynamic_bitset<>::size_type bit = i * 8;
+        if (tmp == 0) continue;
+        if ((tmp & 0x01) != 0) bitmap.set(bit);
+        if ((tmp & 0x02) != 0) bitmap.set(bit + 1);
+        if ((tmp & 0x04) != 0) bitmap.set(bit + 2);
+        if ((tmp & 0x08) != 0) bitmap.set(bit + 3);
+        if ((tmp & 0x10) != 0) bitmap.set(bit + 4);
+        if ((tmp & 0x20) != 0) bitmap.set(bit + 5);
+        if ((tmp & 0x40) != 0) bitmap.set(bit + 6);
+        if ((tmp & 0x80) != 0) bitmap.set(bit + 7);
+    }
 }
 }

@@ -1,9 +1,7 @@
 #include "table_map_event.h"
-#include <sstream>
 #include "bytes_helper.h"
 #include "mysql_replicator_com.h"
 
-using namespace std;
 namespace mysql_replicator {
 
 void TableMapEvent::fromStream(std::istream &is) {
@@ -21,9 +19,6 @@ void TableMapEvent::fromStream(std::istream &is) {
         BytesHelper::readFixUint8(is, tmp_type);
         column_type_def_.push_back(tmp_type);
     }
-    std::string column_def_str;
-    BytesHelper::readLenencString(is, column_def_str);
-    std::istringstream iss(column_def_str);
     for (size_t i = 0; i < column_count_; ++i) {
         switch (column_type_def_[i]) {
             case MYSQL_TYPE_TINY_BLOB:
@@ -38,7 +33,7 @@ void TableMapEvent::fromStream(std::istream &is) {
             case MYSQL_TYPE_TIMESTAMP2:
             case MYSQL_TYPE_JSON: {
                 uint8_t tmp_meta;
-                BytesHelper::readFixUint8(iss, tmp_meta);
+                BytesHelper::readFixUint8(is, tmp_meta);
                 column_meta_def_.push_back(tmp_meta);
                 break;
             }
@@ -48,9 +43,9 @@ void TableMapEvent::fromStream(std::istream &is) {
             case MYSQL_TYPE_STRING: {
                 uint16_t tmp_meta;
                 uint8_t tmp;
-                BytesHelper::readFixUint8(iss, tmp);
+                BytesHelper::readFixUint8(is, tmp);
                 tmp_meta = tmp << 8;
-                BytesHelper::readFixUint8(iss, tmp);
+                BytesHelper::readFixUint8(is, tmp);
                 tmp_meta += tmp;
                 column_meta_def_.push_back(tmp_meta);
                 break;
@@ -58,7 +53,7 @@ void TableMapEvent::fromStream(std::istream &is) {
             case MYSQL_TYPE_BIT:
             case MYSQL_TYPE_VARCHAR: {
                 uint16_t tmp_meta;
-                BytesHelper::readFixUint16(iss, tmp_meta);
+                BytesHelper::readFixUint16(is, tmp_meta);
                 column_meta_def_.push_back(tmp_meta);
                 break;
 
@@ -71,25 +66,15 @@ void TableMapEvent::fromStream(std::istream &is) {
         }
     }
     size_t null_bitsmap_size = (column_count_ + 7) / 8;
-    std::string byte_buffer;
-    BytesHelper::readFixString(is, byte_buffer, null_bitsmap_size);
-    BytesHelper::fillBitmap(byte_buffer, null_bitmap_);
+    for (size_t i = 0; i < null_bitsmap_size; ++i) {
+        uint8_t tmp;
+        BytesHelper::readFixUint8(is, tmp);
+        null_bitmap_.push_back(tmp);
+    }
 }
 
 void TableMapEvent::printPacket() {
     std::cout << "--------table map event packet begin---------" << std::endl;
-    std::cout << "table_id_:" << table_id_ << std::endl;
-    std::cout << "flags_:" << (uint32_t)flags_ << std::endl;
-    std::cout << "schema_name_len_:" << (uint32_t)schema_name_len_ << std::endl;
-    std::cout << "schema_name_:" << schema_name_ << std::endl;
-    std::cout << "table_name_len_:" << (uint32_t)table_name_len_ << std::endl;
-    std::cout << "table_name_:" << table_name_ << std::endl;
-    std::cout << "column_count_:" << column_count_ << std::endl;
-    for (size_t i = 0; i < column_type_def_.size(); ++i) {
-        std::cout << "column_type_def_[" << i << "]:" << (uint32_t)column_type_def_[i] << std::endl;
-        std::cout << "column_meta_def_[" << i << "]:" << column_meta_def_[i] << std::endl;
-    }
-    std::cout << "null_bitmap_:" << null_bitmap_ << std::endl;
     std::cout << "--------table map event packet end---------" << std::endl;
 }
 }

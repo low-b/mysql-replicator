@@ -15,8 +15,8 @@ TEST(TransformerTest,  test_aaaa)
     try {
     driver.init();
     std::shared_ptr<BinlogPosition> bin_pos = std::make_shared<BinlogPosition>();
-    bin_pos->set_binlog_filename("mysql-bin.000020");
-    bin_pos->set_binlog_pos(106);
+    bin_pos->set_binlog_filename("mysql-bin.000012");
+    bin_pos->set_binlog_pos(4);
     bin_pos->set_slave_id(12345);
     driver.sendBinlogDump(bin_pos);
     driver.takeBinlogEvent();

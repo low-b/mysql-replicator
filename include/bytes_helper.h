@@ -9,6 +9,7 @@
 #include "packet.h"
 #include "packet_header.h"
 #include "binlog_event_header.h"
+#include <boost/dynamic_bitset.hpp>
 
 namespace mysql_replicator {
 class BytesHelper {
@@ -44,6 +45,7 @@ public:
     static void readEventHeader(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
             std::shared_ptr<BinlogEventHeader> event_header);
 //    static void read(std::ostream &os, const std::string& value);
+    static void fillBitmap(const std::string& byte_buffer, boost::dynamic_bitset<>& bitmap);
 private:
     static void readValueByLength(std::istream &is, char* value, size_t length);
     static void writeValueByLength(std::ostream &os, const char* value, size_t length);
