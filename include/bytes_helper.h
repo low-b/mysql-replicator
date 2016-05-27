@@ -40,6 +40,11 @@ public:
     static void write(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
             std::shared_ptr<Packet> packet,
             uint8_t seq);
+    static void read(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
+            boost::asio::streambuf& buff,
+            uint8_t& seq);
+    static void read(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
+            boost::asio::streambuf& buff);
     static void readHeader(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
             std::shared_ptr<PacketHeader> packet_header);
     static void readEventHeader(std::shared_ptr<boost::asio::ip::tcp::socket> socket,

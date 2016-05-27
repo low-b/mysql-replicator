@@ -168,6 +168,25 @@ void BytesHelper::write(
     boost::asio::write(*socket, packet_with_header,
             boost::asio::transfer_at_least(4 + packet_size));
 }
+void BytesHelper::read(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
+        boost::asio::streambuf& buff) {
+    uint8_t seq = 0;
+    read(socket, buff, seq);
+}
+
+void BytesHelper::read(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
+        boost::asio::streambuf& buff, uint8_t& seq) {
+    std::shared_ptr<PacketHeader> header(new PacketHeader);
+    BytesHelper::readHeader(socket, header);
+    seq = header->get_seq_num();
+    while (header->get_packet_len() == global_constants::PACKET_MAX_LENGTH) {
+        boost::asio::read(*socket, buff,
+                boost::asio::transfer_exactly(header->get_packet_len()));
+        BytesHelper::readHeader(socket, header);
+    }
+    boost::asio::read(*socket, buff,
+            boost::asio::transfer_exactly(header->get_packet_len()));
+}
 void BytesHelper::readHeader(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
             std::shared_ptr<PacketHeader> packet_header) {
     boost::asio::streambuf packet_message;

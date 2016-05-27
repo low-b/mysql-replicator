@@ -44,12 +44,10 @@ void MySQLReplicatorConnector::connect() {
     //authenticate
 
     //get init pacakge
-    std::shared_ptr<PacketHeader> handshake_init_header(new PacketHeader);
-    BytesHelper::readHeader(socket_, handshake_init_header);
+    uint8_t seq = 0;
     boost::asio::streambuf init_mesasge;
     std::istream init_stream(&init_mesasge);
-    boost::asio::read(*socket_, init_mesasge,
-            boost::asio::transfer_exactly(handshake_init_header->get_packet_len()));
+    BytesHelper::read(socket_, init_mesasge, seq);
     HandshakeInitPacket handshake_init_packet;
     handshake_init_packet.fromStream(init_stream);
     //handshake_init_packet.printPacket();
@@ -60,15 +58,12 @@ void MySQLReplicatorConnector::connect() {
     handshake_response_packet->set_username(username_);
     handshake_response_packet->set_password(password_);
     handshake_response_packet->set_auth_reponse_data(handshake_init_packet.get_auth_data());
-    BytesHelper::write(socket_, handshake_response_packet, handshake_init_header->get_seq_num() + 1);
+    BytesHelper::write(socket_, handshake_response_packet, seq + 1);
 
     //get auth result packet
-    std::shared_ptr<PacketHeader> handshake_result_header(new PacketHeader);
-    BytesHelper::readHeader(socket_, handshake_result_header);
     boost::asio::streambuf result_message;
     std::istream result_stream(&result_message);
-    boost::asio::read(*socket_, result_message,
-            boost::asio::transfer_exactly(handshake_result_header->get_packet_len()));
+    BytesHelper::read(socket_, result_message);
     uint8_t auth_error_code = result_stream.peek();
     if (auth_error_code == 0) {
         OkPacket ok_packet;

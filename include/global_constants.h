@@ -3,18 +3,22 @@
 
 namespace mysql_replicator {
 namespace global_constants {
-const std::string SCHEMA_SQL = 
+const static std::string SCHEMA_SQL = 
     "select schema_name from information_schema.schemata \
     where schema_name != 'information_schema'";
-const std::string TABLE_SQL =
+const static std::string TABLE_SQL =
     "select table_name from information_schema.tables \
     where table_schema='%1%' and TABLE_TYPE=\'BASE TABLE\'";
-const std::string COLOMUN_SQL =
+const static std::string COLOMUN_SQL =
     "select column_name,is_nullable,column_key,data_type \
     from information_schema.columns where table_schema='%1%' and table_name='%2%'";
+const static std::string CLOSE_CHECKSUM_SQL =
+    "SET @master_binlog_checksum='NONE'";
 
-const size_t PACKET_HEADER_LENTH = 4;
-const size_t EVENT_HEADER_LENTH = 20;
+const static size_t PACKET_HEADER_LENTH = 4;
+const static size_t EVENT_HEADER_LENTH = 20;
+
+const static size_t PACKET_MAX_LENGTH = 256L * 256L * 256L - 1;
 
 }
 }

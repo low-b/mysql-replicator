@@ -74,6 +74,7 @@ clean:ccpclean
 	rm -rf ./output/bin/gtest
 	rm -rf ../src/gtest_binlog_dump_gtid_packet.o
 	rm -rf ../src/gtest_binlog_dump_packet.o
+	rm -rf ../src/gtest_binlog_event_factory.o
 	rm -rf ../src/gtest_binlog_event_header.o
 	rm -rf ../src/gtest_binlog_position.o
 	rm -rf ../src/gtest_bytes_helper.o
@@ -99,6 +100,7 @@ clean:ccpclean
 	rm -rf ../src/gtest_rotate_event.o
 	rm -rf ../src/gtest_start_event_v3.o
 	rm -rf ../src/gtest_table_map_event.o
+	rm -rf ../src/gtest_update_rows_event.o
 	rm -rf ../src/gtest_xid_event.o
 	rm -rf gtest_network_driver_test.o
 
@@ -121,6 +123,7 @@ love:
 
 gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_binlog_dump_packet.o \
+  ../src/gtest_binlog_event_factory.o \
   ../src/gtest_binlog_event_header.o \
   ../src/gtest_binlog_position.o \
   ../src/gtest_bytes_helper.o \
@@ -146,11 +149,13 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_rotate_event.o \
   ../src/gtest_start_event_v3.o \
   ../src/gtest_table_map_event.o \
+  ../src/gtest_update_rows_event.o \
   ../src/gtest_xid_event.o \
   gtest_network_driver_test.o
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mgtest[0m']"
 	$(CXX) ../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_binlog_dump_packet.o \
+  ../src/gtest_binlog_event_factory.o \
   ../src/gtest_binlog_event_header.o \
   ../src/gtest_binlog_position.o \
   ../src/gtest_bytes_helper.o \
@@ -176,6 +181,7 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_rotate_event.o \
   ../src/gtest_start_event_v3.o \
   ../src/gtest_table_map_event.o \
+  ../src/gtest_update_rows_event.o \
   ../src/gtest_xid_event.o \
   gtest_network_driver_test.o -Xlinker "-(" ../../../third-64/boost/lib/libboost_atomic.a \
   ../../../third-64/boost/lib/libboost_chrono.a \
@@ -203,6 +209,7 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../../../third-64/boost/lib/libboost_system.a \
   ../../../third-64/boost/lib/libboost_thread.a \
   ../../../third-64/boost/lib/libboost_timer.a \
+  ../../../third-64/boost/lib/libboost_wave.a \
   ../../../third-64/boost/lib/libboost_wserialization.a \
   ../../../third-64/gtest/lib/libgtest.a \
   ../../../third-64/gtest/lib/libgtest_main.a \
@@ -222,6 +229,10 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
 ../src/gtest_binlog_dump_packet.o:../src/binlog_dump_packet.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_binlog_dump_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_binlog_dump_packet.o ../src/binlog_dump_packet.cpp
+
+../src/gtest_binlog_event_factory.o:../src/binlog_event_factory.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_binlog_event_factory.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_binlog_event_factory.o ../src/binlog_event_factory.cpp
 
 ../src/gtest_binlog_event_header.o:../src/binlog_event_header.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_binlog_event_header.o[0m']"
@@ -322,6 +333,10 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
 ../src/gtest_table_map_event.o:../src/table_map_event.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_table_map_event.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_table_map_event.o ../src/table_map_event.cpp
+
+../src/gtest_update_rows_event.o:../src/update_rows_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_update_rows_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_update_rows_event.o ../src/update_rows_event.cpp
 
 ../src/gtest_xid_event.o:../src/xid_event.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_xid_event.o[0m']"
