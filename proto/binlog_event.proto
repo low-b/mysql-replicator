@@ -1,4 +1,4 @@
-package binlog_listener;
+package mysql_replicator;
 enum MysqlType{
 	MYSQL_TYPE_DECIMAL = 0;//not exist in binlog.
 	MYSQL_TYPE_TINY = 1;
@@ -53,19 +53,19 @@ message Field {
 	//@is_pk 0:not primary key, 1:is primary key
 	required bool is_pk = 4;
 
-	optional bytes old_value = 5;
-	optional bytes is_old_null = 6;
+	optional bool is_old_null = 6[default = false];
+	optional bytes old_value = 7;
 
-	optional bytes new_value = 7;
-	optional bytes is_new_null = 8;
+	optional bool is_new_null = 8[default = false];
+	optional bytes new_value = 9;
 
-	optional string charset = 9;
+	optional string charset = 10;
 }
 
 message Row {
 	repeated Field field = 1;
 }
-message MysubStatus {
+message Status {
 	//@log_file binlog file name of this binlog event
 	required string log_file = 1;
 
@@ -75,17 +75,11 @@ message MysubStatus {
 	//@timestamp timestamp of this binlog event.
 	required uint32 timestamp = 3;
 
-	//@safe_offset when publish failed, use this value to recover.
-	required uint32 safe_offset = 4;
+	required string host = 4;
 
-	//@safe_timestamp when publish failed, use this value to recover.
-	required uint32 safe_timestamp = 5;
-
-	required string host = 6;
-
-	required uint32 port = 7;
+	required uint32 port = 5;
 	
-	optional uint64 progress = 8;
+	optional uint64 progress = 6;
 }
 message BinlogEvent
 {
@@ -97,7 +91,7 @@ message BinlogEvent
 
 	required EventType event_type = 3;
 
-	optional MysubStatus mysub_status = 4;
+	optional Status status = 4;
 
 	optional string charset = 5;
 

@@ -9,6 +9,7 @@
 #include "mysql_replicator_dumper.h"
 #include "db_meta.h"
 #include "binlog_check_point.h"
+#include "binlog_event_factory.h"
 
 namespace mysql_replicator {
 
@@ -22,7 +23,7 @@ public:
         }
     void init();
     void sendBinlogDump(std::shared_ptr<BinlogCheckPoint> binlog_pos);
-    std::shared_ptr<binlog_listener::BinlogEvent> takeBinlogEvent();
+    std::shared_ptr<BinlogEvent> takeBinlogEvent();
 private:
     std::shared_ptr<DbMeta> db_meta_;
     std::shared_ptr<MySQLReplicatorConnector> conn_;
@@ -31,7 +32,7 @@ private:
     uint16_t port_;
     std::string username_;
     std::string password_;
-
+    std::shared_ptr<BinlogEventFactory> event_factory_;
 };
 }
 

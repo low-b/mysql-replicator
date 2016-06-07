@@ -8,10 +8,7 @@ using std::string;
 using std::shared_ptr;
 namespace mysql_replicator {
 
-/*
 void ColumnMeta::set_data_type(const std::string data_type) {
-//    if (date_type == "decimal") {
-//        data_type_ = MYSQL_TYPE_DECIMAL;
     if (data_type == "tinyint") {
         data_type_ = MYSQL_TYPE_TINY;
     } else if (data_type == "smallint") {
@@ -22,8 +19,8 @@ void ColumnMeta::set_data_type(const std::string data_type) {
         data_type_ = MYSQL_TYPE_FLOAT;
     } else if (data_type == "double") {
         data_type_ = MYSQL_TYPE_DOUBLE;
-//    } else if (data_type == "") {
-//        data_type_ = MYSQL_TYPE_NULL;
+    } else if (data_type == "null") {
+        data_type_ = MYSQL_TYPE_NULL;
     } else if (data_type == "timestamp") {
         data_type_ = MYSQL_TYPE_TIMESTAMP;
     } else if (data_type == "bigint") {
@@ -38,8 +35,6 @@ void ColumnMeta::set_data_type(const std::string data_type) {
         data_type_ = MYSQL_TYPE_DATETIME;
     } else if (data_type == "year") {
         data_type_ = MYSQL_TYPE_YEAR;
-//    } else if (data_type == "") {
-//        data_type_ = MYSQL_TYPE_NEWDATE;
     } else if (data_type == "varchar") {
         data_type_ = MYSQL_TYPE_VARCHAR;
     } else if (data_type == "bit") {
@@ -51,16 +46,18 @@ void ColumnMeta::set_data_type(const std::string data_type) {
     } else if (data_type == "set") {
         data_type_ = MYSQL_TYPE_SET;
     } else if (data_type == "tinyblob") {
-        data_type_ = MYSQL_TYPE_TINY;
-    } else if (data_type == "") {
-        data_type_ = MYSQL_TYPE_TINY;
-    } else if (data_type == "") {
-        data_type_ = MYSQL_TYPE_TINY;
-    } else if (data_type == "") {
-        data_type_ = MYSQL_TYPE_TINY;
-    data_type_ = data_type;
+        data_type_ = MYSQL_TYPE_TINY_BLOB;
+    } else if (data_type == "mediumblob") {
+        data_type_ = MYSQL_TYPE_MEDIUM_BLOB;
+    } else if (data_type == "longblob") {
+        data_type_ = MYSQL_TYPE_LONG_BLOB;
+    } else if (data_type == "char") {
+        data_type_ = MYSQL_TYPE_STRING;
+    } else if (data_type == "geometry") {
+        data_type_ = MYSQL_TYPE_GEOMETRY;
+    }
 }
-*/
+
 
 void TableMeta::build(const std::string& schema_name,
         const std::string& table_name,
@@ -73,9 +70,10 @@ void TableMeta::build(const std::string& schema_name,
         string column_name = result->getString(1);
         shared_ptr<ColumnMeta> c(new ColumnMeta);
         c->set_column_name(column_name);
-        c->set_is_nullable(result->getBoolean(2));
+        c->set_is_nullable(result->getString(2) == "YES");
         c->set_is_pk(result->getString(3));
         c->set_data_type(result->getString(4));
+        c->set_is_signed(result->getString(5).find("unsigned") == std::string::npos);
         columns_.push_back(c);
     }
 }

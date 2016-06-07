@@ -2,6 +2,7 @@
 #include <sstream>
 #include "bytes_helper.h"
 #include "mysql_replicator_com.h"
+#include "binlog_event.pb.h"
 
 using namespace std;
 namespace mysql_replicator {
@@ -71,9 +72,7 @@ void TableMapEvent::fromStream(std::istream &is) {
         }
     }
     size_t null_bitsmap_size = (column_count_ + 7) / 8;
-    std::string byte_buffer;
-    BytesHelper::readFixString(is, byte_buffer, null_bitsmap_size);
-    BytesHelper::fillBitmap(byte_buffer, null_bitmap_);
+    BytesHelper::readBitmap(is, null_bitset_, null_bitsmap_size);
 }
 
 void TableMapEvent::printPacket() {
@@ -89,7 +88,7 @@ void TableMapEvent::printPacket() {
         std::cout << "column_type_def_[" << i << "]:" << (uint32_t)column_type_def_[i] << std::endl;
         std::cout << "column_meta_def_[" << i << "]:" << column_meta_def_[i] << std::endl;
     }
-    std::cout << "null_bitmap_:" << null_bitmap_ << std::endl;
+    std::cout << "null_bitset_:" << null_bitset_ << std::endl;
     std::cout << "--------table map event packet end---------" << std::endl;
 }
 }

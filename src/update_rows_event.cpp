@@ -4,11 +4,4 @@
 
 namespace mysql_replicator {
 
-void UpdateRowsEvent::fromStream(std::istream &is) {
-}
-
-void UpdateRowsEvent::printPacket() {
-    std::cout << "--------table map event packet begin---------" << std::endl;
-    std::cout << "--------table map event packet end---------" << std::endl;
-}
 }

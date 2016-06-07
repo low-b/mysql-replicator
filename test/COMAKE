@@ -42,6 +42,6 @@ ImportConfigsFrom('../')
 #CONFIGS_32('lib2/ullib')
 #CONFIGS_64('lib2-64/ullib')
 
-test_sources=GLOB('../src/*.cpp *.cpp').replace("../src/main.cpp", ' ')
+test_sources=GLOB('../src/*.cpp ../src/*.cc *.cpp ../proto/*.cc').replace("../src/main.cpp", ' ')
 
 Application('gtest',Sources(test_sources),ENV.LinkLibs()-LinkLibs('../../third-64/boost/lib/libboost_prg_exec_monitor.a')-LinkLibs('../../third-64/boost/lib/libboost_test_exec_monitor.a')-LinkLibs('../../third-64/boost/lib/libboost_unit_test_framework.a')-LinkLibs('../../public/bslext/output/lib/libbsl_var_vscript.a'))

@@ -10,10 +10,12 @@ const static std::string TABLE_SQL =
     "select table_name from information_schema.tables \
     where table_schema='%1%' and TABLE_TYPE=\'BASE TABLE\'";
 const static std::string COLOMUN_SQL =
-    "select column_name,is_nullable,column_key,data_type \
+    "select column_name,is_nullable,column_key,data_type,column_type \
     from information_schema.columns where table_schema='%1%' and table_name='%2%'";
 const static std::string CLOSE_CHECKSUM_SQL =
     "SET @master_binlog_checksum='NONE'";
+const static std::string VERSION_SQL =
+    "SELECT VERSION()";
 
 const static size_t PACKET_HEADER_LENTH = 4;
 const static size_t EVENT_HEADER_LENTH = 20;

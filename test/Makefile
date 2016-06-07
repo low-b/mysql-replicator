@@ -46,7 +46,7 @@ CCP_FLAGS=
 
 
 #COMAKE UUID
-COMAKE_MD5=22f69fea786a1150a14a04cddbeee10a  COMAKE
+COMAKE_MD5=48c880db4872e65a2f246fd4c70cae6a  COMAKE
 
 
 .PHONY:all
@@ -91,6 +91,7 @@ clean:ccpclean
 	rm -rf ../src/gtest_mysql_replicator_dumper.o
 	rm -rf ../src/gtest_mysql_replicator_resultset.o
 	rm -rf ../src/gtest_mysql_replicator_statement.o
+	rm -rf ../src/gtest_mysql_util.o
 	rm -rf ../src/gtest_network_driver.o
 	rm -rf ../src/gtest_ok_packet.o
 	rm -rf ../src/gtest_packet_header.o
@@ -98,11 +99,14 @@ clean:ccpclean
 	rm -rf ../src/gtest_query_packet.o
 	rm -rf ../src/gtest_resultset_row_packet.o
 	rm -rf ../src/gtest_rotate_event.o
+	rm -rf ../src/gtest_rows_event.o
 	rm -rf ../src/gtest_start_event_v3.o
 	rm -rf ../src/gtest_table_map_event.o
 	rm -rf ../src/gtest_update_rows_event.o
 	rm -rf ../src/gtest_xid_event.o
+	rm -rf ../src/gtest_dtoa.o
 	rm -rf gtest_network_driver_test.o
+	rm -rf ../proto/gtest_binlog_event.pb.o
 
 .PHONY:dist
 dist:
@@ -140,6 +144,7 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_mysql_replicator_dumper.o \
   ../src/gtest_mysql_replicator_resultset.o \
   ../src/gtest_mysql_replicator_statement.o \
+  ../src/gtest_mysql_util.o \
   ../src/gtest_network_driver.o \
   ../src/gtest_ok_packet.o \
   ../src/gtest_packet_header.o \
@@ -147,11 +152,14 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_query_packet.o \
   ../src/gtest_resultset_row_packet.o \
   ../src/gtest_rotate_event.o \
+  ../src/gtest_rows_event.o \
   ../src/gtest_start_event_v3.o \
   ../src/gtest_table_map_event.o \
   ../src/gtest_update_rows_event.o \
   ../src/gtest_xid_event.o \
-  gtest_network_driver_test.o
+  ../src/gtest_dtoa.o \
+  gtest_network_driver_test.o \
+  ../proto/gtest_binlog_event.pb.o
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mgtest[0m']"
 	$(CXX) ../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_binlog_dump_packet.o \
@@ -172,6 +180,7 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_mysql_replicator_dumper.o \
   ../src/gtest_mysql_replicator_resultset.o \
   ../src/gtest_mysql_replicator_statement.o \
+  ../src/gtest_mysql_util.o \
   ../src/gtest_network_driver.o \
   ../src/gtest_ok_packet.o \
   ../src/gtest_packet_header.o \
@@ -179,11 +188,14 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
   ../src/gtest_query_packet.o \
   ../src/gtest_resultset_row_packet.o \
   ../src/gtest_rotate_event.o \
+  ../src/gtest_rows_event.o \
   ../src/gtest_start_event_v3.o \
   ../src/gtest_table_map_event.o \
   ../src/gtest_update_rows_event.o \
   ../src/gtest_xid_event.o \
-  gtest_network_driver_test.o -Xlinker "-(" ../../../third-64/boost/lib/libboost_atomic.a \
+  ../src/gtest_dtoa.o \
+  gtest_network_driver_test.o \
+  ../proto/gtest_binlog_event.pb.o -Xlinker "-(" ../../../third-64/boost/lib/libboost_atomic.a \
   ../../../third-64/boost/lib/libboost_chrono.a \
   ../../../third-64/boost/lib/libboost_container.a \
   ../../../third-64/boost/lib/libboost_context.a \
@@ -298,6 +310,10 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_mysql_replicator_statement.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_mysql_replicator_statement.o ../src/mysql_replicator_statement.cpp
 
+../src/gtest_mysql_util.o:../src/mysql_util.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_mysql_util.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_mysql_util.o ../src/mysql_util.cpp
+
 ../src/gtest_network_driver.o:../src/network_driver.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_network_driver.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_network_driver.o ../src/network_driver.cpp
@@ -326,6 +342,10 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_rotate_event.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_rotate_event.o ../src/rotate_event.cpp
 
+../src/gtest_rows_event.o:../src/rows_event.cpp
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_rows_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_rows_event.o ../src/rows_event.cpp
+
 ../src/gtest_start_event_v3.o:../src/start_event_v3.cpp
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_start_event_v3.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_start_event_v3.o ../src/start_event_v3.cpp
@@ -342,10 +362,18 @@ gtest:../src/gtest_binlog_dump_gtid_packet.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_xid_event.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_xid_event.o ../src/xid_event.cpp
 
+../src/gtest_dtoa.o:../src/dtoa.cc
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../src/gtest_dtoa.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../src/gtest_dtoa.o ../src/dtoa.cc
+
 gtest_network_driver_test.o:network_driver_test.cpp \
   network_driver_test.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mgtest_network_driver_test.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o gtest_network_driver_test.o network_driver_test.cpp
+
+../proto/gtest_binlog_event.pb.o:../proto/binlog_event.pb.cc
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40m../proto/gtest_binlog_event.pb.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o ../proto/gtest_binlog_event.pb.o ../proto/binlog_event.pb.cc
 
 endif #ifeq ($(shell uname -m),x86_64)
 

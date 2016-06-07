@@ -6,7 +6,8 @@
 namespace mysql_replicator {
 class XidEvent : public LogEvent {
 public:
-    XidEvent(std::shared_ptr<BinlogEventHeader> header) : LogEvent(header) {}
+    XidEvent(std::shared_ptr<BinlogEventHeader> header) :
+        LogEvent(header) {}
     virtual void fromStream(std::istream&);
     virtual void printPacket();
 private:

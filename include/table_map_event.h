@@ -8,9 +8,25 @@
 namespace mysql_replicator {
 class TableMapEvent : public LogEvent {
 public:
-    TableMapEvent(std::shared_ptr<BinlogEventHeader> header) : LogEvent(header) {}
+    TableMapEvent(std::shared_ptr<BinlogEventHeader> header) :
+        LogEvent(header) {}
     virtual void fromStream(std::istream&);
     virtual void printPacket();
+    uint64_t get_table_id() {
+        return table_id_;
+    }
+    std::string get_schema_name() {
+        return schema_name_;
+    }
+    std::string get_table_name() {
+        return table_name_;
+    }
+    const std::vector<uint8_t> & get_column_type_def() {
+        return column_type_def_;
+    }
+    const std::vector<uint16_t> & get_column_meta_def() {
+        return column_meta_def_;
+    }
 private:
     uint64_t table_id_;
     uint16_t flags_;
@@ -23,7 +39,7 @@ private:
     uint64_t column_count_;
     std::vector<uint8_t> column_type_def_;
     std::vector<uint16_t> column_meta_def_;
-    boost::dynamic_bitset<> null_bitmap_;
+    boost::dynamic_bitset<> null_bitset_;
 };
 }
 #endif //__TABLE_MAP_EVENT_H__

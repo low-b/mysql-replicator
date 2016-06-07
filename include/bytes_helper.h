@@ -20,6 +20,13 @@ public:
     static void readFixUint32(std::istream &is, uint32_t& value);
     static void readFixUint48(std::istream &is, uint64_t& value);
     static void readFixUint64(std::istream &is, uint64_t& value);
+    static void readFixInt8(std::istream &is, int8_t& value);
+    static void readFixInt16(std::istream &is, int16_t& value);
+    static void readFixInt24(std::istream &is, int32_t& value);
+    static void readFixInt32(std::istream &is, int32_t& value);
+    static void readFixInt64(std::istream &is, int64_t& value);
+    static void readFixFloat(std::istream &is, float& value);
+    static void readFixDouble(std::istream &is, double& value);
     static int readLenencUint(std::istream &is, uint64_t& value);
     static void readNullString(std::istream &is, std::string& value);
     static void readEofString(std::istream &is, std::string& value);
@@ -50,7 +57,7 @@ public:
     static void readEventHeader(std::shared_ptr<boost::asio::ip::tcp::socket> socket,
             std::shared_ptr<BinlogEventHeader> event_header);
 //    static void read(std::ostream &os, const std::string& value);
-    static void fillBitmap(const std::string& byte_buffer, boost::dynamic_bitset<>& bitmap);
+    static void readBitmap(std::istream &is, boost::dynamic_bitset<>& bitmap, size_t bitmap_size);
 private:
     static void readValueByLength(std::istream &is, char* value, size_t length);
     static void writeValueByLength(std::ostream &os, const char* value, size_t length);

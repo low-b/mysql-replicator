@@ -7,7 +7,8 @@
 namespace mysql_replicator {
 class LoadEvent : public LogEvent {
 public:
-    LoadEvent(std::shared_ptr<BinlogEventHeader> header) : LogEvent(header) {}
+    LoadEvent(std::shared_ptr<BinlogEventHeader> header) :
+        LogEvent(header) {}
     virtual void fromStream(std::istream&);
     virtual void printPacket();
 private:

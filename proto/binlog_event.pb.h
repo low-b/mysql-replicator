@@ -27,7 +27,7 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace binlog_listener {
+namespace mysql_replicator {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_binlog_5fevent_2eproto();
@@ -57,6 +57,10 @@ enum MysqlType {
   MYSQL_TYPE_NEWDATE = 14,
   MYSQL_TYPE_VARCHAR = 15,
   MYSQL_TYPE_BIT = 16,
+  MYSQL_TYPE_TIMESTAMP2 = 17,
+  MYSQL_TYPE_DATETIME2 = 18,
+  MYSQL_TYPE_TIME2 = 19,
+  MYSQL_TYPE_JSON = 245,
   MYSQL_TYPE_NEWDECIMAL = 246,
   MYSQL_TYPE_ENUM = 247,
   MYSQL_TYPE_SET = 248,
@@ -170,12 +174,12 @@ class Field : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // required .binlog_listener.MysqlType mysql_type = 2;
+  // required .mysql_replicator.MysqlType mysql_type = 2;
   inline bool has_mysql_type() const;
   inline void clear_mysql_type();
   static const int kMysqlTypeFieldNumber = 2;
-  inline ::binlog_listener::MysqlType mysql_type() const;
-  inline void set_mysql_type(::binlog_listener::MysqlType value);
+  inline ::mysql_replicator::MysqlType mysql_type() const;
+  inline void set_mysql_type(::mysql_replicator::MysqlType value);
 
   // required bool is_signed = 3 [default = false];
   inline bool has_is_signed() const;
@@ -191,10 +195,17 @@ class Field : public ::google::protobuf::Message {
   inline bool is_pk() const;
   inline void set_is_pk(bool value);
 
-  // optional bytes old_value = 5;
+  // optional bool is_old_null = 6;
+  inline bool has_is_old_null() const;
+  inline void clear_is_old_null();
+  static const int kIsOldNullFieldNumber = 6;
+  inline bool is_old_null() const;
+  inline void set_is_old_null(bool value);
+
+  // optional bytes old_value = 7;
   inline bool has_old_value() const;
   inline void clear_old_value();
-  static const int kOldValueFieldNumber = 5;
+  static const int kOldValueFieldNumber = 7;
   inline const ::std::string& old_value() const;
   inline void set_old_value(const ::std::string& value);
   inline void set_old_value(const char* value);
@@ -203,22 +214,17 @@ class Field : public ::google::protobuf::Message {
   inline ::std::string* release_old_value();
   inline void set_allocated_old_value(::std::string* old_value);
 
-  // optional bytes is_old_null = 6;
-  inline bool has_is_old_null() const;
-  inline void clear_is_old_null();
-  static const int kIsOldNullFieldNumber = 6;
-  inline const ::std::string& is_old_null() const;
-  inline void set_is_old_null(const ::std::string& value);
-  inline void set_is_old_null(const char* value);
-  inline void set_is_old_null(const void* value, size_t size);
-  inline ::std::string* mutable_is_old_null();
-  inline ::std::string* release_is_old_null();
-  inline void set_allocated_is_old_null(::std::string* is_old_null);
+  // optional bool is_new_null = 8;
+  inline bool has_is_new_null() const;
+  inline void clear_is_new_null();
+  static const int kIsNewNullFieldNumber = 8;
+  inline bool is_new_null() const;
+  inline void set_is_new_null(bool value);
 
-  // optional bytes new_value = 7;
+  // optional bytes new_value = 9;
   inline bool has_new_value() const;
   inline void clear_new_value();
-  static const int kNewValueFieldNumber = 7;
+  static const int kNewValueFieldNumber = 9;
   inline const ::std::string& new_value() const;
   inline void set_new_value(const ::std::string& value);
   inline void set_new_value(const char* value);
@@ -227,22 +233,10 @@ class Field : public ::google::protobuf::Message {
   inline ::std::string* release_new_value();
   inline void set_allocated_new_value(::std::string* new_value);
 
-  // optional bytes is_new_null = 8;
-  inline bool has_is_new_null() const;
-  inline void clear_is_new_null();
-  static const int kIsNewNullFieldNumber = 8;
-  inline const ::std::string& is_new_null() const;
-  inline void set_is_new_null(const ::std::string& value);
-  inline void set_is_new_null(const char* value);
-  inline void set_is_new_null(const void* value, size_t size);
-  inline ::std::string* mutable_is_new_null();
-  inline ::std::string* release_is_new_null();
-  inline void set_allocated_is_new_null(::std::string* is_new_null);
-
-  // optional string charset = 9;
+  // optional string charset = 10;
   inline bool has_charset() const;
   inline void clear_charset();
-  static const int kCharsetFieldNumber = 9;
+  static const int kCharsetFieldNumber = 10;
   inline const ::std::string& charset() const;
   inline void set_charset(const ::std::string& value);
   inline void set_charset(const char* value);
@@ -251,7 +245,7 @@ class Field : public ::google::protobuf::Message {
   inline ::std::string* release_charset();
   inline void set_allocated_charset(::std::string* charset);
 
-  // @@protoc_insertion_point(class_scope:binlog_listener.Field)
+  // @@protoc_insertion_point(class_scope:mysql_replicator.Field)
  private:
   inline void set_has_name();
   inline void clear_has_name();
@@ -261,14 +255,14 @@ class Field : public ::google::protobuf::Message {
   inline void clear_has_is_signed();
   inline void set_has_is_pk();
   inline void clear_has_is_pk();
-  inline void set_has_old_value();
-  inline void clear_has_old_value();
   inline void set_has_is_old_null();
   inline void clear_has_is_old_null();
-  inline void set_has_new_value();
-  inline void clear_has_new_value();
+  inline void set_has_old_value();
+  inline void clear_has_old_value();
   inline void set_has_is_new_null();
   inline void clear_has_is_new_null();
+  inline void set_has_new_value();
+  inline void clear_has_new_value();
   inline void set_has_charset();
   inline void clear_has_charset();
 
@@ -280,10 +274,10 @@ class Field : public ::google::protobuf::Message {
   int mysql_type_;
   bool is_signed_;
   bool is_pk_;
+  bool is_old_null_;
+  bool is_new_null_;
   ::std::string* old_value_;
-  ::std::string* is_old_null_;
   ::std::string* new_value_;
-  ::std::string* is_new_null_;
   ::std::string* charset_;
   friend void  protobuf_AddDesc_binlog_5fevent_2eproto();
   friend void protobuf_AssignDesc_binlog_5fevent_2eproto();
@@ -347,26 +341,26 @@ class Row : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated .binlog_listener.Field field = 1;
+  // repeated .mysql_replicator.Field field = 1;
   inline int field_size() const;
   inline void clear_field();
   static const int kFieldFieldNumber = 1;
-  inline const ::binlog_listener::Field& field(int index) const;
-  inline ::binlog_listener::Field* mutable_field(int index);
-  inline ::binlog_listener::Field* add_field();
-  inline const ::google::protobuf::RepeatedPtrField< ::binlog_listener::Field >&
+  inline const ::mysql_replicator::Field& field(int index) const;
+  inline ::mysql_replicator::Field* mutable_field(int index);
+  inline ::mysql_replicator::Field* add_field();
+  inline const ::google::protobuf::RepeatedPtrField< ::mysql_replicator::Field >&
       field() const;
-  inline ::google::protobuf::RepeatedPtrField< ::binlog_listener::Field >*
+  inline ::google::protobuf::RepeatedPtrField< ::mysql_replicator::Field >*
       mutable_field();
 
-  // @@protoc_insertion_point(class_scope:binlog_listener.Row)
+  // @@protoc_insertion_point(class_scope:mysql_replicator.Row)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::binlog_listener::Field > field_;
+  ::google::protobuf::RepeatedPtrField< ::mysql_replicator::Field > field_;
   friend void  protobuf_AddDesc_binlog_5fevent_2eproto();
   friend void protobuf_AssignDesc_binlog_5fevent_2eproto();
   friend void protobuf_ShutdownFile_binlog_5fevent_2eproto();
@@ -495,7 +489,7 @@ class MysubStatus : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 progress() const;
   inline void set_progress(::google::protobuf::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(class_scope:mysql_replicator.MysubStatus)
  private:
   inline void set_has_log_file();
   inline void clear_has_log_file();
@@ -612,21 +606,21 @@ class BinlogEvent : public ::google::protobuf::Message {
   inline ::std::string* release_table();
   inline void set_allocated_table(::std::string* table);
 
-  // required .binlog_listener.EventType event_type = 3;
+  // required .mysql_replicator.EventType event_type = 3;
   inline bool has_event_type() const;
   inline void clear_event_type();
   static const int kEventTypeFieldNumber = 3;
-  inline ::binlog_listener::EventType event_type() const;
-  inline void set_event_type(::binlog_listener::EventType value);
+  inline ::mysql_replicator::EventType event_type() const;
+  inline void set_event_type(::mysql_replicator::EventType value);
 
-  // optional .binlog_listener.MysubStatus mysub_status = 4;
+  // optional .mysql_replicator.MysubStatus mysub_status = 4;
   inline bool has_mysub_status() const;
   inline void clear_mysub_status();
   static const int kMysubStatusFieldNumber = 4;
-  inline const ::binlog_listener::MysubStatus& mysub_status() const;
-  inline ::binlog_listener::MysubStatus* mutable_mysub_status();
-  inline ::binlog_listener::MysubStatus* release_mysub_status();
-  inline void set_allocated_mysub_status(::binlog_listener::MysubStatus* mysub_status);
+  inline const ::mysql_replicator::MysubStatus& mysub_status() const;
+  inline ::mysql_replicator::MysubStatus* mutable_mysub_status();
+  inline ::mysql_replicator::MysubStatus* release_mysub_status();
+  inline void set_allocated_mysub_status(::mysql_replicator::MysubStatus* mysub_status);
 
   // optional string charset = 5;
   inline bool has_charset() const;
@@ -640,16 +634,16 @@ class BinlogEvent : public ::google::protobuf::Message {
   inline ::std::string* release_charset();
   inline void set_allocated_charset(::std::string* charset);
 
-  // optional .binlog_listener.Row row = 6;
+  // optional .mysql_replicator.Row row = 6;
   inline bool has_row() const;
   inline void clear_row();
   static const int kRowFieldNumber = 6;
-  inline const ::binlog_listener::Row& row() const;
-  inline ::binlog_listener::Row* mutable_row();
-  inline ::binlog_listener::Row* release_row();
-  inline void set_allocated_row(::binlog_listener::Row* row);
+  inline const ::mysql_replicator::Row& row() const;
+  inline ::mysql_replicator::Row* mutable_row();
+  inline ::mysql_replicator::Row* release_row();
+  inline void set_allocated_row(::mysql_replicator::Row* row);
 
-  // @@protoc_insertion_point(class_scope:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(class_scope:mysql_replicator.BinlogEvent)
  private:
   inline void set_has_db();
   inline void clear_has_db();
@@ -670,9 +664,9 @@ class BinlogEvent : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* db_;
   ::std::string* table_;
-  ::binlog_listener::MysubStatus* mysub_status_;
+  ::mysql_replicator::MysubStatus* mysub_status_;
   ::std::string* charset_;
-  ::binlog_listener::Row* row_;
+  ::mysql_replicator::Row* row_;
   int event_type_;
   friend void  protobuf_AddDesc_binlog_5fevent_2eproto();
   friend void protobuf_AssignDesc_binlog_5fevent_2eproto();
@@ -705,7 +699,7 @@ inline void Field::clear_name() {
   clear_has_name();
 }
 inline const ::std::string& Field::name() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.name)
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.name)
   return *name_;
 }
 inline void Field::set_name(const ::std::string& value) {
@@ -714,7 +708,7 @@ inline void Field::set_name(const ::std::string& value) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.name)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.name)
 }
 inline void Field::set_name(const char* value) {
   set_has_name();
@@ -722,7 +716,7 @@ inline void Field::set_name(const char* value) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.Field.name)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.Field.name)
 }
 inline void Field::set_name(const char* value, size_t size) {
   set_has_name();
@@ -730,14 +724,14 @@ inline void Field::set_name(const char* value, size_t size) {
     name_ = new ::std::string;
   }
   name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.Field.name)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.Field.name)
 }
 inline ::std::string* Field::mutable_name() {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.Field.name)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.Field.name)
   return name_;
 }
 inline ::std::string* Field::release_name() {
@@ -761,10 +755,10 @@ inline void Field::set_allocated_name(::std::string* name) {
     clear_has_name();
     name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.Field.name)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.Field.name)
 }
 
-// required .binlog_listener.MysqlType mysql_type = 2;
+// required .mysql_replicator.MysqlType mysql_type = 2;
 inline bool Field::has_mysql_type() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -778,15 +772,15 @@ inline void Field::clear_mysql_type() {
   mysql_type_ = 0;
   clear_has_mysql_type();
 }
-inline ::binlog_listener::MysqlType Field::mysql_type() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.mysql_type)
-  return static_cast< ::binlog_listener::MysqlType >(mysql_type_);
+inline ::mysql_replicator::MysqlType Field::mysql_type() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.mysql_type)
+  return static_cast< ::mysql_replicator::MysqlType >(mysql_type_);
 }
-inline void Field::set_mysql_type(::binlog_listener::MysqlType value) {
-  assert(::binlog_listener::MysqlType_IsValid(value));
+inline void Field::set_mysql_type(::mysql_replicator::MysqlType value) {
+  assert(::mysql_replicator::MysqlType_IsValid(value));
   set_has_mysql_type();
   mysql_type_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.mysql_type)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.mysql_type)
 }
 
 // required bool is_signed = 3 [default = false];
@@ -804,13 +798,13 @@ inline void Field::clear_is_signed() {
   clear_has_is_signed();
 }
 inline bool Field::is_signed() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.is_signed)
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.is_signed)
   return is_signed_;
 }
 inline void Field::set_is_signed(bool value) {
   set_has_is_signed();
   is_signed_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.is_signed)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.is_signed)
 }
 
 // required bool is_pk = 4;
@@ -828,24 +822,48 @@ inline void Field::clear_is_pk() {
   clear_has_is_pk();
 }
 inline bool Field::is_pk() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.is_pk)
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.is_pk)
   return is_pk_;
 }
 inline void Field::set_is_pk(bool value) {
   set_has_is_pk();
   is_pk_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.is_pk)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.is_pk)
 }
 
-// optional bytes old_value = 5;
-inline bool Field::has_old_value() const {
+// optional bool is_old_null = 6;
+inline bool Field::has_is_old_null() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void Field::set_has_old_value() {
+inline void Field::set_has_is_old_null() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void Field::clear_has_old_value() {
+inline void Field::clear_has_is_old_null() {
   _has_bits_[0] &= ~0x00000010u;
+}
+inline void Field::clear_is_old_null() {
+  is_old_null_ = false;
+  clear_has_is_old_null();
+}
+inline bool Field::is_old_null() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.is_old_null)
+  return is_old_null_;
+}
+inline void Field::set_is_old_null(bool value) {
+  set_has_is_old_null();
+  is_old_null_ = value;
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.is_old_null)
+}
+
+// optional bytes old_value = 7;
+inline bool Field::has_old_value() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Field::set_has_old_value() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Field::clear_has_old_value() {
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void Field::clear_old_value() {
   if (old_value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -854,7 +872,7 @@ inline void Field::clear_old_value() {
   clear_has_old_value();
 }
 inline const ::std::string& Field::old_value() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.old_value)
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.old_value)
   return *old_value_;
 }
 inline void Field::set_old_value(const ::std::string& value) {
@@ -863,7 +881,7 @@ inline void Field::set_old_value(const ::std::string& value) {
     old_value_ = new ::std::string;
   }
   old_value_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.old_value)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.old_value)
 }
 inline void Field::set_old_value(const char* value) {
   set_has_old_value();
@@ -871,7 +889,7 @@ inline void Field::set_old_value(const char* value) {
     old_value_ = new ::std::string;
   }
   old_value_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.Field.old_value)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.Field.old_value)
 }
 inline void Field::set_old_value(const void* value, size_t size) {
   set_has_old_value();
@@ -879,14 +897,14 @@ inline void Field::set_old_value(const void* value, size_t size) {
     old_value_ = new ::std::string;
   }
   old_value_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.Field.old_value)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.Field.old_value)
 }
 inline ::std::string* Field::mutable_old_value() {
   set_has_old_value();
   if (old_value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     old_value_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.Field.old_value)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.Field.old_value)
   return old_value_;
 }
 inline ::std::string* Field::release_old_value() {
@@ -910,94 +928,42 @@ inline void Field::set_allocated_old_value(::std::string* old_value) {
     clear_has_old_value();
     old_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.Field.old_value)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.Field.old_value)
 }
 
-// optional bytes is_old_null = 6;
-inline bool Field::has_is_old_null() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void Field::set_has_is_old_null() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void Field::clear_has_is_old_null() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void Field::clear_is_old_null() {
-  if (is_old_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_old_null_->clear();
-  }
-  clear_has_is_old_null();
-}
-inline const ::std::string& Field::is_old_null() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.is_old_null)
-  return *is_old_null_;
-}
-inline void Field::set_is_old_null(const ::std::string& value) {
-  set_has_is_old_null();
-  if (is_old_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_old_null_ = new ::std::string;
-  }
-  is_old_null_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.is_old_null)
-}
-inline void Field::set_is_old_null(const char* value) {
-  set_has_is_old_null();
-  if (is_old_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_old_null_ = new ::std::string;
-  }
-  is_old_null_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.Field.is_old_null)
-}
-inline void Field::set_is_old_null(const void* value, size_t size) {
-  set_has_is_old_null();
-  if (is_old_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_old_null_ = new ::std::string;
-  }
-  is_old_null_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.Field.is_old_null)
-}
-inline ::std::string* Field::mutable_is_old_null() {
-  set_has_is_old_null();
-  if (is_old_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_old_null_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.Field.is_old_null)
-  return is_old_null_;
-}
-inline ::std::string* Field::release_is_old_null() {
-  clear_has_is_old_null();
-  if (is_old_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = is_old_null_;
-    is_old_null_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void Field::set_allocated_is_old_null(::std::string* is_old_null) {
-  if (is_old_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete is_old_null_;
-  }
-  if (is_old_null) {
-    set_has_is_old_null();
-    is_old_null_ = is_old_null;
-  } else {
-    clear_has_is_old_null();
-    is_old_null_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.Field.is_old_null)
-}
-
-// optional bytes new_value = 7;
-inline bool Field::has_new_value() const {
+// optional bool is_new_null = 8;
+inline bool Field::has_is_new_null() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void Field::set_has_new_value() {
+inline void Field::set_has_is_new_null() {
   _has_bits_[0] |= 0x00000040u;
 }
-inline void Field::clear_has_new_value() {
+inline void Field::clear_has_is_new_null() {
   _has_bits_[0] &= ~0x00000040u;
+}
+inline void Field::clear_is_new_null() {
+  is_new_null_ = false;
+  clear_has_is_new_null();
+}
+inline bool Field::is_new_null() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.is_new_null)
+  return is_new_null_;
+}
+inline void Field::set_is_new_null(bool value) {
+  set_has_is_new_null();
+  is_new_null_ = value;
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.is_new_null)
+}
+
+// optional bytes new_value = 9;
+inline bool Field::has_new_value() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void Field::set_has_new_value() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void Field::clear_has_new_value() {
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void Field::clear_new_value() {
   if (new_value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -1006,7 +972,7 @@ inline void Field::clear_new_value() {
   clear_has_new_value();
 }
 inline const ::std::string& Field::new_value() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.new_value)
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.new_value)
   return *new_value_;
 }
 inline void Field::set_new_value(const ::std::string& value) {
@@ -1015,7 +981,7 @@ inline void Field::set_new_value(const ::std::string& value) {
     new_value_ = new ::std::string;
   }
   new_value_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.new_value)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.new_value)
 }
 inline void Field::set_new_value(const char* value) {
   set_has_new_value();
@@ -1023,7 +989,7 @@ inline void Field::set_new_value(const char* value) {
     new_value_ = new ::std::string;
   }
   new_value_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.Field.new_value)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.Field.new_value)
 }
 inline void Field::set_new_value(const void* value, size_t size) {
   set_has_new_value();
@@ -1031,14 +997,14 @@ inline void Field::set_new_value(const void* value, size_t size) {
     new_value_ = new ::std::string;
   }
   new_value_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.Field.new_value)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.Field.new_value)
 }
 inline ::std::string* Field::mutable_new_value() {
   set_has_new_value();
   if (new_value_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     new_value_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.Field.new_value)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.Field.new_value)
   return new_value_;
 }
 inline ::std::string* Field::release_new_value() {
@@ -1062,86 +1028,10 @@ inline void Field::set_allocated_new_value(::std::string* new_value) {
     clear_has_new_value();
     new_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.Field.new_value)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.Field.new_value)
 }
 
-// optional bytes is_new_null = 8;
-inline bool Field::has_is_new_null() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void Field::set_has_is_new_null() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void Field::clear_has_is_new_null() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void Field::clear_is_new_null() {
-  if (is_new_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_new_null_->clear();
-  }
-  clear_has_is_new_null();
-}
-inline const ::std::string& Field::is_new_null() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.is_new_null)
-  return *is_new_null_;
-}
-inline void Field::set_is_new_null(const ::std::string& value) {
-  set_has_is_new_null();
-  if (is_new_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_new_null_ = new ::std::string;
-  }
-  is_new_null_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.is_new_null)
-}
-inline void Field::set_is_new_null(const char* value) {
-  set_has_is_new_null();
-  if (is_new_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_new_null_ = new ::std::string;
-  }
-  is_new_null_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.Field.is_new_null)
-}
-inline void Field::set_is_new_null(const void* value, size_t size) {
-  set_has_is_new_null();
-  if (is_new_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_new_null_ = new ::std::string;
-  }
-  is_new_null_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.Field.is_new_null)
-}
-inline ::std::string* Field::mutable_is_new_null() {
-  set_has_is_new_null();
-  if (is_new_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    is_new_null_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.Field.is_new_null)
-  return is_new_null_;
-}
-inline ::std::string* Field::release_is_new_null() {
-  clear_has_is_new_null();
-  if (is_new_null_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = is_new_null_;
-    is_new_null_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void Field::set_allocated_is_new_null(::std::string* is_new_null) {
-  if (is_new_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete is_new_null_;
-  }
-  if (is_new_null) {
-    set_has_is_new_null();
-    is_new_null_ = is_new_null;
-  } else {
-    clear_has_is_new_null();
-    is_new_null_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.Field.is_new_null)
-}
-
-// optional string charset = 9;
+// optional string charset = 10;
 inline bool Field::has_charset() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
@@ -1158,7 +1048,7 @@ inline void Field::clear_charset() {
   clear_has_charset();
 }
 inline const ::std::string& Field::charset() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Field.charset)
+  // @@protoc_insertion_point(field_get:mysql_replicator.Field.charset)
   return *charset_;
 }
 inline void Field::set_charset(const ::std::string& value) {
@@ -1167,7 +1057,7 @@ inline void Field::set_charset(const ::std::string& value) {
     charset_ = new ::std::string;
   }
   charset_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.Field.charset)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Field.charset)
 }
 inline void Field::set_charset(const char* value) {
   set_has_charset();
@@ -1175,7 +1065,7 @@ inline void Field::set_charset(const char* value) {
     charset_ = new ::std::string;
   }
   charset_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.Field.charset)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.Field.charset)
 }
 inline void Field::set_charset(const char* value, size_t size) {
   set_has_charset();
@@ -1183,14 +1073,14 @@ inline void Field::set_charset(const char* value, size_t size) {
     charset_ = new ::std::string;
   }
   charset_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.Field.charset)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.Field.charset)
 }
 inline ::std::string* Field::mutable_charset() {
   set_has_charset();
   if (charset_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     charset_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.Field.charset)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.Field.charset)
   return charset_;
 }
 inline ::std::string* Field::release_charset() {
@@ -1214,40 +1104,40 @@ inline void Field::set_allocated_charset(::std::string* charset) {
     clear_has_charset();
     charset_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.Field.charset)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.Field.charset)
 }
 
 // -------------------------------------------------------------------
 
 // Row
 
-// repeated .binlog_listener.Field field = 1;
+// repeated .mysql_replicator.Field field = 1;
 inline int Row::field_size() const {
   return field_.size();
 }
 inline void Row::clear_field() {
   field_.Clear();
 }
-inline const ::binlog_listener::Field& Row::field(int index) const {
-  // @@protoc_insertion_point(field_get:binlog_listener.Row.field)
+inline const ::mysql_replicator::Field& Row::field(int index) const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Row.field)
   return field_.Get(index);
 }
-inline ::binlog_listener::Field* Row::mutable_field(int index) {
-  // @@protoc_insertion_point(field_mutable:binlog_listener.Row.field)
+inline ::mysql_replicator::Field* Row::mutable_field(int index) {
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.Row.field)
   return field_.Mutable(index);
 }
-inline ::binlog_listener::Field* Row::add_field() {
-  // @@protoc_insertion_point(field_add:binlog_listener.Row.field)
+inline ::mysql_replicator::Field* Row::add_field() {
+  // @@protoc_insertion_point(field_add:mysql_replicator.Row.field)
   return field_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::binlog_listener::Field >&
+inline const ::google::protobuf::RepeatedPtrField< ::mysql_replicator::Field >&
 Row::field() const {
-  // @@protoc_insertion_point(field_list:binlog_listener.Row.field)
+  // @@protoc_insertion_point(field_list:mysql_replicator.Row.field)
   return field_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::binlog_listener::Field >*
+inline ::google::protobuf::RepeatedPtrField< ::mysql_replicator::Field >*
 Row::mutable_field() {
-  // @@protoc_insertion_point(field_mutable_list:binlog_listener.Row.field)
+  // @@protoc_insertion_point(field_mutable_list:mysql_replicator.Row.field)
   return &field_;
 }
 
@@ -1272,7 +1162,7 @@ inline void MysubStatus::clear_log_file() {
   clear_has_log_file();
 }
 inline const ::std::string& MysubStatus::log_file() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.log_file)
   return *log_file_;
 }
 inline void MysubStatus::set_log_file(const ::std::string& value) {
@@ -1281,7 +1171,7 @@ inline void MysubStatus::set_log_file(const ::std::string& value) {
     log_file_ = new ::std::string;
   }
   log_file_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.log_file)
 }
 inline void MysubStatus::set_log_file(const char* value) {
   set_has_log_file();
@@ -1289,7 +1179,7 @@ inline void MysubStatus::set_log_file(const char* value) {
     log_file_ = new ::std::string;
   }
   log_file_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.MysubStatus.log_file)
 }
 inline void MysubStatus::set_log_file(const char* value, size_t size) {
   set_has_log_file();
@@ -1297,14 +1187,14 @@ inline void MysubStatus::set_log_file(const char* value, size_t size) {
     log_file_ = new ::std::string;
   }
   log_file_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.MysubStatus.log_file)
 }
 inline ::std::string* MysubStatus::mutable_log_file() {
   set_has_log_file();
   if (log_file_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     log_file_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.MysubStatus.log_file)
   return log_file_;
 }
 inline ::std::string* MysubStatus::release_log_file() {
@@ -1328,7 +1218,7 @@ inline void MysubStatus::set_allocated_log_file(::std::string* log_file) {
     clear_has_log_file();
     log_file_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.MysubStatus.log_file)
 }
 
 // required uint32 offset = 2;
@@ -1346,13 +1236,13 @@ inline void MysubStatus::clear_offset() {
   clear_has_offset();
 }
 inline ::google::protobuf::uint32 MysubStatus::offset() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.offset)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.offset)
   return offset_;
 }
 inline void MysubStatus::set_offset(::google::protobuf::uint32 value) {
   set_has_offset();
   offset_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.offset)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.offset)
 }
 
 // required uint32 timestamp = 3;
@@ -1370,13 +1260,13 @@ inline void MysubStatus::clear_timestamp() {
   clear_has_timestamp();
 }
 inline ::google::protobuf::uint32 MysubStatus::timestamp() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.timestamp)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.timestamp)
   return timestamp_;
 }
 inline void MysubStatus::set_timestamp(::google::protobuf::uint32 value) {
   set_has_timestamp();
   timestamp_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.timestamp)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.timestamp)
 }
 
 // required uint32 safe_offset = 4;
@@ -1394,13 +1284,13 @@ inline void MysubStatus::clear_safe_offset() {
   clear_has_safe_offset();
 }
 inline ::google::protobuf::uint32 MysubStatus::safe_offset() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.safe_offset)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.safe_offset)
   return safe_offset_;
 }
 inline void MysubStatus::set_safe_offset(::google::protobuf::uint32 value) {
   set_has_safe_offset();
   safe_offset_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.safe_offset)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.safe_offset)
 }
 
 // required uint32 safe_timestamp = 5;
@@ -1418,13 +1308,13 @@ inline void MysubStatus::clear_safe_timestamp() {
   clear_has_safe_timestamp();
 }
 inline ::google::protobuf::uint32 MysubStatus::safe_timestamp() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.safe_timestamp)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.safe_timestamp)
   return safe_timestamp_;
 }
 inline void MysubStatus::set_safe_timestamp(::google::protobuf::uint32 value) {
   set_has_safe_timestamp();
   safe_timestamp_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.safe_timestamp)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.safe_timestamp)
 }
 
 // required string host = 6;
@@ -1444,7 +1334,7 @@ inline void MysubStatus::clear_host() {
   clear_has_host();
 }
 inline const ::std::string& MysubStatus::host() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.host)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.host)
   return *host_;
 }
 inline void MysubStatus::set_host(const ::std::string& value) {
@@ -1453,7 +1343,7 @@ inline void MysubStatus::set_host(const ::std::string& value) {
     host_ = new ::std::string;
   }
   host_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.host)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.host)
 }
 inline void MysubStatus::set_host(const char* value) {
   set_has_host();
@@ -1461,7 +1351,7 @@ inline void MysubStatus::set_host(const char* value) {
     host_ = new ::std::string;
   }
   host_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.MysubStatus.host)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.MysubStatus.host)
 }
 inline void MysubStatus::set_host(const char* value, size_t size) {
   set_has_host();
@@ -1469,14 +1359,14 @@ inline void MysubStatus::set_host(const char* value, size_t size) {
     host_ = new ::std::string;
   }
   host_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.MysubStatus.host)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.MysubStatus.host)
 }
 inline ::std::string* MysubStatus::mutable_host() {
   set_has_host();
   if (host_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     host_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.MysubStatus.host)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.MysubStatus.host)
   return host_;
 }
 inline ::std::string* MysubStatus::release_host() {
@@ -1500,7 +1390,7 @@ inline void MysubStatus::set_allocated_host(::std::string* host) {
     clear_has_host();
     host_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.MysubStatus.host)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.MysubStatus.host)
 }
 
 // required uint32 port = 7;
@@ -1518,13 +1408,13 @@ inline void MysubStatus::clear_port() {
   clear_has_port();
 }
 inline ::google::protobuf::uint32 MysubStatus::port() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.port)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.port)
   return port_;
 }
 inline void MysubStatus::set_port(::google::protobuf::uint32 value) {
   set_has_port();
   port_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.port)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.port)
 }
 
 // optional uint64 progress = 8;
@@ -1542,13 +1432,13 @@ inline void MysubStatus::clear_progress() {
   clear_has_progress();
 }
 inline ::google::protobuf::uint64 MysubStatus::progress() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.MysubStatus.progress)
+  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.progress)
   return progress_;
 }
 inline void MysubStatus::set_progress(::google::protobuf::uint64 value) {
   set_has_progress();
   progress_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.MysubStatus.progress)
+  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.progress)
 }
 
 // -------------------------------------------------------------------
@@ -1572,7 +1462,7 @@ inline void BinlogEvent::clear_db() {
   clear_has_db();
 }
 inline const ::std::string& BinlogEvent::db() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.BinlogEvent.db)
+  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.db)
   return *db_;
 }
 inline void BinlogEvent::set_db(const ::std::string& value) {
@@ -1581,7 +1471,7 @@ inline void BinlogEvent::set_db(const ::std::string& value) {
     db_ = new ::std::string;
   }
   db_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.BinlogEvent.db)
+  // @@protoc_insertion_point(field_set:mysql_replicator.BinlogEvent.db)
 }
 inline void BinlogEvent::set_db(const char* value) {
   set_has_db();
@@ -1589,7 +1479,7 @@ inline void BinlogEvent::set_db(const char* value) {
     db_ = new ::std::string;
   }
   db_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.BinlogEvent.db)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.BinlogEvent.db)
 }
 inline void BinlogEvent::set_db(const char* value, size_t size) {
   set_has_db();
@@ -1597,14 +1487,14 @@ inline void BinlogEvent::set_db(const char* value, size_t size) {
     db_ = new ::std::string;
   }
   db_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.BinlogEvent.db)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.BinlogEvent.db)
 }
 inline ::std::string* BinlogEvent::mutable_db() {
   set_has_db();
   if (db_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     db_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.BinlogEvent.db)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.BinlogEvent.db)
   return db_;
 }
 inline ::std::string* BinlogEvent::release_db() {
@@ -1628,7 +1518,7 @@ inline void BinlogEvent::set_allocated_db(::std::string* db) {
     clear_has_db();
     db_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.BinlogEvent.db)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.BinlogEvent.db)
 }
 
 // required string table = 2;
@@ -1648,7 +1538,7 @@ inline void BinlogEvent::clear_table() {
   clear_has_table();
 }
 inline const ::std::string& BinlogEvent::table() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.BinlogEvent.table)
+  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.table)
   return *table_;
 }
 inline void BinlogEvent::set_table(const ::std::string& value) {
@@ -1657,7 +1547,7 @@ inline void BinlogEvent::set_table(const ::std::string& value) {
     table_ = new ::std::string;
   }
   table_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.BinlogEvent.table)
+  // @@protoc_insertion_point(field_set:mysql_replicator.BinlogEvent.table)
 }
 inline void BinlogEvent::set_table(const char* value) {
   set_has_table();
@@ -1665,7 +1555,7 @@ inline void BinlogEvent::set_table(const char* value) {
     table_ = new ::std::string;
   }
   table_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.BinlogEvent.table)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.BinlogEvent.table)
 }
 inline void BinlogEvent::set_table(const char* value, size_t size) {
   set_has_table();
@@ -1673,14 +1563,14 @@ inline void BinlogEvent::set_table(const char* value, size_t size) {
     table_ = new ::std::string;
   }
   table_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.BinlogEvent.table)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.BinlogEvent.table)
 }
 inline ::std::string* BinlogEvent::mutable_table() {
   set_has_table();
   if (table_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     table_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.BinlogEvent.table)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.BinlogEvent.table)
   return table_;
 }
 inline ::std::string* BinlogEvent::release_table() {
@@ -1704,10 +1594,10 @@ inline void BinlogEvent::set_allocated_table(::std::string* table) {
     clear_has_table();
     table_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.BinlogEvent.table)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.BinlogEvent.table)
 }
 
-// required .binlog_listener.EventType event_type = 3;
+// required .mysql_replicator.EventType event_type = 3;
 inline bool BinlogEvent::has_event_type() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1721,18 +1611,18 @@ inline void BinlogEvent::clear_event_type() {
   event_type_ = 0;
   clear_has_event_type();
 }
-inline ::binlog_listener::EventType BinlogEvent::event_type() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.BinlogEvent.event_type)
-  return static_cast< ::binlog_listener::EventType >(event_type_);
+inline ::mysql_replicator::EventType BinlogEvent::event_type() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.event_type)
+  return static_cast< ::mysql_replicator::EventType >(event_type_);
 }
-inline void BinlogEvent::set_event_type(::binlog_listener::EventType value) {
-  assert(::binlog_listener::EventType_IsValid(value));
+inline void BinlogEvent::set_event_type(::mysql_replicator::EventType value) {
+  assert(::mysql_replicator::EventType_IsValid(value));
   set_has_event_type();
   event_type_ = value;
-  // @@protoc_insertion_point(field_set:binlog_listener.BinlogEvent.event_type)
+  // @@protoc_insertion_point(field_set:mysql_replicator.BinlogEvent.event_type)
 }
 
-// optional .binlog_listener.MysubStatus mysub_status = 4;
+// optional .mysql_replicator.MysubStatus mysub_status = 4;
 inline bool BinlogEvent::has_mysub_status() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -1743,26 +1633,26 @@ inline void BinlogEvent::clear_has_mysub_status() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void BinlogEvent::clear_mysub_status() {
-  if (mysub_status_ != NULL) mysub_status_->::binlog_listener::MysubStatus::Clear();
+  if (mysub_status_ != NULL) mysub_status_->::mysql_replicator::MysubStatus::Clear();
   clear_has_mysub_status();
 }
-inline const ::binlog_listener::MysubStatus& BinlogEvent::mysub_status() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.BinlogEvent.mysub_status)
+inline const ::mysql_replicator::MysubStatus& BinlogEvent::mysub_status() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.mysub_status)
   return mysub_status_ != NULL ? *mysub_status_ : *default_instance_->mysub_status_;
 }
-inline ::binlog_listener::MysubStatus* BinlogEvent::mutable_mysub_status() {
+inline ::mysql_replicator::MysubStatus* BinlogEvent::mutable_mysub_status() {
   set_has_mysub_status();
-  if (mysub_status_ == NULL) mysub_status_ = new ::binlog_listener::MysubStatus;
-  // @@protoc_insertion_point(field_mutable:binlog_listener.BinlogEvent.mysub_status)
+  if (mysub_status_ == NULL) mysub_status_ = new ::mysql_replicator::MysubStatus;
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.BinlogEvent.mysub_status)
   return mysub_status_;
 }
-inline ::binlog_listener::MysubStatus* BinlogEvent::release_mysub_status() {
+inline ::mysql_replicator::MysubStatus* BinlogEvent::release_mysub_status() {
   clear_has_mysub_status();
-  ::binlog_listener::MysubStatus* temp = mysub_status_;
+  ::mysql_replicator::MysubStatus* temp = mysub_status_;
   mysub_status_ = NULL;
   return temp;
 }
-inline void BinlogEvent::set_allocated_mysub_status(::binlog_listener::MysubStatus* mysub_status) {
+inline void BinlogEvent::set_allocated_mysub_status(::mysql_replicator::MysubStatus* mysub_status) {
   delete mysub_status_;
   mysub_status_ = mysub_status;
   if (mysub_status) {
@@ -1770,7 +1660,7 @@ inline void BinlogEvent::set_allocated_mysub_status(::binlog_listener::MysubStat
   } else {
     clear_has_mysub_status();
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.BinlogEvent.mysub_status)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.BinlogEvent.mysub_status)
 }
 
 // optional string charset = 5;
@@ -1790,7 +1680,7 @@ inline void BinlogEvent::clear_charset() {
   clear_has_charset();
 }
 inline const ::std::string& BinlogEvent::charset() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.BinlogEvent.charset)
+  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.charset)
   return *charset_;
 }
 inline void BinlogEvent::set_charset(const ::std::string& value) {
@@ -1799,7 +1689,7 @@ inline void BinlogEvent::set_charset(const ::std::string& value) {
     charset_ = new ::std::string;
   }
   charset_->assign(value);
-  // @@protoc_insertion_point(field_set:binlog_listener.BinlogEvent.charset)
+  // @@protoc_insertion_point(field_set:mysql_replicator.BinlogEvent.charset)
 }
 inline void BinlogEvent::set_charset(const char* value) {
   set_has_charset();
@@ -1807,7 +1697,7 @@ inline void BinlogEvent::set_charset(const char* value) {
     charset_ = new ::std::string;
   }
   charset_->assign(value);
-  // @@protoc_insertion_point(field_set_char:binlog_listener.BinlogEvent.charset)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.BinlogEvent.charset)
 }
 inline void BinlogEvent::set_charset(const char* value, size_t size) {
   set_has_charset();
@@ -1815,14 +1705,14 @@ inline void BinlogEvent::set_charset(const char* value, size_t size) {
     charset_ = new ::std::string;
   }
   charset_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:binlog_listener.BinlogEvent.charset)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.BinlogEvent.charset)
 }
 inline ::std::string* BinlogEvent::mutable_charset() {
   set_has_charset();
   if (charset_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     charset_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:binlog_listener.BinlogEvent.charset)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.BinlogEvent.charset)
   return charset_;
 }
 inline ::std::string* BinlogEvent::release_charset() {
@@ -1846,10 +1736,10 @@ inline void BinlogEvent::set_allocated_charset(::std::string* charset) {
     clear_has_charset();
     charset_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.BinlogEvent.charset)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.BinlogEvent.charset)
 }
 
-// optional .binlog_listener.Row row = 6;
+// optional .mysql_replicator.Row row = 6;
 inline bool BinlogEvent::has_row() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -1860,26 +1750,26 @@ inline void BinlogEvent::clear_has_row() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void BinlogEvent::clear_row() {
-  if (row_ != NULL) row_->::binlog_listener::Row::Clear();
+  if (row_ != NULL) row_->::mysql_replicator::Row::Clear();
   clear_has_row();
 }
-inline const ::binlog_listener::Row& BinlogEvent::row() const {
-  // @@protoc_insertion_point(field_get:binlog_listener.BinlogEvent.row)
+inline const ::mysql_replicator::Row& BinlogEvent::row() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.row)
   return row_ != NULL ? *row_ : *default_instance_->row_;
 }
-inline ::binlog_listener::Row* BinlogEvent::mutable_row() {
+inline ::mysql_replicator::Row* BinlogEvent::mutable_row() {
   set_has_row();
-  if (row_ == NULL) row_ = new ::binlog_listener::Row;
-  // @@protoc_insertion_point(field_mutable:binlog_listener.BinlogEvent.row)
+  if (row_ == NULL) row_ = new ::mysql_replicator::Row;
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.BinlogEvent.row)
   return row_;
 }
-inline ::binlog_listener::Row* BinlogEvent::release_row() {
+inline ::mysql_replicator::Row* BinlogEvent::release_row() {
   clear_has_row();
-  ::binlog_listener::Row* temp = row_;
+  ::mysql_replicator::Row* temp = row_;
   row_ = NULL;
   return temp;
 }
-inline void BinlogEvent::set_allocated_row(::binlog_listener::Row* row) {
+inline void BinlogEvent::set_allocated_row(::mysql_replicator::Row* row) {
   delete row_;
   row_ = row;
   if (row) {
@@ -1887,27 +1777,27 @@ inline void BinlogEvent::set_allocated_row(::binlog_listener::Row* row) {
   } else {
     clear_has_row();
   }
-  // @@protoc_insertion_point(field_set_allocated:binlog_listener.BinlogEvent.row)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.BinlogEvent.row)
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace binlog_listener
+}  // namespace mysql_replicator
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::binlog_listener::MysqlType> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::mysql_replicator::MysqlType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::binlog_listener::MysqlType>() {
-  return ::binlog_listener::MysqlType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::mysql_replicator::MysqlType>() {
+  return ::mysql_replicator::MysqlType_descriptor();
 }
-template <> struct is_proto_enum< ::binlog_listener::EventType> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::mysql_replicator::EventType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::binlog_listener::EventType>() {
-  return ::binlog_listener::EventType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::mysql_replicator::EventType>() {
+  return ::mysql_replicator::EventType_descriptor();
 }
 
 }  // namespace google

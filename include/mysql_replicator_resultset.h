@@ -10,7 +10,7 @@
 namespace mysql_replicator {
 class MySQLReplicatorResultset {
 public:
-    MySQLReplicatorResultset():index_(0) {}
+    MySQLReplicatorResultset():index_(0) { rows_.push_back(std::shared_ptr<ResultsetRowPacket>());}
     void addColumn(std::shared_ptr<ColumnDefinitionPacket> column) {
         columns_.push_back(column);
     }
@@ -19,7 +19,6 @@ public:
     }
     std::string getString(uint32_t column_index);
     bool next();
-    bool getBoolean(uint32_t column_index);
     void set_column_count(uint64_t column_count) {
         column_count_ = column_count;
     }

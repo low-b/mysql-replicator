@@ -6,7 +6,8 @@
 namespace mysql_replicator {
 class QueryEvent : public LogEvent {
 public:
-    QueryEvent(std::shared_ptr<BinlogEventHeader> header) : LogEvent(header) {}
+    QueryEvent(std::shared_ptr<BinlogEventHeader> header) :
+        LogEvent(header) {}
     virtual void fromStream(std::istream&);
     virtual void printPacket();
 private:

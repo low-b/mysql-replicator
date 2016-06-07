@@ -16,7 +16,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace binlog_listener {
+namespace mysql_replicator {
 
 namespace {
 
@@ -50,10 +50,10 @@ void protobuf_AssignDesc_binlog_5fevent_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, mysql_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, is_signed_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, is_pk_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, old_value_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, is_old_null_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, new_value_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, old_value_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, is_new_null_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, new_value_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Field, charset_),
   };
   Field_reflection_ =
@@ -168,41 +168,41 @@ void protobuf_AddDesc_binlog_5fevent_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022binlog_event.proto\022\017binlog_listener\"\317\001"
-    "\n\005Field\022\014\n\004name\030\001 \002(\t\022.\n\nmysql_type\030\002 \002("
-    "\0162\032.binlog_listener.MysqlType\022\030\n\tis_sign"
-    "ed\030\003 \002(\010:\005false\022\r\n\005is_pk\030\004 \002(\010\022\021\n\told_va"
-    "lue\030\005 \001(\014\022\023\n\013is_old_null\030\006 \001(\014\022\021\n\tnew_va"
-    "lue\030\007 \001(\014\022\023\n\013is_new_null\030\010 \001(\014\022\017\n\007charse"
-    "t\030\t \001(\t\",\n\003Row\022%\n\005field\030\001 \003(\0132\026.binlog_l"
-    "istener.Field\"\235\001\n\013MysubStatus\022\020\n\010log_fil"
-    "e\030\001 \002(\t\022\016\n\006offset\030\002 \002(\r\022\021\n\ttimestamp\030\003 \002"
-    "(\r\022\023\n\013safe_offset\030\004 \002(\r\022\026\n\016safe_timestam"
-    "p\030\005 \002(\r\022\014\n\004host\030\006 \002(\t\022\014\n\004port\030\007 \002(\r\022\020\n\010p"
-    "rogress\030\010 \001(\004\"\300\001\n\013BinlogEvent\022\n\n\002db\030\001 \002("
-    "\t\022\r\n\005table\030\002 \002(\t\022.\n\nevent_type\030\003 \002(\0162\032.b"
-    "inlog_listener.EventType\0222\n\014mysub_status"
-    "\030\004 \001(\0132\034.binlog_listener.MysubStatus\022\017\n\007"
-    "charset\030\005 \001(\t\022!\n\003row\030\006 \001(\0132\024.binlog_list"
-    "ener.Row*\210\005\n\tMysqlType\022\026\n\022MYSQL_TYPE_DEC"
-    "IMAL\020\000\022\023\n\017MYSQL_TYPE_TINY\020\001\022\024\n\020MYSQL_TYP"
-    "E_SHORT\020\002\022\023\n\017MYSQL_TYPE_LONG\020\003\022\024\n\020MYSQL_"
-    "TYPE_FLOAT\020\004\022\025\n\021MYSQL_TYPE_DOUBLE\020\005\022\023\n\017M"
-    "YSQL_TYPE_NULL\020\006\022\030\n\024MYSQL_TYPE_TIMESTAMP"
-    "\020\007\022\027\n\023MYSQL_TYPE_LONGLONG\020\010\022\024\n\020MYSQL_TYP"
-    "E_INT24\020\t\022\023\n\017MYSQL_TYPE_DATE\020\n\022\023\n\017MYSQL_"
-    "TYPE_TIME\020\013\022\027\n\023MYSQL_TYPE_DATETIME\020\014\022\023\n\017"
-    "MYSQL_TYPE_YEAR\020\r\022\026\n\022MYSQL_TYPE_NEWDATE\020"
-    "\016\022\026\n\022MYSQL_TYPE_VARCHAR\020\017\022\022\n\016MYSQL_TYPE_"
-    "BIT\020\020\022\032\n\025MYSQL_TYPE_NEWDECIMAL\020\366\001\022\024\n\017MYS"
-    "QL_TYPE_ENUM\020\367\001\022\023\n\016MYSQL_TYPE_SET\020\370\001\022\031\n\024"
-    "MYSQL_TYPE_TINY_BLOB\020\371\001\022\033\n\026MYSQL_TYPE_ME"
-    "DIUM_BLOB\020\372\001\022\031\n\024MYSQL_TYPE_LONG_BLOB\020\373\001\022"
-    "\024\n\017MYSQL_TYPE_BLOB\020\374\001\022\032\n\025MYSQL_TYPE_VAR_"
-    "STRING\020\375\001\022\026\n\021MYSQL_TYPE_STRING\020\376\001\022\030\n\023MYS"
-    "QL_TYPE_GEOMETRY\020\377\001*A\n\tEventType\022\020\n\014UPDA"
-    "TE_EVENT\020\000\022\020\n\014INSERT_EVENT\020\001\022\020\n\014DELETE_E"
-    "VENT\020\002", 1366);
+    "\n\022binlog_event.proto\022\020mysql_replicator\"\320"
+    "\001\n\005Field\022\014\n\004name\030\001 \002(\t\022/\n\nmysql_type\030\002 \002"
+    "(\0162\033.mysql_replicator.MysqlType\022\030\n\tis_si"
+    "gned\030\003 \002(\010:\005false\022\r\n\005is_pk\030\004 \002(\010\022\023\n\013is_o"
+    "ld_null\030\006 \001(\010\022\021\n\told_value\030\007 \001(\014\022\023\n\013is_n"
+    "ew_null\030\010 \001(\010\022\021\n\tnew_value\030\t \001(\014\022\017\n\007char"
+    "set\030\n \001(\t\"-\n\003Row\022&\n\005field\030\001 \003(\0132\027.mysql_"
+    "replicator.Field\"\235\001\n\013MysubStatus\022\020\n\010log_"
+    "file\030\001 \002(\t\022\016\n\006offset\030\002 \002(\r\022\021\n\ttimestamp\030"
+    "\003 \002(\r\022\023\n\013safe_offset\030\004 \002(\r\022\026\n\016safe_times"
+    "tamp\030\005 \002(\r\022\014\n\004host\030\006 \002(\t\022\014\n\004port\030\007 \002(\r\022\020"
+    "\n\010progress\030\010 \001(\004\"\303\001\n\013BinlogEvent\022\n\n\002db\030\001"
+    " \002(\t\022\r\n\005table\030\002 \002(\t\022/\n\nevent_type\030\003 \002(\0162"
+    "\033.mysql_replicator.EventType\0223\n\014mysub_st"
+    "atus\030\004 \001(\0132\035.mysql_replicator.MysubStatu"
+    "s\022\017\n\007charset\030\005 \001(\t\022\"\n\003row\030\006 \001(\0132\025.mysql_"
+    "replicator.Row*\210\005\n\tMysqlType\022\026\n\022MYSQL_TY"
+    "PE_DECIMAL\020\000\022\023\n\017MYSQL_TYPE_TINY\020\001\022\024\n\020MYS"
+    "QL_TYPE_SHORT\020\002\022\023\n\017MYSQL_TYPE_LONG\020\003\022\024\n\020"
+    "MYSQL_TYPE_FLOAT\020\004\022\025\n\021MYSQL_TYPE_DOUBLE\020"
+    "\005\022\023\n\017MYSQL_TYPE_NULL\020\006\022\030\n\024MYSQL_TYPE_TIM"
+    "ESTAMP\020\007\022\027\n\023MYSQL_TYPE_LONGLONG\020\010\022\024\n\020MYS"
+    "QL_TYPE_INT24\020\t\022\023\n\017MYSQL_TYPE_DATE\020\n\022\023\n\017"
+    "MYSQL_TYPE_TIME\020\013\022\027\n\023MYSQL_TYPE_DATETIME"
+    "\020\014\022\023\n\017MYSQL_TYPE_YEAR\020\r\022\026\n\022MYSQL_TYPE_NE"
+    "WDATE\020\016\022\026\n\022MYSQL_TYPE_VARCHAR\020\017\022\022\n\016MYSQL"
+    "_TYPE_BIT\020\020\022\032\n\025MYSQL_TYPE_NEWDECIMAL\020\366\001\022"
+    "\024\n\017MYSQL_TYPE_ENUM\020\367\001\022\023\n\016MYSQL_TYPE_SET\020"
+    "\370\001\022\031\n\024MYSQL_TYPE_TINY_BLOB\020\371\001\022\033\n\026MYSQL_T"
+    "YPE_MEDIUM_BLOB\020\372\001\022\031\n\024MYSQL_TYPE_LONG_BL"
+    "OB\020\373\001\022\024\n\017MYSQL_TYPE_BLOB\020\374\001\022\032\n\025MYSQL_TYP"
+    "E_VAR_STRING\020\375\001\022\026\n\021MYSQL_TYPE_STRING\020\376\001\022"
+    "\030\n\023MYSQL_TYPE_GEOMETRY\020\377\001*A\n\tEventType\022\020"
+    "\n\014UPDATE_EVENT\020\000\022\020\n\014INSERT_EVENT\020\001\022\020\n\014DE"
+    "LETE_EVENT\020\002", 1372);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "binlog_event.proto", &protobuf_RegisterTypes);
   Field::default_instance_ = new Field();
@@ -284,17 +284,17 @@ const int Field::kNameFieldNumber;
 const int Field::kMysqlTypeFieldNumber;
 const int Field::kIsSignedFieldNumber;
 const int Field::kIsPkFieldNumber;
-const int Field::kOldValueFieldNumber;
 const int Field::kIsOldNullFieldNumber;
-const int Field::kNewValueFieldNumber;
+const int Field::kOldValueFieldNumber;
 const int Field::kIsNewNullFieldNumber;
+const int Field::kNewValueFieldNumber;
 const int Field::kCharsetFieldNumber;
 #endif  // !_MSC_VER
 
 Field::Field()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:binlog_listener.Field)
+  // @@protoc_insertion_point(constructor:mysql_replicator.Field)
 }
 
 void Field::InitAsDefaultInstance() {
@@ -304,7 +304,7 @@ Field::Field(const Field& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:binlog_listener.Field)
+  // @@protoc_insertion_point(copy_constructor:mysql_replicator.Field)
 }
 
 void Field::SharedCtor() {
@@ -314,16 +314,16 @@ void Field::SharedCtor() {
   mysql_type_ = 0;
   is_signed_ = false;
   is_pk_ = false;
+  is_old_null_ = false;
   old_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  is_old_null_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  is_new_null_ = false;
   new_value_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  is_new_null_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   charset_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Field::~Field() {
-  // @@protoc_insertion_point(destructor:binlog_listener.Field)
+  // @@protoc_insertion_point(destructor:mysql_replicator.Field)
   SharedDtor();
 }
 
@@ -334,14 +334,8 @@ void Field::SharedDtor() {
   if (old_value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete old_value_;
   }
-  if (is_old_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete is_old_null_;
-  }
   if (new_value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete new_value_;
-  }
-  if (is_new_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete is_new_null_;
   }
   if (charset_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete charset_;
@@ -383,7 +377,7 @@ void Field::Clear() {
   } while (0)
 
   if (_has_bits_[0 / 32] & 255) {
-    ZR_(mysql_type_, is_pk_);
+    ZR_(mysql_type_, is_new_null_);
     if (has_name()) {
       if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         name_->clear();
@@ -394,19 +388,9 @@ void Field::Clear() {
         old_value_->clear();
       }
     }
-    if (has_is_old_null()) {
-      if (is_old_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        is_old_null_->clear();
-      }
-    }
     if (has_new_value()) {
       if (new_value_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         new_value_->clear();
-      }
-    }
-    if (has_is_new_null()) {
-      if (is_new_null_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        is_new_null_->clear();
       }
     }
   }
@@ -427,7 +411,7 @@ bool Field::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:binlog_listener.Field)
+  // @@protoc_insertion_point(parse_start:mysql_replicator.Field)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -449,7 +433,7 @@ bool Field::MergePartialFromCodedStream(
         break;
       }
 
-      // required .binlog_listener.MysqlType mysql_type = 2;
+      // required .mysql_replicator.MysqlType mysql_type = 2;
       case 2: {
         if (tag == 16) {
          parse_mysql_type:
@@ -457,8 +441,8 @@ bool Field::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::binlog_listener::MysqlType_IsValid(value)) {
-            set_mysql_type(static_cast< ::binlog_listener::MysqlType >(value));
+          if (::mysql_replicator::MysqlType_IsValid(value)) {
+            set_mysql_type(static_cast< ::mysql_replicator::MysqlType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(2, value);
           }
@@ -495,65 +479,69 @@ bool Field::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(42)) goto parse_old_value;
+        if (input->ExpectTag(48)) goto parse_is_old_null;
         break;
       }
 
-      // optional bytes old_value = 5;
-      case 5: {
-        if (tag == 42) {
+      // optional bool is_old_null = 6;
+      case 6: {
+        if (tag == 48) {
+         parse_is_old_null:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &is_old_null_)));
+          set_has_is_old_null();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(58)) goto parse_old_value;
+        break;
+      }
+
+      // optional bytes old_value = 7;
+      case 7: {
+        if (tag == 58) {
          parse_old_value:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_old_value()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(50)) goto parse_is_old_null;
+        if (input->ExpectTag(64)) goto parse_is_new_null;
         break;
       }
 
-      // optional bytes is_old_null = 6;
-      case 6: {
-        if (tag == 50) {
-         parse_is_old_null:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_is_old_null()));
+      // optional bool is_new_null = 8;
+      case 8: {
+        if (tag == 64) {
+         parse_is_new_null:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &is_new_null_)));
+          set_has_is_new_null();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(58)) goto parse_new_value;
+        if (input->ExpectTag(74)) goto parse_new_value;
         break;
       }
 
-      // optional bytes new_value = 7;
-      case 7: {
-        if (tag == 58) {
+      // optional bytes new_value = 9;
+      case 9: {
+        if (tag == 74) {
          parse_new_value:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_new_value()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(66)) goto parse_is_new_null;
+        if (input->ExpectTag(82)) goto parse_charset;
         break;
       }
 
-      // optional bytes is_new_null = 8;
-      case 8: {
-        if (tag == 66) {
-         parse_is_new_null:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_is_new_null()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(74)) goto parse_charset;
-        break;
-      }
-
-      // optional string charset = 9;
-      case 9: {
-        if (tag == 74) {
+      // optional string charset = 10;
+      case 10: {
+        if (tag == 82) {
          parse_charset:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_charset()));
@@ -582,17 +570,17 @@ bool Field::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:binlog_listener.Field)
+  // @@protoc_insertion_point(parse_success:mysql_replicator.Field)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:binlog_listener.Field)
+  // @@protoc_insertion_point(parse_failure:mysql_replicator.Field)
   return false;
 #undef DO_
 }
 
 void Field::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:binlog_listener.Field)
+  // @@protoc_insertion_point(serialize_start:mysql_replicator.Field)
   // required string name = 1;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -603,7 +591,7 @@ void Field::SerializeWithCachedSizes(
       1, this->name(), output);
   }
 
-  // required .binlog_listener.MysqlType mysql_type = 2;
+  // required .mysql_replicator.MysqlType mysql_type = 2;
   if (has_mysql_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->mysql_type(), output);
@@ -619,50 +607,48 @@ void Field::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->is_pk(), output);
   }
 
-  // optional bytes old_value = 5;
+  // optional bool is_old_null = 6;
+  if (has_is_old_null()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->is_old_null(), output);
+  }
+
+  // optional bytes old_value = 7;
   if (has_old_value()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      5, this->old_value(), output);
+      7, this->old_value(), output);
   }
 
-  // optional bytes is_old_null = 6;
-  if (has_is_old_null()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      6, this->is_old_null(), output);
+  // optional bool is_new_null = 8;
+  if (has_is_new_null()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->is_new_null(), output);
   }
 
-  // optional bytes new_value = 7;
+  // optional bytes new_value = 9;
   if (has_new_value()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      7, this->new_value(), output);
+      9, this->new_value(), output);
   }
 
-  // optional bytes is_new_null = 8;
-  if (has_is_new_null()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      8, this->is_new_null(), output);
-  }
-
-  // optional string charset = 9;
+  // optional string charset = 10;
   if (has_charset()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->charset().data(), this->charset().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "charset");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      9, this->charset(), output);
+      10, this->charset(), output);
   }
 
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:binlog_listener.Field)
+  // @@protoc_insertion_point(serialize_end:mysql_replicator.Field)
 }
 
 ::google::protobuf::uint8* Field::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:binlog_listener.Field)
+  // @@protoc_insertion_point(serialize_to_array_start:mysql_replicator.Field)
   // required string name = 1;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -674,7 +660,7 @@ void Field::SerializeWithCachedSizes(
         1, this->name(), target);
   }
 
-  // required .binlog_listener.MysqlType mysql_type = 2;
+  // required .mysql_replicator.MysqlType mysql_type = 2;
   if (has_mysql_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->mysql_type(), target);
@@ -690,35 +676,31 @@ void Field::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->is_pk(), target);
   }
 
-  // optional bytes old_value = 5;
+  // optional bool is_old_null = 6;
+  if (has_is_old_null()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->is_old_null(), target);
+  }
+
+  // optional bytes old_value = 7;
   if (has_old_value()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        5, this->old_value(), target);
+        7, this->old_value(), target);
   }
 
-  // optional bytes is_old_null = 6;
-  if (has_is_old_null()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        6, this->is_old_null(), target);
+  // optional bool is_new_null = 8;
+  if (has_is_new_null()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(8, this->is_new_null(), target);
   }
 
-  // optional bytes new_value = 7;
+  // optional bytes new_value = 9;
   if (has_new_value()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        7, this->new_value(), target);
+        9, this->new_value(), target);
   }
 
-  // optional bytes is_new_null = 8;
-  if (has_is_new_null()) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        8, this->is_new_null(), target);
-  }
-
-  // optional string charset = 9;
+  // optional string charset = 10;
   if (has_charset()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->charset().data(), this->charset().length(),
@@ -726,14 +708,14 @@ void Field::SerializeWithCachedSizes(
       "charset");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        9, this->charset(), target);
+        10, this->charset(), target);
   }
 
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:binlog_listener.Field)
+  // @@protoc_insertion_point(serialize_to_array_end:mysql_replicator.Field)
   return target;
 }
 
@@ -748,7 +730,7 @@ int Field::ByteSize() const {
           this->name());
     }
 
-    // required .binlog_listener.MysqlType mysql_type = 2;
+    // required .mysql_replicator.MysqlType mysql_type = 2;
     if (has_mysql_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->mysql_type());
@@ -764,37 +746,33 @@ int Field::ByteSize() const {
       total_size += 1 + 1;
     }
 
-    // optional bytes old_value = 5;
+    // optional bool is_old_null = 6;
+    if (has_is_old_null()) {
+      total_size += 1 + 1;
+    }
+
+    // optional bytes old_value = 7;
     if (has_old_value()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->old_value());
     }
 
-    // optional bytes is_old_null = 6;
-    if (has_is_old_null()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->is_old_null());
+    // optional bool is_new_null = 8;
+    if (has_is_new_null()) {
+      total_size += 1 + 1;
     }
 
-    // optional bytes new_value = 7;
+    // optional bytes new_value = 9;
     if (has_new_value()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->new_value());
     }
 
-    // optional bytes is_new_null = 8;
-    if (has_is_new_null()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->is_new_null());
-    }
-
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional string charset = 9;
+    // optional string charset = 10;
     if (has_charset()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -840,17 +818,17 @@ void Field::MergeFrom(const Field& from) {
     if (from.has_is_pk()) {
       set_is_pk(from.is_pk());
     }
-    if (from.has_old_value()) {
-      set_old_value(from.old_value());
-    }
     if (from.has_is_old_null()) {
       set_is_old_null(from.is_old_null());
     }
-    if (from.has_new_value()) {
-      set_new_value(from.new_value());
+    if (from.has_old_value()) {
+      set_old_value(from.old_value());
     }
     if (from.has_is_new_null()) {
       set_is_new_null(from.is_new_null());
+    }
+    if (from.has_new_value()) {
+      set_new_value(from.new_value());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
@@ -885,10 +863,10 @@ void Field::Swap(Field* other) {
     std::swap(mysql_type_, other->mysql_type_);
     std::swap(is_signed_, other->is_signed_);
     std::swap(is_pk_, other->is_pk_);
-    std::swap(old_value_, other->old_value_);
     std::swap(is_old_null_, other->is_old_null_);
-    std::swap(new_value_, other->new_value_);
+    std::swap(old_value_, other->old_value_);
     std::swap(is_new_null_, other->is_new_null_);
+    std::swap(new_value_, other->new_value_);
     std::swap(charset_, other->charset_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -914,7 +892,7 @@ const int Row::kFieldFieldNumber;
 Row::Row()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:binlog_listener.Row)
+  // @@protoc_insertion_point(constructor:mysql_replicator.Row)
 }
 
 void Row::InitAsDefaultInstance() {
@@ -924,7 +902,7 @@ Row::Row(const Row& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:binlog_listener.Row)
+  // @@protoc_insertion_point(copy_constructor:mysql_replicator.Row)
 }
 
 void Row::SharedCtor() {
@@ -933,7 +911,7 @@ void Row::SharedCtor() {
 }
 
 Row::~Row() {
-  // @@protoc_insertion_point(destructor:binlog_listener.Row)
+  // @@protoc_insertion_point(destructor:mysql_replicator.Row)
   SharedDtor();
 }
 
@@ -973,13 +951,13 @@ bool Row::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:binlog_listener.Row)
+  // @@protoc_insertion_point(parse_start:mysql_replicator.Row)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .binlog_listener.Field field = 1;
+      // repeated .mysql_replicator.Field field = 1;
       case 1: {
         if (tag == 10) {
          parse_field:
@@ -1007,18 +985,18 @@ bool Row::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:binlog_listener.Row)
+  // @@protoc_insertion_point(parse_success:mysql_replicator.Row)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:binlog_listener.Row)
+  // @@protoc_insertion_point(parse_failure:mysql_replicator.Row)
   return false;
 #undef DO_
 }
 
 void Row::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:binlog_listener.Row)
-  // repeated .binlog_listener.Field field = 1;
+  // @@protoc_insertion_point(serialize_start:mysql_replicator.Row)
+  // repeated .mysql_replicator.Field field = 1;
   for (int i = 0; i < this->field_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->field(i), output);
@@ -1028,13 +1006,13 @@ void Row::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:binlog_listener.Row)
+  // @@protoc_insertion_point(serialize_end:mysql_replicator.Row)
 }
 
 ::google::protobuf::uint8* Row::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:binlog_listener.Row)
-  // repeated .binlog_listener.Field field = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:mysql_replicator.Row)
+  // repeated .mysql_replicator.Field field = 1;
   for (int i = 0; i < this->field_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1045,14 +1023,14 @@ void Row::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:binlog_listener.Row)
+  // @@protoc_insertion_point(serialize_to_array_end:mysql_replicator.Row)
   return target;
 }
 
 int Row::ByteSize() const {
   int total_size = 0;
 
-  // repeated .binlog_listener.Field field = 1;
+  // repeated .mysql_replicator.Field field = 1;
   total_size += 1 * this->field_size();
   for (int i = 0; i < this->field_size(); i++) {
     total_size +=
@@ -1141,7 +1119,7 @@ const int MysubStatus::kProgressFieldNumber;
 MysubStatus::MysubStatus()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(constructor:mysql_replicator.MysubStatus)
 }
 
 void MysubStatus::InitAsDefaultInstance() {
@@ -1151,7 +1129,7 @@ MysubStatus::MysubStatus(const MysubStatus& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(copy_constructor:mysql_replicator.MysubStatus)
 }
 
 void MysubStatus::SharedCtor() {
@@ -1169,7 +1147,7 @@ void MysubStatus::SharedCtor() {
 }
 
 MysubStatus::~MysubStatus() {
-  // @@protoc_insertion_point(destructor:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(destructor:mysql_replicator.MysubStatus)
   SharedDtor();
 }
 
@@ -1242,7 +1220,7 @@ bool MysubStatus::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(parse_start:mysql_replicator.MysubStatus)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -1385,17 +1363,17 @@ bool MysubStatus::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(parse_success:mysql_replicator.MysubStatus)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(parse_failure:mysql_replicator.MysubStatus)
   return false;
 #undef DO_
 }
 
 void MysubStatus::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(serialize_start:mysql_replicator.MysubStatus)
   // required string log_file = 1;
   if (has_log_file()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1450,12 +1428,12 @@ void MysubStatus::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(serialize_end:mysql_replicator.MysubStatus)
 }
 
 ::google::protobuf::uint8* MysubStatus::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(serialize_to_array_start:mysql_replicator.MysubStatus)
   // required string log_file = 1;
   if (has_log_file()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1512,7 +1490,7 @@ void MysubStatus::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:binlog_listener.MysubStatus)
+  // @@protoc_insertion_point(serialize_to_array_end:mysql_replicator.MysubStatus)
   return target;
 }
 
@@ -1688,19 +1666,19 @@ const int BinlogEvent::kRowFieldNumber;
 BinlogEvent::BinlogEvent()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(constructor:mysql_replicator.BinlogEvent)
 }
 
 void BinlogEvent::InitAsDefaultInstance() {
-  mysub_status_ = const_cast< ::binlog_listener::MysubStatus*>(&::binlog_listener::MysubStatus::default_instance());
-  row_ = const_cast< ::binlog_listener::Row*>(&::binlog_listener::Row::default_instance());
+  mysub_status_ = const_cast< ::mysql_replicator::MysubStatus*>(&::mysql_replicator::MysubStatus::default_instance());
+  row_ = const_cast< ::mysql_replicator::Row*>(&::mysql_replicator::Row::default_instance());
 }
 
 BinlogEvent::BinlogEvent(const BinlogEvent& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(copy_constructor:mysql_replicator.BinlogEvent)
 }
 
 void BinlogEvent::SharedCtor() {
@@ -1716,7 +1694,7 @@ void BinlogEvent::SharedCtor() {
 }
 
 BinlogEvent::~BinlogEvent() {
-  // @@protoc_insertion_point(destructor:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(destructor:mysql_replicator.BinlogEvent)
   SharedDtor();
 }
 
@@ -1771,7 +1749,7 @@ void BinlogEvent::Clear() {
     }
     event_type_ = 0;
     if (has_mysub_status()) {
-      if (mysub_status_ != NULL) mysub_status_->::binlog_listener::MysubStatus::Clear();
+      if (mysub_status_ != NULL) mysub_status_->::mysql_replicator::MysubStatus::Clear();
     }
     if (has_charset()) {
       if (charset_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -1779,7 +1757,7 @@ void BinlogEvent::Clear() {
       }
     }
     if (has_row()) {
-      if (row_ != NULL) row_->::binlog_listener::Row::Clear();
+      if (row_ != NULL) row_->::mysql_replicator::Row::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1790,7 +1768,7 @@ bool BinlogEvent::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(parse_start:mysql_replicator.BinlogEvent)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -1829,7 +1807,7 @@ bool BinlogEvent::MergePartialFromCodedStream(
         break;
       }
 
-      // required .binlog_listener.EventType event_type = 3;
+      // required .mysql_replicator.EventType event_type = 3;
       case 3: {
         if (tag == 24) {
          parse_event_type:
@@ -1837,8 +1815,8 @@ bool BinlogEvent::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::binlog_listener::EventType_IsValid(value)) {
-            set_event_type(static_cast< ::binlog_listener::EventType >(value));
+          if (::mysql_replicator::EventType_IsValid(value)) {
+            set_event_type(static_cast< ::mysql_replicator::EventType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(3, value);
           }
@@ -1849,7 +1827,7 @@ bool BinlogEvent::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .binlog_listener.MysubStatus mysub_status = 4;
+      // optional .mysql_replicator.MysubStatus mysub_status = 4;
       case 4: {
         if (tag == 34) {
          parse_mysub_status:
@@ -1879,7 +1857,7 @@ bool BinlogEvent::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .binlog_listener.Row row = 6;
+      // optional .mysql_replicator.Row row = 6;
       case 6: {
         if (tag == 50) {
          parse_row:
@@ -1906,17 +1884,17 @@ bool BinlogEvent::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(parse_success:mysql_replicator.BinlogEvent)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(parse_failure:mysql_replicator.BinlogEvent)
   return false;
 #undef DO_
 }
 
 void BinlogEvent::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(serialize_start:mysql_replicator.BinlogEvent)
   // required string db = 1;
   if (has_db()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1937,13 +1915,13 @@ void BinlogEvent::SerializeWithCachedSizes(
       2, this->table(), output);
   }
 
-  // required .binlog_listener.EventType event_type = 3;
+  // required .mysql_replicator.EventType event_type = 3;
   if (has_event_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       3, this->event_type(), output);
   }
 
-  // optional .binlog_listener.MysubStatus mysub_status = 4;
+  // optional .mysql_replicator.MysubStatus mysub_status = 4;
   if (has_mysub_status()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->mysub_status(), output);
@@ -1959,7 +1937,7 @@ void BinlogEvent::SerializeWithCachedSizes(
       5, this->charset(), output);
   }
 
-  // optional .binlog_listener.Row row = 6;
+  // optional .mysql_replicator.Row row = 6;
   if (has_row()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, this->row(), output);
@@ -1969,12 +1947,12 @@ void BinlogEvent::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(serialize_end:mysql_replicator.BinlogEvent)
 }
 
 ::google::protobuf::uint8* BinlogEvent::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(serialize_to_array_start:mysql_replicator.BinlogEvent)
   // required string db = 1;
   if (has_db()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1997,13 +1975,13 @@ void BinlogEvent::SerializeWithCachedSizes(
         2, this->table(), target);
   }
 
-  // required .binlog_listener.EventType event_type = 3;
+  // required .mysql_replicator.EventType event_type = 3;
   if (has_event_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       3, this->event_type(), target);
   }
 
-  // optional .binlog_listener.MysubStatus mysub_status = 4;
+  // optional .mysql_replicator.MysubStatus mysub_status = 4;
   if (has_mysub_status()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -2021,7 +1999,7 @@ void BinlogEvent::SerializeWithCachedSizes(
         5, this->charset(), target);
   }
 
-  // optional .binlog_listener.Row row = 6;
+  // optional .mysql_replicator.Row row = 6;
   if (has_row()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -2032,7 +2010,7 @@ void BinlogEvent::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:binlog_listener.BinlogEvent)
+  // @@protoc_insertion_point(serialize_to_array_end:mysql_replicator.BinlogEvent)
   return target;
 }
 
@@ -2054,13 +2032,13 @@ int BinlogEvent::ByteSize() const {
           this->table());
     }
 
-    // required .binlog_listener.EventType event_type = 3;
+    // required .mysql_replicator.EventType event_type = 3;
     if (has_event_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->event_type());
     }
 
-    // optional .binlog_listener.MysubStatus mysub_status = 4;
+    // optional .mysql_replicator.MysubStatus mysub_status = 4;
     if (has_mysub_status()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -2074,7 +2052,7 @@ int BinlogEvent::ByteSize() const {
           this->charset());
     }
 
-    // optional .binlog_listener.Row row = 6;
+    // optional .mysql_replicator.Row row = 6;
     if (has_row()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -2118,13 +2096,13 @@ void BinlogEvent::MergeFrom(const BinlogEvent& from) {
       set_event_type(from.event_type());
     }
     if (from.has_mysub_status()) {
-      mutable_mysub_status()->::binlog_listener::MysubStatus::MergeFrom(from.mysub_status());
+      mutable_mysub_status()->::mysql_replicator::MysubStatus::MergeFrom(from.mysub_status());
     }
     if (from.has_charset()) {
       set_charset(from.charset());
     }
     if (from.has_row()) {
-      mutable_row()->::binlog_listener::Row::MergeFrom(from.row());
+      mutable_row()->::mysql_replicator::Row::MergeFrom(from.row());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -2179,6 +2157,6 @@ void BinlogEvent::Swap(BinlogEvent* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace binlog_listener
+}  // namespace mysql_replicator
 
 // @@protoc_insertion_point(global_scope)

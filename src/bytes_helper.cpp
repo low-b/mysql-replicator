@@ -41,6 +41,39 @@ void BytesHelper::readFixUint64(std::istream &is, uint64_t& value) {
     value = 0;
     readValueByLength(is, (char*)&value, sizeof(value));
 }
+void BytesHelper::readFixInt8(std::istream &is, int8_t& value) {
+    value = 0;
+    readValueByLength(is, (char*)&value, sizeof(value));
+}
+void BytesHelper::readFixInt16(std::istream &is, int16_t& value) {
+    value = 0;
+    readValueByLength(is, (char*)&value, sizeof(value));
+}
+void BytesHelper::readFixInt24(std::istream &is, int32_t& value) {
+    value = 0;
+    char ch;
+    for (size_t i = 0; i < 3; ++i) {
+        is.get(ch);
+        value |= ((uint32_t)ch) << (8 * i);
+    }
+    value |= (ch & 128) ? 0xFF000000 : 0;
+}
+void BytesHelper::readFixInt32(std::istream &is, int32_t& value) {
+    value = 0;
+    readValueByLength(is, (char*)&value, sizeof(value));
+}
+void BytesHelper::readFixInt64(std::istream &is, int64_t& value) {
+    value = 0;
+    readValueByLength(is, (char*)&value, sizeof(value));
+}
+void BytesHelper::readFixFloat(std::istream &is, float& value) {
+    value = 0;
+    readValueByLength(is, (char*)&value, sizeof(value));
+}
+void BytesHelper::readFixDouble(std::istream &is, double& value) {
+    value = 0;
+    readValueByLength(is, (char*)&value, sizeof(value));
+}
 int BytesHelper::readLenencUint(std::istream &is, uint64_t& value) {
     value = 0;
     char ch;
@@ -203,9 +236,11 @@ void BytesHelper::readEventHeader(std::shared_ptr<boost::asio::ip::tcp::socket> 
             boost::asio::transfer_exactly(global_constants::EVENT_HEADER_LENTH));
     event_header->fromStream(packet_stream);
 }
-void BytesHelper::fillBitmap(const std::string& byte_buffer, boost::dynamic_bitset<>& bitmap) {
-    bitmap.resize(byte_buffer.length() * 8, false);
-    for (size_t i = 0; i < byte_buffer.length(); ++i) {
+void BytesHelper::readBitmap(std::istream &is, boost::dynamic_bitset<>& bitmap, size_t bitmap_size) {
+    std::string byte_buffer;
+    BytesHelper::readFixString(is, byte_buffer, bitmap_size);
+    bitmap.resize(bitmap_size * 8, false);
+    for (size_t i = 0; i < bitmap_size; ++i) {
         uint8_t tmp = byte_buffer[i];
         boost::dynamic_bitset<>::size_type bit = i * 8;
         if (tmp == 0) continue;
