@@ -26,9 +26,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Row_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Row_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MysubStatus_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* Status_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  MysubStatus_reflection_ = NULL;
+  Status_reflection_ = NULL;
 const ::google::protobuf::Descriptor* BinlogEvent_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   BinlogEvent_reflection_ = NULL;
@@ -82,34 +82,32 @@ void protobuf_AssignDesc_binlog_5fevent_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Row));
-  MysubStatus_descriptor_ = file->message_type(2);
-  static const int MysubStatus_offsets_[8] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, log_file_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, offset_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, timestamp_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, safe_offset_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, safe_timestamp_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, host_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, port_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, progress_),
+  Status_descriptor_ = file->message_type(2);
+  static const int Status_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, log_file_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, offset_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, timestamp_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, host_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, port_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, progress_),
   };
-  MysubStatus_reflection_ =
+  Status_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      MysubStatus_descriptor_,
-      MysubStatus::default_instance_,
-      MysubStatus_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MysubStatus, _unknown_fields_),
+      Status_descriptor_,
+      Status::default_instance_,
+      Status_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Status, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(MysubStatus));
+      sizeof(Status));
   BinlogEvent_descriptor_ = file->message_type(3);
   static const int BinlogEvent_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BinlogEvent, db_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BinlogEvent, table_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BinlogEvent, event_type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BinlogEvent, mysub_status_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BinlogEvent, status_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BinlogEvent, charset_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BinlogEvent, row_),
   };
@@ -143,7 +141,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Row_descriptor_, &Row::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    MysubStatus_descriptor_, &MysubStatus::default_instance());
+    Status_descriptor_, &Status::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     BinlogEvent_descriptor_, &BinlogEvent::default_instance());
 }
@@ -155,8 +153,8 @@ void protobuf_ShutdownFile_binlog_5fevent_2eproto() {
   delete Field_reflection_;
   delete Row::default_instance_;
   delete Row_reflection_;
-  delete MysubStatus::default_instance_;
-  delete MysubStatus_reflection_;
+  delete Status::default_instance_;
+  delete Status_reflection_;
   delete BinlogEvent::default_instance_;
   delete BinlogEvent_reflection_;
 }
@@ -168,50 +166,51 @@ void protobuf_AddDesc_binlog_5fevent_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\022binlog_event.proto\022\020mysql_replicator\"\320"
+    "\n\022binlog_event.proto\022\020mysql_replicator\"\336"
     "\001\n\005Field\022\014\n\004name\030\001 \002(\t\022/\n\nmysql_type\030\002 \002"
     "(\0162\033.mysql_replicator.MysqlType\022\030\n\tis_si"
-    "gned\030\003 \002(\010:\005false\022\r\n\005is_pk\030\004 \002(\010\022\023\n\013is_o"
-    "ld_null\030\006 \001(\010\022\021\n\told_value\030\007 \001(\014\022\023\n\013is_n"
-    "ew_null\030\010 \001(\010\022\021\n\tnew_value\030\t \001(\014\022\017\n\007char"
-    "set\030\n \001(\t\"-\n\003Row\022&\n\005field\030\001 \003(\0132\027.mysql_"
-    "replicator.Field\"\235\001\n\013MysubStatus\022\020\n\010log_"
-    "file\030\001 \002(\t\022\016\n\006offset\030\002 \002(\r\022\021\n\ttimestamp\030"
-    "\003 \002(\r\022\023\n\013safe_offset\030\004 \002(\r\022\026\n\016safe_times"
-    "tamp\030\005 \002(\r\022\014\n\004host\030\006 \002(\t\022\014\n\004port\030\007 \002(\r\022\020"
-    "\n\010progress\030\010 \001(\004\"\303\001\n\013BinlogEvent\022\n\n\002db\030\001"
-    " \002(\t\022\r\n\005table\030\002 \002(\t\022/\n\nevent_type\030\003 \002(\0162"
-    "\033.mysql_replicator.EventType\0223\n\014mysub_st"
-    "atus\030\004 \001(\0132\035.mysql_replicator.MysubStatu"
-    "s\022\017\n\007charset\030\005 \001(\t\022\"\n\003row\030\006 \001(\0132\025.mysql_"
-    "replicator.Row*\210\005\n\tMysqlType\022\026\n\022MYSQL_TY"
-    "PE_DECIMAL\020\000\022\023\n\017MYSQL_TYPE_TINY\020\001\022\024\n\020MYS"
-    "QL_TYPE_SHORT\020\002\022\023\n\017MYSQL_TYPE_LONG\020\003\022\024\n\020"
-    "MYSQL_TYPE_FLOAT\020\004\022\025\n\021MYSQL_TYPE_DOUBLE\020"
-    "\005\022\023\n\017MYSQL_TYPE_NULL\020\006\022\030\n\024MYSQL_TYPE_TIM"
-    "ESTAMP\020\007\022\027\n\023MYSQL_TYPE_LONGLONG\020\010\022\024\n\020MYS"
-    "QL_TYPE_INT24\020\t\022\023\n\017MYSQL_TYPE_DATE\020\n\022\023\n\017"
-    "MYSQL_TYPE_TIME\020\013\022\027\n\023MYSQL_TYPE_DATETIME"
-    "\020\014\022\023\n\017MYSQL_TYPE_YEAR\020\r\022\026\n\022MYSQL_TYPE_NE"
-    "WDATE\020\016\022\026\n\022MYSQL_TYPE_VARCHAR\020\017\022\022\n\016MYSQL"
-    "_TYPE_BIT\020\020\022\032\n\025MYSQL_TYPE_NEWDECIMAL\020\366\001\022"
-    "\024\n\017MYSQL_TYPE_ENUM\020\367\001\022\023\n\016MYSQL_TYPE_SET\020"
-    "\370\001\022\031\n\024MYSQL_TYPE_TINY_BLOB\020\371\001\022\033\n\026MYSQL_T"
-    "YPE_MEDIUM_BLOB\020\372\001\022\031\n\024MYSQL_TYPE_LONG_BL"
-    "OB\020\373\001\022\024\n\017MYSQL_TYPE_BLOB\020\374\001\022\032\n\025MYSQL_TYP"
-    "E_VAR_STRING\020\375\001\022\026\n\021MYSQL_TYPE_STRING\020\376\001\022"
-    "\030\n\023MYSQL_TYPE_GEOMETRY\020\377\001*A\n\tEventType\022\020"
-    "\n\014UPDATE_EVENT\020\000\022\020\n\014INSERT_EVENT\020\001\022\020\n\014DE"
-    "LETE_EVENT\020\002", 1372);
+    "gned\030\003 \002(\010:\005false\022\r\n\005is_pk\030\004 \002(\010\022\032\n\013is_o"
+    "ld_null\030\006 \001(\010:\005false\022\021\n\told_value\030\007 \001(\014\022"
+    "\032\n\013is_new_null\030\010 \001(\010:\005false\022\021\n\tnew_value"
+    "\030\t \001(\014\022\017\n\007charset\030\n \001(\t\"-\n\003Row\022&\n\005field\030"
+    "\001 \003(\0132\027.mysql_replicator.Field\"k\n\006Status"
+    "\022\020\n\010log_file\030\001 \002(\t\022\016\n\006offset\030\002 \002(\r\022\021\n\tti"
+    "mestamp\030\003 \002(\r\022\014\n\004host\030\004 \002(\t\022\014\n\004port\030\005 \002("
+    "\r\022\020\n\010progress\030\006 \001(\004\"\270\001\n\013BinlogEvent\022\n\n\002d"
+    "b\030\001 \002(\t\022\r\n\005table\030\002 \002(\t\022/\n\nevent_type\030\003 \002"
+    "(\0162\033.mysql_replicator.EventType\022(\n\006statu"
+    "s\030\004 \001(\0132\030.mysql_replicator.Status\022\017\n\007cha"
+    "rset\030\005 \001(\t\022\"\n\003row\030\006 \001(\0132\025.mysql_replicat"
+    "or.Row*\351\005\n\tMysqlType\022\026\n\022MYSQL_TYPE_DECIM"
+    "AL\020\000\022\023\n\017MYSQL_TYPE_TINY\020\001\022\024\n\020MYSQL_TYPE_"
+    "SHORT\020\002\022\023\n\017MYSQL_TYPE_LONG\020\003\022\024\n\020MYSQL_TY"
+    "PE_FLOAT\020\004\022\025\n\021MYSQL_TYPE_DOUBLE\020\005\022\023\n\017MYS"
+    "QL_TYPE_NULL\020\006\022\030\n\024MYSQL_TYPE_TIMESTAMP\020\007"
+    "\022\027\n\023MYSQL_TYPE_LONGLONG\020\010\022\024\n\020MYSQL_TYPE_"
+    "INT24\020\t\022\023\n\017MYSQL_TYPE_DATE\020\n\022\023\n\017MYSQL_TY"
+    "PE_TIME\020\013\022\027\n\023MYSQL_TYPE_DATETIME\020\014\022\023\n\017MY"
+    "SQL_TYPE_YEAR\020\r\022\026\n\022MYSQL_TYPE_NEWDATE\020\016\022"
+    "\026\n\022MYSQL_TYPE_VARCHAR\020\017\022\022\n\016MYSQL_TYPE_BI"
+    "T\020\020\022\031\n\025MYSQL_TYPE_TIMESTAMP2\020\021\022\030\n\024MYSQL_"
+    "TYPE_DATETIME2\020\022\022\024\n\020MYSQL_TYPE_TIME2\020\023\022\024"
+    "\n\017MYSQL_TYPE_JSON\020\365\001\022\032\n\025MYSQL_TYPE_NEWDE"
+    "CIMAL\020\366\001\022\024\n\017MYSQL_TYPE_ENUM\020\367\001\022\023\n\016MYSQL_"
+    "TYPE_SET\020\370\001\022\031\n\024MYSQL_TYPE_TINY_BLOB\020\371\001\022\033"
+    "\n\026MYSQL_TYPE_MEDIUM_BLOB\020\372\001\022\031\n\024MYSQL_TYP"
+    "E_LONG_BLOB\020\373\001\022\024\n\017MYSQL_TYPE_BLOB\020\374\001\022\032\n\025"
+    "MYSQL_TYPE_VAR_STRING\020\375\001\022\026\n\021MYSQL_TYPE_S"
+    "TRING\020\376\001\022\030\n\023MYSQL_TYPE_GEOMETRY\020\377\001*A\n\tEv"
+    "entType\022\020\n\014UPDATE_EVENT\020\000\022\020\n\014INSERT_EVEN"
+    "T\020\001\022\020\n\014DELETE_EVENT\020\002", 1421);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "binlog_event.proto", &protobuf_RegisterTypes);
   Field::default_instance_ = new Field();
   Row::default_instance_ = new Row();
-  MysubStatus::default_instance_ = new MysubStatus();
+  Status::default_instance_ = new Status();
   BinlogEvent::default_instance_ = new BinlogEvent();
   Field::default_instance_->InitAsDefaultInstance();
   Row::default_instance_->InitAsDefaultInstance();
-  MysubStatus::default_instance_->InitAsDefaultInstance();
+  Status::default_instance_->InitAsDefaultInstance();
   BinlogEvent::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_binlog_5fevent_2eproto);
 }
@@ -245,6 +244,10 @@ bool MysqlType_IsValid(int value) {
     case 14:
     case 15:
     case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 245:
     case 246:
     case 247:
     case 248:
@@ -483,7 +486,7 @@ bool Field::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bool is_old_null = 6;
+      // optional bool is_old_null = 6 [default = false];
       case 6: {
         if (tag == 48) {
          parse_is_old_null:
@@ -511,7 +514,7 @@ bool Field::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bool is_new_null = 8;
+      // optional bool is_new_null = 8 [default = false];
       case 8: {
         if (tag == 64) {
          parse_is_new_null:
@@ -607,7 +610,7 @@ void Field::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->is_pk(), output);
   }
 
-  // optional bool is_old_null = 6;
+  // optional bool is_old_null = 6 [default = false];
   if (has_is_old_null()) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->is_old_null(), output);
   }
@@ -618,7 +621,7 @@ void Field::SerializeWithCachedSizes(
       7, this->old_value(), output);
   }
 
-  // optional bool is_new_null = 8;
+  // optional bool is_new_null = 8 [default = false];
   if (has_is_new_null()) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(8, this->is_new_null(), output);
   }
@@ -676,7 +679,7 @@ void Field::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->is_pk(), target);
   }
 
-  // optional bool is_old_null = 6;
+  // optional bool is_old_null = 6 [default = false];
   if (has_is_old_null()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->is_old_null(), target);
   }
@@ -688,7 +691,7 @@ void Field::SerializeWithCachedSizes(
         7, this->old_value(), target);
   }
 
-  // optional bool is_new_null = 8;
+  // optional bool is_new_null = 8 [default = false];
   if (has_is_new_null()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(8, this->is_new_null(), target);
   }
@@ -746,7 +749,7 @@ int Field::ByteSize() const {
       total_size += 1 + 1;
     }
 
-    // optional bool is_old_null = 6;
+    // optional bool is_old_null = 6 [default = false];
     if (has_is_old_null()) {
       total_size += 1 + 1;
     }
@@ -758,7 +761,7 @@ int Field::ByteSize() const {
           this->old_value());
     }
 
-    // optional bool is_new_null = 8;
+    // optional bool is_new_null = 8 [default = false];
     if (has_is_new_null()) {
       total_size += 1 + 1;
     }
@@ -1106,52 +1109,48 @@ void Row::Swap(Row* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int MysubStatus::kLogFileFieldNumber;
-const int MysubStatus::kOffsetFieldNumber;
-const int MysubStatus::kTimestampFieldNumber;
-const int MysubStatus::kSafeOffsetFieldNumber;
-const int MysubStatus::kSafeTimestampFieldNumber;
-const int MysubStatus::kHostFieldNumber;
-const int MysubStatus::kPortFieldNumber;
-const int MysubStatus::kProgressFieldNumber;
+const int Status::kLogFileFieldNumber;
+const int Status::kOffsetFieldNumber;
+const int Status::kTimestampFieldNumber;
+const int Status::kHostFieldNumber;
+const int Status::kPortFieldNumber;
+const int Status::kProgressFieldNumber;
 #endif  // !_MSC_VER
 
-MysubStatus::MysubStatus()
+Status::Status()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(constructor:mysql_replicator.Status)
 }
 
-void MysubStatus::InitAsDefaultInstance() {
+void Status::InitAsDefaultInstance() {
 }
 
-MysubStatus::MysubStatus(const MysubStatus& from)
+Status::Status(const Status& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(copy_constructor:mysql_replicator.Status)
 }
 
-void MysubStatus::SharedCtor() {
+void Status::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   log_file_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   offset_ = 0u;
   timestamp_ = 0u;
-  safe_offset_ = 0u;
-  safe_timestamp_ = 0u;
   host_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   port_ = 0u;
   progress_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-MysubStatus::~MysubStatus() {
-  // @@protoc_insertion_point(destructor:mysql_replicator.MysubStatus)
+Status::~Status() {
+  // @@protoc_insertion_point(destructor:mysql_replicator.Status)
   SharedDtor();
 }
 
-void MysubStatus::SharedDtor() {
+void Status::SharedDtor() {
   if (log_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete log_file_;
   }
@@ -1162,30 +1161,30 @@ void MysubStatus::SharedDtor() {
   }
 }
 
-void MysubStatus::SetCachedSize(int size) const {
+void Status::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* MysubStatus::descriptor() {
+const ::google::protobuf::Descriptor* Status::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return MysubStatus_descriptor_;
+  return Status_descriptor_;
 }
 
-const MysubStatus& MysubStatus::default_instance() {
+const Status& Status::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_binlog_5fevent_2eproto();
   return *default_instance_;
 }
 
-MysubStatus* MysubStatus::default_instance_ = NULL;
+Status* Status::default_instance_ = NULL;
 
-MysubStatus* MysubStatus::New() const {
-  return new MysubStatus;
+Status* Status::New() const {
+  return new Status;
 }
 
-void MysubStatus::Clear() {
+void Status::Clear() {
 #define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<MysubStatus*>(16)->f) - \
+  &reinterpret_cast<Status*>(16)->f) - \
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
@@ -1194,8 +1193,8 @@ void MysubStatus::Clear() {
     ::memset(&first, 0, n);                                \
   } while (0)
 
-  if (_has_bits_[0 / 32] & 255) {
-    ZR_(offset_, safe_timestamp_);
+  if (_has_bits_[0 / 32] & 63) {
+    ZR_(offset_, timestamp_);
     ZR_(progress_, port_);
     if (has_log_file()) {
       if (log_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -1216,11 +1215,11 @@ void MysubStatus::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool MysubStatus::MergePartialFromCodedStream(
+bool Status::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(parse_start:mysql_replicator.Status)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -1268,43 +1267,13 @@ bool MysubStatus::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(32)) goto parse_safe_offset;
+        if (input->ExpectTag(34)) goto parse_host;
         break;
       }
 
-      // required uint32 safe_offset = 4;
+      // required string host = 4;
       case 4: {
-        if (tag == 32) {
-         parse_safe_offset:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &safe_offset_)));
-          set_has_safe_offset();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(40)) goto parse_safe_timestamp;
-        break;
-      }
-
-      // required uint32 safe_timestamp = 5;
-      case 5: {
-        if (tag == 40) {
-         parse_safe_timestamp:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &safe_timestamp_)));
-          set_has_safe_timestamp();
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(50)) goto parse_host;
-        break;
-      }
-
-      // required string host = 6;
-      case 6: {
-        if (tag == 50) {
+        if (tag == 34) {
          parse_host:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_host()));
@@ -1315,13 +1284,13 @@ bool MysubStatus::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(56)) goto parse_port;
+        if (input->ExpectTag(40)) goto parse_port;
         break;
       }
 
-      // required uint32 port = 7;
-      case 7: {
-        if (tag == 56) {
+      // required uint32 port = 5;
+      case 5: {
+        if (tag == 40) {
          parse_port:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
@@ -1330,13 +1299,13 @@ bool MysubStatus::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(64)) goto parse_progress;
+        if (input->ExpectTag(48)) goto parse_progress;
         break;
       }
 
-      // optional uint64 progress = 8;
-      case 8: {
-        if (tag == 64) {
+      // optional uint64 progress = 6;
+      case 6: {
+        if (tag == 48) {
          parse_progress:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
@@ -1363,17 +1332,17 @@ bool MysubStatus::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(parse_success:mysql_replicator.Status)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(parse_failure:mysql_replicator.Status)
   return false;
 #undef DO_
 }
 
-void MysubStatus::SerializeWithCachedSizes(
+void Status::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(serialize_start:mysql_replicator.Status)
   // required string log_file = 1;
   if (has_log_file()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1394,46 +1363,36 @@ void MysubStatus::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->timestamp(), output);
   }
 
-  // required uint32 safe_offset = 4;
-  if (has_safe_offset()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->safe_offset(), output);
-  }
-
-  // required uint32 safe_timestamp = 5;
-  if (has_safe_timestamp()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->safe_timestamp(), output);
-  }
-
-  // required string host = 6;
+  // required string host = 4;
   if (has_host()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->host().data(), this->host().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "host");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      6, this->host(), output);
+      4, this->host(), output);
   }
 
-  // required uint32 port = 7;
+  // required uint32 port = 5;
   if (has_port()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(7, this->port(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->port(), output);
   }
 
-  // optional uint64 progress = 8;
+  // optional uint64 progress = 6;
   if (has_progress()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->progress(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(6, this->progress(), output);
   }
 
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(serialize_end:mysql_replicator.Status)
 }
 
-::google::protobuf::uint8* MysubStatus::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Status::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(serialize_to_array_start:mysql_replicator.Status)
   // required string log_file = 1;
   if (has_log_file()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1455,17 +1414,7 @@ void MysubStatus::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->timestamp(), target);
   }
 
-  // required uint32 safe_offset = 4;
-  if (has_safe_offset()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->safe_offset(), target);
-  }
-
-  // required uint32 safe_timestamp = 5;
-  if (has_safe_timestamp()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->safe_timestamp(), target);
-  }
-
-  // required string host = 6;
+  // required string host = 4;
   if (has_host()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->host().data(), this->host().length(),
@@ -1473,28 +1422,28 @@ void MysubStatus::SerializeWithCachedSizes(
       "host");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        6, this->host(), target);
+        4, this->host(), target);
   }
 
-  // required uint32 port = 7;
+  // required uint32 port = 5;
   if (has_port()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(7, this->port(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->port(), target);
   }
 
-  // optional uint64 progress = 8;
+  // optional uint64 progress = 6;
   if (has_progress()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->progress(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(6, this->progress(), target);
   }
 
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(serialize_to_array_end:mysql_replicator.Status)
   return target;
 }
 
-int MysubStatus::ByteSize() const {
+int Status::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -1519,35 +1468,21 @@ int MysubStatus::ByteSize() const {
           this->timestamp());
     }
 
-    // required uint32 safe_offset = 4;
-    if (has_safe_offset()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->safe_offset());
-    }
-
-    // required uint32 safe_timestamp = 5;
-    if (has_safe_timestamp()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->safe_timestamp());
-    }
-
-    // required string host = 6;
+    // required string host = 4;
     if (has_host()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->host());
     }
 
-    // required uint32 port = 7;
+    // required uint32 port = 5;
     if (has_port()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->port());
     }
 
-    // optional uint64 progress = 8;
+    // optional uint64 progress = 6;
     if (has_progress()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt64Size(
@@ -1566,10 +1501,10 @@ int MysubStatus::ByteSize() const {
   return total_size;
 }
 
-void MysubStatus::MergeFrom(const ::google::protobuf::Message& from) {
+void Status::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const MysubStatus* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const MysubStatus*>(
+  const Status* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Status*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1578,7 +1513,7 @@ void MysubStatus::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void MysubStatus::MergeFrom(const MysubStatus& from) {
+void Status::MergeFrom(const Status& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_log_file()) {
@@ -1589,12 +1524,6 @@ void MysubStatus::MergeFrom(const MysubStatus& from) {
     }
     if (from.has_timestamp()) {
       set_timestamp(from.timestamp());
-    }
-    if (from.has_safe_offset()) {
-      set_safe_offset(from.safe_offset());
-    }
-    if (from.has_safe_timestamp()) {
-      set_safe_timestamp(from.safe_timestamp());
     }
     if (from.has_host()) {
       set_host(from.host());
@@ -1609,31 +1538,29 @@ void MysubStatus::MergeFrom(const MysubStatus& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void MysubStatus::CopyFrom(const ::google::protobuf::Message& from) {
+void Status::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void MysubStatus::CopyFrom(const MysubStatus& from) {
+void Status::CopyFrom(const Status& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MysubStatus::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
+bool Status::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   return true;
 }
 
-void MysubStatus::Swap(MysubStatus* other) {
+void Status::Swap(Status* other) {
   if (other != this) {
     std::swap(log_file_, other->log_file_);
     std::swap(offset_, other->offset_);
     std::swap(timestamp_, other->timestamp_);
-    std::swap(safe_offset_, other->safe_offset_);
-    std::swap(safe_timestamp_, other->safe_timestamp_);
     std::swap(host_, other->host_);
     std::swap(port_, other->port_);
     std::swap(progress_, other->progress_);
@@ -1643,11 +1570,11 @@ void MysubStatus::Swap(MysubStatus* other) {
   }
 }
 
-::google::protobuf::Metadata MysubStatus::GetMetadata() const {
+::google::protobuf::Metadata Status::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MysubStatus_descriptor_;
-  metadata.reflection = MysubStatus_reflection_;
+  metadata.descriptor = Status_descriptor_;
+  metadata.reflection = Status_reflection_;
   return metadata;
 }
 
@@ -1658,7 +1585,7 @@ void MysubStatus::Swap(MysubStatus* other) {
 const int BinlogEvent::kDbFieldNumber;
 const int BinlogEvent::kTableFieldNumber;
 const int BinlogEvent::kEventTypeFieldNumber;
-const int BinlogEvent::kMysubStatusFieldNumber;
+const int BinlogEvent::kStatusFieldNumber;
 const int BinlogEvent::kCharsetFieldNumber;
 const int BinlogEvent::kRowFieldNumber;
 #endif  // !_MSC_VER
@@ -1670,7 +1597,7 @@ BinlogEvent::BinlogEvent()
 }
 
 void BinlogEvent::InitAsDefaultInstance() {
-  mysub_status_ = const_cast< ::mysql_replicator::MysubStatus*>(&::mysql_replicator::MysubStatus::default_instance());
+  status_ = const_cast< ::mysql_replicator::Status*>(&::mysql_replicator::Status::default_instance());
   row_ = const_cast< ::mysql_replicator::Row*>(&::mysql_replicator::Row::default_instance());
 }
 
@@ -1687,7 +1614,7 @@ void BinlogEvent::SharedCtor() {
   db_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   table_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   event_type_ = 0;
-  mysub_status_ = NULL;
+  status_ = NULL;
   charset_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   row_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1709,7 +1636,7 @@ void BinlogEvent::SharedDtor() {
     delete charset_;
   }
   if (this != default_instance_) {
-    delete mysub_status_;
+    delete status_;
     delete row_;
   }
 }
@@ -1748,8 +1675,8 @@ void BinlogEvent::Clear() {
       }
     }
     event_type_ = 0;
-    if (has_mysub_status()) {
-      if (mysub_status_ != NULL) mysub_status_->::mysql_replicator::MysubStatus::Clear();
+    if (has_status()) {
+      if (status_ != NULL) status_->::mysql_replicator::Status::Clear();
     }
     if (has_charset()) {
       if (charset_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -1823,16 +1750,16 @@ bool BinlogEvent::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(34)) goto parse_mysub_status;
+        if (input->ExpectTag(34)) goto parse_status;
         break;
       }
 
-      // optional .mysql_replicator.MysubStatus mysub_status = 4;
+      // optional .mysql_replicator.Status status = 4;
       case 4: {
         if (tag == 34) {
-         parse_mysub_status:
+         parse_status:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_mysub_status()));
+               input, mutable_status()));
         } else {
           goto handle_unusual;
         }
@@ -1921,10 +1848,10 @@ void BinlogEvent::SerializeWithCachedSizes(
       3, this->event_type(), output);
   }
 
-  // optional .mysql_replicator.MysubStatus mysub_status = 4;
-  if (has_mysub_status()) {
+  // optional .mysql_replicator.Status status = 4;
+  if (has_status()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->mysub_status(), output);
+      4, this->status(), output);
   }
 
   // optional string charset = 5;
@@ -1981,11 +1908,11 @@ void BinlogEvent::SerializeWithCachedSizes(
       3, this->event_type(), target);
   }
 
-  // optional .mysql_replicator.MysubStatus mysub_status = 4;
-  if (has_mysub_status()) {
+  // optional .mysql_replicator.Status status = 4;
+  if (has_status()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        4, this->mysub_status(), target);
+        4, this->status(), target);
   }
 
   // optional string charset = 5;
@@ -2038,11 +1965,11 @@ int BinlogEvent::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->event_type());
     }
 
-    // optional .mysql_replicator.MysubStatus mysub_status = 4;
-    if (has_mysub_status()) {
+    // optional .mysql_replicator.Status status = 4;
+    if (has_status()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->mysub_status());
+          this->status());
     }
 
     // optional string charset = 5;
@@ -2095,8 +2022,8 @@ void BinlogEvent::MergeFrom(const BinlogEvent& from) {
     if (from.has_event_type()) {
       set_event_type(from.event_type());
     }
-    if (from.has_mysub_status()) {
-      mutable_mysub_status()->::mysql_replicator::MysubStatus::MergeFrom(from.mysub_status());
+    if (from.has_status()) {
+      mutable_status()->::mysql_replicator::Status::MergeFrom(from.status());
     }
     if (from.has_charset()) {
       set_charset(from.charset());
@@ -2123,8 +2050,8 @@ void BinlogEvent::CopyFrom(const BinlogEvent& from) {
 bool BinlogEvent::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
-  if (has_mysub_status()) {
-    if (!this->mysub_status().IsInitialized()) return false;
+  if (has_status()) {
+    if (!this->status().IsInitialized()) return false;
   }
   if (has_row()) {
     if (!this->row().IsInitialized()) return false;
@@ -2137,7 +2064,7 @@ void BinlogEvent::Swap(BinlogEvent* other) {
     std::swap(db_, other->db_);
     std::swap(table_, other->table_);
     std::swap(event_type_, other->event_type_);
-    std::swap(mysub_status_, other->mysub_status_);
+    std::swap(status_, other->status_);
     std::swap(charset_, other->charset_);
     std::swap(row_, other->row_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);

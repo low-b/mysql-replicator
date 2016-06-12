@@ -46,7 +46,7 @@ CCP_FLAGS=
 
 
 #COMAKE UUID
-COMAKE_MD5=135f55c545dd04589ddb0d1367fe8d34  COMAKE
+COMAKE_MD5=b130c0d9e40214792237424b6563288e  COMAKE
 
 
 .PHONY:all
@@ -74,6 +74,7 @@ clean:ccpclean
 	rm -rf ./output/bin/binlog_listener
 	rm -rf src/binlog_listener_binlog_dump_gtid_packet.o
 	rm -rf src/binlog_listener_binlog_dump_packet.o
+	rm -rf src/binlog_listener_binlog_event_factory.o
 	rm -rf src/binlog_listener_binlog_event_header.o
 	rm -rf src/binlog_listener_binlog_position.o
 	rm -rf src/binlog_listener_bytes_helper.o
@@ -90,6 +91,7 @@ clean:ccpclean
 	rm -rf src/binlog_listener_mysql_replicator_dumper.o
 	rm -rf src/binlog_listener_mysql_replicator_resultset.o
 	rm -rf src/binlog_listener_mysql_replicator_statement.o
+	rm -rf src/binlog_listener_mysql_util.o
 	rm -rf src/binlog_listener_network_driver.o
 	rm -rf src/binlog_listener_ok_packet.o
 	rm -rf src/binlog_listener_packet_header.o
@@ -97,6 +99,7 @@ clean:ccpclean
 	rm -rf src/binlog_listener_query_packet.o
 	rm -rf src/binlog_listener_resultset_row_packet.o
 	rm -rf src/binlog_listener_rotate_event.o
+	rm -rf src/binlog_listener_rows_event.o
 	rm -rf src/binlog_listener_start_event_v3.o
 	rm -rf src/binlog_listener_table_map_event.o
 	rm -rf src/binlog_listener_update_rows_event.o
@@ -121,6 +124,7 @@ love:
 
 binlog_listener:src/binlog_listener_binlog_dump_gtid_packet.o \
   src/binlog_listener_binlog_dump_packet.o \
+  src/binlog_listener_binlog_event_factory.o \
   src/binlog_listener_binlog_event_header.o \
   src/binlog_listener_binlog_position.o \
   src/binlog_listener_bytes_helper.o \
@@ -137,6 +141,7 @@ binlog_listener:src/binlog_listener_binlog_dump_gtid_packet.o \
   src/binlog_listener_mysql_replicator_dumper.o \
   src/binlog_listener_mysql_replicator_resultset.o \
   src/binlog_listener_mysql_replicator_statement.o \
+  src/binlog_listener_mysql_util.o \
   src/binlog_listener_network_driver.o \
   src/binlog_listener_ok_packet.o \
   src/binlog_listener_packet_header.o \
@@ -144,6 +149,7 @@ binlog_listener:src/binlog_listener_binlog_dump_gtid_packet.o \
   src/binlog_listener_query_packet.o \
   src/binlog_listener_resultset_row_packet.o \
   src/binlog_listener_rotate_event.o \
+  src/binlog_listener_rows_event.o \
   src/binlog_listener_start_event_v3.o \
   src/binlog_listener_table_map_event.o \
   src/binlog_listener_update_rows_event.o \
@@ -151,6 +157,7 @@ binlog_listener:src/binlog_listener_binlog_dump_gtid_packet.o \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40mbinlog_listener[0m']"
 	$(CXX) src/binlog_listener_binlog_dump_gtid_packet.o \
   src/binlog_listener_binlog_dump_packet.o \
+  src/binlog_listener_binlog_event_factory.o \
   src/binlog_listener_binlog_event_header.o \
   src/binlog_listener_binlog_position.o \
   src/binlog_listener_bytes_helper.o \
@@ -167,6 +174,7 @@ binlog_listener:src/binlog_listener_binlog_dump_gtid_packet.o \
   src/binlog_listener_mysql_replicator_dumper.o \
   src/binlog_listener_mysql_replicator_resultset.o \
   src/binlog_listener_mysql_replicator_statement.o \
+  src/binlog_listener_mysql_util.o \
   src/binlog_listener_network_driver.o \
   src/binlog_listener_ok_packet.o \
   src/binlog_listener_packet_header.o \
@@ -174,6 +182,7 @@ binlog_listener:src/binlog_listener_binlog_dump_gtid_packet.o \
   src/binlog_listener_query_packet.o \
   src/binlog_listener_resultset_row_packet.o \
   src/binlog_listener_rotate_event.o \
+  src/binlog_listener_rows_event.o \
   src/binlog_listener_start_event_v3.o \
   src/binlog_listener_table_map_event.o \
   src/binlog_listener_update_rows_event.o \
@@ -242,6 +251,39 @@ src/binlog_listener_binlog_dump_packet.o:src/binlog_dump_packet.cpp \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_binlog_dump_packet.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_binlog_dump_packet.o src/binlog_dump_packet.cpp
 
+src/binlog_listener_binlog_event_factory.o:src/binlog_event_factory.cpp \
+  include/binlog_event_factory.h \
+  include/format_description_event.h \
+  include/log_event.h \
+  include/binlog_event_header.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/db_meta.h \
+  include/mysql_replicator_com.h \
+  include/mysql_replicator_connector.h \
+  include/mysql_replicator_statement.h \
+  include/mysql_replicator_resultset.h \
+  include/column_definition_packet.h \
+  include/resultset_row_packet.h \
+  proto/binlog_event.pb.h \
+  include/table_map_event.h \
+  include/start_event_v3.h \
+  include/intvar_event.h \
+  include/rotate_event.h \
+  include/load_event.h \
+  include/table_map_event.h \
+  include/xid_event.h \
+  include/query_event.h \
+  include/format_description_event.h \
+  include/mysql_replicator_com.h \
+  include/update_rows_event.h \
+  include/rows_event.h \
+  include/write_rows_event.h \
+  include/delete_rows_event.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_binlog_event_factory.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_binlog_event_factory.o src/binlog_event_factory.cpp
+
 src/binlog_listener_binlog_event_header.o:src/binlog_event_header.cpp \
   include/binlog_event_header.h \
   include/packet.h \
@@ -298,6 +340,7 @@ src/binlog_listener_db_meta.o:src/db_meta.cpp \
   include/network_exception.h \
   include/myexception.h \
   include/resultset_row_packet.h \
+  proto/binlog_event.pb.h \
   include/mysql_replicator_statement.h \
   include/mysql_replicator_resultset.h \
   include/global_constants.h
@@ -334,7 +377,8 @@ src/binlog_listener_format_description_event.o:src/format_description_event.cpp 
   include/network_exception.h \
   include/myexception.h \
   include/bytes_helper.h \
-  include/packet_header.h
+  include/packet_header.h \
+  include/mysql_replicator_com.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_format_description_event.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_format_description_event.o src/format_description_event.cpp
 
@@ -416,6 +460,16 @@ src/binlog_listener_mysql_replicator_dumper.o:src/mysql_replicator_dumper.cpp \
   include/log_event.h \
   include/binlog_event_header.h \
   include/mysql_replicator_com.h \
+  include/db_meta.h \
+  include/mysql_replicator_connector.h \
+  include/mysql_replicator_statement.h \
+  include/mysql_replicator_resultset.h \
+  include/column_definition_packet.h \
+  include/resultset_row_packet.h \
+  proto/binlog_event.pb.h \
+  include/binlog_event_factory.h \
+  include/format_description_event.h \
+  include/table_map_event.h \
   include/packet_header.h \
   include/eof_packet.h \
   include/err_packet.h \
@@ -424,14 +478,7 @@ src/binlog_listener_mysql_replicator_dumper.o:src/mysql_replicator_dumper.cpp \
   include/packet_header.h \
   include/network_exception.h \
   include/binlog_dump_exception.h \
-  include/start_event_v3.h \
-  include/intvar_event.h \
-  include/rotate_event.h \
-  include/load_event.h \
-  include/table_map_event.h \
-  include/xid_event.h \
-  include/query_event.h \
-  include/format_description_event.h
+  include/binlog_event_factory.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_mysql_replicator_dumper.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_mysql_replicator_dumper.o src/mysql_replicator_dumper.cpp
 
@@ -467,6 +514,11 @@ src/binlog_listener_mysql_replicator_statement.o:src/mysql_replicator_statement.
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_mysql_replicator_statement.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_mysql_replicator_statement.o src/mysql_replicator_statement.cpp
 
+src/binlog_listener_mysql_util.o:src/mysql_util.cpp \
+  include/mysql_util.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_mysql_util.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_mysql_util.o src/mysql_util.cpp
+
 src/binlog_listener_network_driver.o:src/network_driver.cpp \
   include/network_driver.h \
   proto/binlog_event.pb.h \
@@ -484,8 +536,15 @@ src/binlog_listener_network_driver.o:src/network_driver.cpp \
   include/binlog_event_header.h \
   include/mysql_replicator_com.h \
   include/db_meta.h \
+  include/binlog_event_factory.h \
+  include/format_description_event.h \
+  include/table_map_event.h \
   include/mysql_replicator_statement.h \
-  include/mysql_replicator_resultset.h
+  include/mysql_replicator_resultset.h \
+  include/global_constants.h \
+  include/format_description_event.h \
+  include/binlog_event_factory.h \
+  include/binlog_dump_exception.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_network_driver.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_network_driver.o src/network_driver.cpp
 
@@ -558,6 +617,32 @@ src/binlog_listener_rotate_event.o:src/rotate_event.cpp \
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_rotate_event.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_rotate_event.o src/rotate_event.cpp
 
+src/binlog_listener_rows_event.o:src/rows_event.cpp \
+  include/rows_event.h \
+  include/db_meta.h \
+  include/mysql_replicator_com.h \
+  include/mysql_replicator_connector.h \
+  include/mysql_replicator_statement.h \
+  include/mysql_replicator_resultset.h \
+  include/column_definition_packet.h \
+  include/packet.h \
+  include/network_exception.h \
+  include/myexception.h \
+  include/resultset_row_packet.h \
+  proto/binlog_event.pb.h \
+  include/format_description_event.h \
+  include/log_event.h \
+  include/binlog_event_header.h \
+  include/table_map_event.h \
+  include/bytes_helper.h \
+  include/packet_header.h \
+  include/mysql_replicator_com.h \
+  include/binlog_event_exception.h \
+  include/mysql_util.h \
+  include/m_string.h
+	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_rows_event.o[0m']"
+	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_rows_event.o src/rows_event.cpp
+
 src/binlog_listener_start_event_v3.o:src/start_event_v3.cpp \
   include/start_event_v3.h \
   include/log_event.h \
@@ -579,17 +664,29 @@ src/binlog_listener_table_map_event.o:src/table_map_event.cpp \
   include/myexception.h \
   include/bytes_helper.h \
   include/packet_header.h \
-  include/mysql_replicator_com.h
+  include/mysql_replicator_com.h \
+  proto/binlog_event.pb.h
 	@echo "[[1;32;40mCOMAKE:BUILD[0m][Target:'[1;32;40msrc/binlog_listener_table_map_event.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o src/binlog_listener_table_map_event.o src/table_map_event.cpp
 
 src/binlog_listener_update_rows_event.o:src/update_rows_event.cpp \
-  include/table_map_event.h \
-  include/log_event.h \
-  include/binlog_event_header.h \
+  include/update_rows_event.h \
+  include/rows_event.h \
+  include/db_meta.h \
+  include/mysql_replicator_com.h \
+  include/mysql_replicator_connector.h \
+  include/mysql_replicator_statement.h \
+  include/mysql_replicator_resultset.h \
+  include/column_definition_packet.h \
   include/packet.h \
   include/network_exception.h \
   include/myexception.h \
+  include/resultset_row_packet.h \
+  proto/binlog_event.pb.h \
+  include/format_description_event.h \
+  include/log_event.h \
+  include/binlog_event_header.h \
+  include/table_map_event.h \
   include/bytes_helper.h \
   include/packet_header.h \
   include/mysql_replicator_com.h

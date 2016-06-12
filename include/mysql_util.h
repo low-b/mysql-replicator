@@ -83,11 +83,17 @@ typedef ulonglong uint64;
                                             (dec)->frac=0;      \
                                             (dec)->sign=0;      \
                                           } while(0)
-typedef struct st_decimal_t {
+struct decimal_t {
+public:
+    decimal_t() {
+        len= DECIMAL_BUFF_LENGTH;
+        buf= buffer;
+    }
+    int32_t buffer[DECIMAL_BUFF_LENGTH];
     int    intg, frac, len;
     char sign;
     int32_t *buf;
-} decimal_t;
+};
 
 typedef int32_t dec1;
 

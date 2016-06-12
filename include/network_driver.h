@@ -23,7 +23,7 @@ public:
         }
     void init();
     void sendBinlogDump(std::shared_ptr<BinlogCheckPoint> binlog_pos);
-    std::shared_ptr<BinlogEvent> takeBinlogEvent();
+    void takeBinlogEvent(std::vector<std::shared_ptr<BinlogEvent> >& event_vec);
 private:
     std::shared_ptr<DbMeta> db_meta_;
     std::shared_ptr<MySQLReplicatorConnector> conn_;
@@ -33,6 +33,7 @@ private:
     std::string username_;
     std::string password_;
     std::shared_ptr<BinlogEventFactory> event_factory_;
+    std::shared_ptr<BinlogCheckPoint> check_point_;
 };
 }
 

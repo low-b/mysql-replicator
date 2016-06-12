@@ -13,9 +13,6 @@
 #include "write_rows_event.h"
 #include "delete_rows_event.h"
 
-#include <iostream>
-
-using namespace std;
 
 namespace mysql_replicator {
 std::shared_ptr<LogEvent> BinlogEventFactory::create(boost::asio::streambuf& packet_buf) {
@@ -71,11 +68,6 @@ std::shared_ptr<LogEvent> BinlogEventFactory::create(boost::asio::streambuf& pac
             update_rows_event->fromStream(packet_stream);
             update_rows_event->set_table_map_event(table_map_);
             update_rows_event->set_db_meta(db_meta_);
-            std::vector<std::shared_ptr<BinlogEvent> > event_vec;
-            update_rows_event->buildEventProto(event_vec);
-            for (auto &i : event_vec) {
-                cout << i->DebugString() << endl;
-            }
             log_event = update_rows_event;
             break;
         }
@@ -85,11 +77,6 @@ std::shared_ptr<LogEvent> BinlogEventFactory::create(boost::asio::streambuf& pac
             write_rows_event->fromStream(packet_stream);
             write_rows_event->set_table_map_event(table_map_);
             write_rows_event->set_db_meta(db_meta_);
-            std::vector<std::shared_ptr<BinlogEvent> > event_vec;
-            write_rows_event->buildEventProto(event_vec);
-            for (auto &i : event_vec) {
-                cout << i->DebugString() << endl;
-            }
             log_event = write_rows_event;
             break;
         }
@@ -99,16 +86,11 @@ std::shared_ptr<LogEvent> BinlogEventFactory::create(boost::asio::streambuf& pac
             delete_rows_event->fromStream(packet_stream);
             delete_rows_event->set_table_map_event(table_map_);
             delete_rows_event->set_db_meta(db_meta_);
-            std::vector<std::shared_ptr<BinlogEvent> > event_vec;
-            delete_rows_event->buildEventProto(event_vec);
-            for (auto &i : event_vec) {
-                cout << i->DebugString() << endl;
-            }
             log_event = delete_rows_event;
             break;
         }
         default:
-            return log_event;
+            return std::shared_ptr<LogEvent>();
     }
 //    log_event->printPacket();
     return log_event;

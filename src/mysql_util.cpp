@@ -2,7 +2,6 @@
 #include <cstring>
 #include <alloca.h>
 #include <algorithm>
-
 inline bool likely(bool expr)
 {
       return __builtin_expect(expr, true);
@@ -27,6 +26,7 @@ int decimal_bin_size(int precision, int scale)
 
 int bin2decimal(const uchar *from, decimal_t *to, int precision, int scale)
 {
+
     int error=E_DEC_OK, intg=precision-scale,
         intg0=intg/DIG_PER_DEC1, frac0=scale/DIG_PER_DEC1,
         intg0x=intg-intg0*DIG_PER_DEC1, frac0x=scale-frac0*DIG_PER_DEC1,
@@ -79,7 +79,7 @@ int bin2decimal(const uchar *from, decimal_t *to, int precision, int scale)
             goto err;
         if (buf > to->buf || *buf != 0)
             buf++;
-        else
+        else 
             to->intg-=intg0x;
     }
     for (stop=from+intg0*sizeof(dec1); from < stop; from+=sizeof(dec1))

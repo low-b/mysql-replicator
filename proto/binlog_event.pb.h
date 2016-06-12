@@ -36,7 +36,7 @@ void protobuf_ShutdownFile_binlog_5fevent_2eproto();
 
 class Field;
 class Row;
-class MysubStatus;
+class Status;
 class BinlogEvent;
 
 enum MysqlType {
@@ -195,7 +195,7 @@ class Field : public ::google::protobuf::Message {
   inline bool is_pk() const;
   inline void set_is_pk(bool value);
 
-  // optional bool is_old_null = 6;
+  // optional bool is_old_null = 6 [default = false];
   inline bool has_is_old_null() const;
   inline void clear_is_old_null();
   static const int kIsOldNullFieldNumber = 6;
@@ -214,7 +214,7 @@ class Field : public ::google::protobuf::Message {
   inline ::std::string* release_old_value();
   inline void set_allocated_old_value(::std::string* old_value);
 
-  // optional bool is_new_null = 8;
+  // optional bool is_new_null = 8 [default = false];
   inline bool has_is_new_null() const;
   inline void clear_is_new_null();
   static const int kIsNewNullFieldNumber = 8;
@@ -370,14 +370,14 @@ class Row : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class MysubStatus : public ::google::protobuf::Message {
+class Status : public ::google::protobuf::Message {
  public:
-  MysubStatus();
-  virtual ~MysubStatus();
+  Status();
+  virtual ~Status();
 
-  MysubStatus(const MysubStatus& from);
+  Status(const Status& from);
 
-  inline MysubStatus& operator=(const MysubStatus& from) {
+  inline Status& operator=(const Status& from) {
     CopyFrom(from);
     return *this;
   }
@@ -391,17 +391,17 @@ class MysubStatus : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const MysubStatus& default_instance();
+  static const Status& default_instance();
 
-  void Swap(MysubStatus* other);
+  void Swap(Status* other);
 
   // implements Message ----------------------------------------------
 
-  MysubStatus* New() const;
+  Status* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const MysubStatus& from);
-  void MergeFrom(const MysubStatus& from);
+  void CopyFrom(const Status& from);
+  void MergeFrom(const Status& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -449,24 +449,10 @@ class MysubStatus : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 timestamp() const;
   inline void set_timestamp(::google::protobuf::uint32 value);
 
-  // required uint32 safe_offset = 4;
-  inline bool has_safe_offset() const;
-  inline void clear_safe_offset();
-  static const int kSafeOffsetFieldNumber = 4;
-  inline ::google::protobuf::uint32 safe_offset() const;
-  inline void set_safe_offset(::google::protobuf::uint32 value);
-
-  // required uint32 safe_timestamp = 5;
-  inline bool has_safe_timestamp() const;
-  inline void clear_safe_timestamp();
-  static const int kSafeTimestampFieldNumber = 5;
-  inline ::google::protobuf::uint32 safe_timestamp() const;
-  inline void set_safe_timestamp(::google::protobuf::uint32 value);
-
-  // required string host = 6;
+  // required string host = 4;
   inline bool has_host() const;
   inline void clear_host();
-  static const int kHostFieldNumber = 6;
+  static const int kHostFieldNumber = 4;
   inline const ::std::string& host() const;
   inline void set_host(const ::std::string& value);
   inline void set_host(const char* value);
@@ -475,21 +461,21 @@ class MysubStatus : public ::google::protobuf::Message {
   inline ::std::string* release_host();
   inline void set_allocated_host(::std::string* host);
 
-  // required uint32 port = 7;
+  // required uint32 port = 5;
   inline bool has_port() const;
   inline void clear_port();
-  static const int kPortFieldNumber = 7;
+  static const int kPortFieldNumber = 5;
   inline ::google::protobuf::uint32 port() const;
   inline void set_port(::google::protobuf::uint32 value);
 
-  // optional uint64 progress = 8;
+  // optional uint64 progress = 6;
   inline bool has_progress() const;
   inline void clear_progress();
-  static const int kProgressFieldNumber = 8;
+  static const int kProgressFieldNumber = 6;
   inline ::google::protobuf::uint64 progress() const;
   inline void set_progress(::google::protobuf::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:mysql_replicator.MysubStatus)
+  // @@protoc_insertion_point(class_scope:mysql_replicator.Status)
  private:
   inline void set_has_log_file();
   inline void clear_has_log_file();
@@ -497,10 +483,6 @@ class MysubStatus : public ::google::protobuf::Message {
   inline void clear_has_offset();
   inline void set_has_timestamp();
   inline void clear_has_timestamp();
-  inline void set_has_safe_offset();
-  inline void clear_has_safe_offset();
-  inline void set_has_safe_timestamp();
-  inline void clear_has_safe_timestamp();
   inline void set_has_host();
   inline void clear_has_host();
   inline void set_has_port();
@@ -515,8 +497,6 @@ class MysubStatus : public ::google::protobuf::Message {
   ::std::string* log_file_;
   ::google::protobuf::uint32 offset_;
   ::google::protobuf::uint32 timestamp_;
-  ::google::protobuf::uint32 safe_offset_;
-  ::google::protobuf::uint32 safe_timestamp_;
   ::std::string* host_;
   ::google::protobuf::uint64 progress_;
   ::google::protobuf::uint32 port_;
@@ -525,7 +505,7 @@ class MysubStatus : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_binlog_5fevent_2eproto();
 
   void InitAsDefaultInstance();
-  static MysubStatus* default_instance_;
+  static Status* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -613,14 +593,14 @@ class BinlogEvent : public ::google::protobuf::Message {
   inline ::mysql_replicator::EventType event_type() const;
   inline void set_event_type(::mysql_replicator::EventType value);
 
-  // optional .mysql_replicator.MysubStatus mysub_status = 4;
-  inline bool has_mysub_status() const;
-  inline void clear_mysub_status();
-  static const int kMysubStatusFieldNumber = 4;
-  inline const ::mysql_replicator::MysubStatus& mysub_status() const;
-  inline ::mysql_replicator::MysubStatus* mutable_mysub_status();
-  inline ::mysql_replicator::MysubStatus* release_mysub_status();
-  inline void set_allocated_mysub_status(::mysql_replicator::MysubStatus* mysub_status);
+  // optional .mysql_replicator.Status status = 4;
+  inline bool has_status() const;
+  inline void clear_status();
+  static const int kStatusFieldNumber = 4;
+  inline const ::mysql_replicator::Status& status() const;
+  inline ::mysql_replicator::Status* mutable_status();
+  inline ::mysql_replicator::Status* release_status();
+  inline void set_allocated_status(::mysql_replicator::Status* status);
 
   // optional string charset = 5;
   inline bool has_charset() const;
@@ -651,8 +631,8 @@ class BinlogEvent : public ::google::protobuf::Message {
   inline void clear_has_table();
   inline void set_has_event_type();
   inline void clear_has_event_type();
-  inline void set_has_mysub_status();
-  inline void clear_has_mysub_status();
+  inline void set_has_status();
+  inline void clear_has_status();
   inline void set_has_charset();
   inline void clear_has_charset();
   inline void set_has_row();
@@ -664,7 +644,7 @@ class BinlogEvent : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* db_;
   ::std::string* table_;
-  ::mysql_replicator::MysubStatus* mysub_status_;
+  ::mysql_replicator::Status* status_;
   ::std::string* charset_;
   ::mysql_replicator::Row* row_;
   int event_type_;
@@ -831,7 +811,7 @@ inline void Field::set_is_pk(bool value) {
   // @@protoc_insertion_point(field_set:mysql_replicator.Field.is_pk)
 }
 
-// optional bool is_old_null = 6;
+// optional bool is_old_null = 6 [default = false];
 inline bool Field::has_is_old_null() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -931,7 +911,7 @@ inline void Field::set_allocated_old_value(::std::string* old_value) {
   // @@protoc_insertion_point(field_set_allocated:mysql_replicator.Field.old_value)
 }
 
-// optional bool is_new_null = 8;
+// optional bool is_new_null = 8 [default = false];
 inline bool Field::has_is_new_null() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
@@ -1143,61 +1123,61 @@ Row::mutable_field() {
 
 // -------------------------------------------------------------------
 
-// MysubStatus
+// Status
 
 // required string log_file = 1;
-inline bool MysubStatus::has_log_file() const {
+inline bool Status::has_log_file() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MysubStatus::set_has_log_file() {
+inline void Status::set_has_log_file() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MysubStatus::clear_has_log_file() {
+inline void Status::clear_has_log_file() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MysubStatus::clear_log_file() {
+inline void Status::clear_log_file() {
   if (log_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     log_file_->clear();
   }
   clear_has_log_file();
 }
-inline const ::std::string& MysubStatus::log_file() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.log_file)
+inline const ::std::string& Status::log_file() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Status.log_file)
   return *log_file_;
 }
-inline void MysubStatus::set_log_file(const ::std::string& value) {
+inline void Status::set_log_file(const ::std::string& value) {
   set_has_log_file();
   if (log_file_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     log_file_ = new ::std::string;
   }
   log_file_->assign(value);
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Status.log_file)
 }
-inline void MysubStatus::set_log_file(const char* value) {
+inline void Status::set_log_file(const char* value) {
   set_has_log_file();
   if (log_file_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     log_file_ = new ::std::string;
   }
   log_file_->assign(value);
-  // @@protoc_insertion_point(field_set_char:mysql_replicator.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.Status.log_file)
 }
-inline void MysubStatus::set_log_file(const char* value, size_t size) {
+inline void Status::set_log_file(const char* value, size_t size) {
   set_has_log_file();
   if (log_file_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     log_file_ = new ::std::string;
   }
   log_file_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.Status.log_file)
 }
-inline ::std::string* MysubStatus::mutable_log_file() {
+inline ::std::string* Status::mutable_log_file() {
   set_has_log_file();
   if (log_file_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     log_file_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:mysql_replicator.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.Status.log_file)
   return log_file_;
 }
-inline ::std::string* MysubStatus::release_log_file() {
+inline ::std::string* Status::release_log_file() {
   clear_has_log_file();
   if (log_file_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -1207,7 +1187,7 @@ inline ::std::string* MysubStatus::release_log_file() {
     return temp;
   }
 }
-inline void MysubStatus::set_allocated_log_file(::std::string* log_file) {
+inline void Status::set_allocated_log_file(::std::string* log_file) {
   if (log_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete log_file_;
   }
@@ -1218,158 +1198,110 @@ inline void MysubStatus::set_allocated_log_file(::std::string* log_file) {
     clear_has_log_file();
     log_file_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.MysubStatus.log_file)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.Status.log_file)
 }
 
 // required uint32 offset = 2;
-inline bool MysubStatus::has_offset() const {
+inline bool Status::has_offset() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MysubStatus::set_has_offset() {
+inline void Status::set_has_offset() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MysubStatus::clear_has_offset() {
+inline void Status::clear_has_offset() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MysubStatus::clear_offset() {
+inline void Status::clear_offset() {
   offset_ = 0u;
   clear_has_offset();
 }
-inline ::google::protobuf::uint32 MysubStatus::offset() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.offset)
+inline ::google::protobuf::uint32 Status::offset() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Status.offset)
   return offset_;
 }
-inline void MysubStatus::set_offset(::google::protobuf::uint32 value) {
+inline void Status::set_offset(::google::protobuf::uint32 value) {
   set_has_offset();
   offset_ = value;
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.offset)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Status.offset)
 }
 
 // required uint32 timestamp = 3;
-inline bool MysubStatus::has_timestamp() const {
+inline bool Status::has_timestamp() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void MysubStatus::set_has_timestamp() {
+inline void Status::set_has_timestamp() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void MysubStatus::clear_has_timestamp() {
+inline void Status::clear_has_timestamp() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void MysubStatus::clear_timestamp() {
+inline void Status::clear_timestamp() {
   timestamp_ = 0u;
   clear_has_timestamp();
 }
-inline ::google::protobuf::uint32 MysubStatus::timestamp() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.timestamp)
+inline ::google::protobuf::uint32 Status::timestamp() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Status.timestamp)
   return timestamp_;
 }
-inline void MysubStatus::set_timestamp(::google::protobuf::uint32 value) {
+inline void Status::set_timestamp(::google::protobuf::uint32 value) {
   set_has_timestamp();
   timestamp_ = value;
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.timestamp)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Status.timestamp)
 }
 
-// required uint32 safe_offset = 4;
-inline bool MysubStatus::has_safe_offset() const {
+// required string host = 4;
+inline bool Status::has_host() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void MysubStatus::set_has_safe_offset() {
+inline void Status::set_has_host() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void MysubStatus::clear_has_safe_offset() {
+inline void Status::clear_has_host() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void MysubStatus::clear_safe_offset() {
-  safe_offset_ = 0u;
-  clear_has_safe_offset();
-}
-inline ::google::protobuf::uint32 MysubStatus::safe_offset() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.safe_offset)
-  return safe_offset_;
-}
-inline void MysubStatus::set_safe_offset(::google::protobuf::uint32 value) {
-  set_has_safe_offset();
-  safe_offset_ = value;
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.safe_offset)
-}
-
-// required uint32 safe_timestamp = 5;
-inline bool MysubStatus::has_safe_timestamp() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void MysubStatus::set_has_safe_timestamp() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void MysubStatus::clear_has_safe_timestamp() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void MysubStatus::clear_safe_timestamp() {
-  safe_timestamp_ = 0u;
-  clear_has_safe_timestamp();
-}
-inline ::google::protobuf::uint32 MysubStatus::safe_timestamp() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.safe_timestamp)
-  return safe_timestamp_;
-}
-inline void MysubStatus::set_safe_timestamp(::google::protobuf::uint32 value) {
-  set_has_safe_timestamp();
-  safe_timestamp_ = value;
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.safe_timestamp)
-}
-
-// required string host = 6;
-inline bool MysubStatus::has_host() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void MysubStatus::set_has_host() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void MysubStatus::clear_has_host() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void MysubStatus::clear_host() {
+inline void Status::clear_host() {
   if (host_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     host_->clear();
   }
   clear_has_host();
 }
-inline const ::std::string& MysubStatus::host() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.host)
+inline const ::std::string& Status::host() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Status.host)
   return *host_;
 }
-inline void MysubStatus::set_host(const ::std::string& value) {
+inline void Status::set_host(const ::std::string& value) {
   set_has_host();
   if (host_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     host_ = new ::std::string;
   }
   host_->assign(value);
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.host)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Status.host)
 }
-inline void MysubStatus::set_host(const char* value) {
+inline void Status::set_host(const char* value) {
   set_has_host();
   if (host_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     host_ = new ::std::string;
   }
   host_->assign(value);
-  // @@protoc_insertion_point(field_set_char:mysql_replicator.MysubStatus.host)
+  // @@protoc_insertion_point(field_set_char:mysql_replicator.Status.host)
 }
-inline void MysubStatus::set_host(const char* value, size_t size) {
+inline void Status::set_host(const char* value, size_t size) {
   set_has_host();
   if (host_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     host_ = new ::std::string;
   }
   host_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.MysubStatus.host)
+  // @@protoc_insertion_point(field_set_pointer:mysql_replicator.Status.host)
 }
-inline ::std::string* MysubStatus::mutable_host() {
+inline ::std::string* Status::mutable_host() {
   set_has_host();
   if (host_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     host_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:mysql_replicator.MysubStatus.host)
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.Status.host)
   return host_;
 }
-inline ::std::string* MysubStatus::release_host() {
+inline ::std::string* Status::release_host() {
   clear_has_host();
   if (host_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -1379,7 +1311,7 @@ inline ::std::string* MysubStatus::release_host() {
     return temp;
   }
 }
-inline void MysubStatus::set_allocated_host(::std::string* host) {
+inline void Status::set_allocated_host(::std::string* host) {
   if (host_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete host_;
   }
@@ -1390,55 +1322,55 @@ inline void MysubStatus::set_allocated_host(::std::string* host) {
     clear_has_host();
     host_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.MysubStatus.host)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.Status.host)
 }
 
-// required uint32 port = 7;
-inline bool MysubStatus::has_port() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+// required uint32 port = 5;
+inline bool Status::has_port() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void MysubStatus::set_has_port() {
-  _has_bits_[0] |= 0x00000040u;
+inline void Status::set_has_port() {
+  _has_bits_[0] |= 0x00000010u;
 }
-inline void MysubStatus::clear_has_port() {
-  _has_bits_[0] &= ~0x00000040u;
+inline void Status::clear_has_port() {
+  _has_bits_[0] &= ~0x00000010u;
 }
-inline void MysubStatus::clear_port() {
+inline void Status::clear_port() {
   port_ = 0u;
   clear_has_port();
 }
-inline ::google::protobuf::uint32 MysubStatus::port() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.port)
+inline ::google::protobuf::uint32 Status::port() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Status.port)
   return port_;
 }
-inline void MysubStatus::set_port(::google::protobuf::uint32 value) {
+inline void Status::set_port(::google::protobuf::uint32 value) {
   set_has_port();
   port_ = value;
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.port)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Status.port)
 }
 
-// optional uint64 progress = 8;
-inline bool MysubStatus::has_progress() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+// optional uint64 progress = 6;
+inline bool Status::has_progress() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void MysubStatus::set_has_progress() {
-  _has_bits_[0] |= 0x00000080u;
+inline void Status::set_has_progress() {
+  _has_bits_[0] |= 0x00000020u;
 }
-inline void MysubStatus::clear_has_progress() {
-  _has_bits_[0] &= ~0x00000080u;
+inline void Status::clear_has_progress() {
+  _has_bits_[0] &= ~0x00000020u;
 }
-inline void MysubStatus::clear_progress() {
+inline void Status::clear_progress() {
   progress_ = GOOGLE_ULONGLONG(0);
   clear_has_progress();
 }
-inline ::google::protobuf::uint64 MysubStatus::progress() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.MysubStatus.progress)
+inline ::google::protobuf::uint64 Status::progress() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.Status.progress)
   return progress_;
 }
-inline void MysubStatus::set_progress(::google::protobuf::uint64 value) {
+inline void Status::set_progress(::google::protobuf::uint64 value) {
   set_has_progress();
   progress_ = value;
-  // @@protoc_insertion_point(field_set:mysql_replicator.MysubStatus.progress)
+  // @@protoc_insertion_point(field_set:mysql_replicator.Status.progress)
 }
 
 // -------------------------------------------------------------------
@@ -1622,45 +1554,45 @@ inline void BinlogEvent::set_event_type(::mysql_replicator::EventType value) {
   // @@protoc_insertion_point(field_set:mysql_replicator.BinlogEvent.event_type)
 }
 
-// optional .mysql_replicator.MysubStatus mysub_status = 4;
-inline bool BinlogEvent::has_mysub_status() const {
+// optional .mysql_replicator.Status status = 4;
+inline bool BinlogEvent::has_status() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void BinlogEvent::set_has_mysub_status() {
+inline void BinlogEvent::set_has_status() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void BinlogEvent::clear_has_mysub_status() {
+inline void BinlogEvent::clear_has_status() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void BinlogEvent::clear_mysub_status() {
-  if (mysub_status_ != NULL) mysub_status_->::mysql_replicator::MysubStatus::Clear();
-  clear_has_mysub_status();
+inline void BinlogEvent::clear_status() {
+  if (status_ != NULL) status_->::mysql_replicator::Status::Clear();
+  clear_has_status();
 }
-inline const ::mysql_replicator::MysubStatus& BinlogEvent::mysub_status() const {
-  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.mysub_status)
-  return mysub_status_ != NULL ? *mysub_status_ : *default_instance_->mysub_status_;
+inline const ::mysql_replicator::Status& BinlogEvent::status() const {
+  // @@protoc_insertion_point(field_get:mysql_replicator.BinlogEvent.status)
+  return status_ != NULL ? *status_ : *default_instance_->status_;
 }
-inline ::mysql_replicator::MysubStatus* BinlogEvent::mutable_mysub_status() {
-  set_has_mysub_status();
-  if (mysub_status_ == NULL) mysub_status_ = new ::mysql_replicator::MysubStatus;
-  // @@protoc_insertion_point(field_mutable:mysql_replicator.BinlogEvent.mysub_status)
-  return mysub_status_;
+inline ::mysql_replicator::Status* BinlogEvent::mutable_status() {
+  set_has_status();
+  if (status_ == NULL) status_ = new ::mysql_replicator::Status;
+  // @@protoc_insertion_point(field_mutable:mysql_replicator.BinlogEvent.status)
+  return status_;
 }
-inline ::mysql_replicator::MysubStatus* BinlogEvent::release_mysub_status() {
-  clear_has_mysub_status();
-  ::mysql_replicator::MysubStatus* temp = mysub_status_;
-  mysub_status_ = NULL;
+inline ::mysql_replicator::Status* BinlogEvent::release_status() {
+  clear_has_status();
+  ::mysql_replicator::Status* temp = status_;
+  status_ = NULL;
   return temp;
 }
-inline void BinlogEvent::set_allocated_mysub_status(::mysql_replicator::MysubStatus* mysub_status) {
-  delete mysub_status_;
-  mysub_status_ = mysub_status;
-  if (mysub_status) {
-    set_has_mysub_status();
+inline void BinlogEvent::set_allocated_status(::mysql_replicator::Status* status) {
+  delete status_;
+  status_ = status;
+  if (status) {
+    set_has_status();
   } else {
-    clear_has_mysub_status();
+    clear_has_status();
   }
-  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.BinlogEvent.mysub_status)
+  // @@protoc_insertion_point(field_set_allocated:mysql_replicator.BinlogEvent.status)
 }
 
 // optional string charset = 5;

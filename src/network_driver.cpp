@@ -5,6 +5,10 @@
 #include "format_description_event.h"
 #include "binlog_event_factory.h"
 #include "binlog_dump_exception.h"
+#include "binlog_event.pb.h"
+#include "mysql_replicator_com.h"
+#include "rows_event.h"
+#include "rotate_event.h"
 using std::shared_ptr;
 using std::string;
 
@@ -49,28 +53,35 @@ void NetworkDriver::init() {
 }
 
 void NetworkDriver::sendBinlogDump(std::shared_ptr<BinlogCheckPoint> binlog_pos) {
+    check_point_ = binlog_pos;
     dumper_->sendBinlogDump(binlog_pos);
-
 }
-std::shared_ptr<BinlogEvent> NetworkDriver::takeBinlogEvent() {
-    std::shared_ptr<LogEvent> event;
-    do {
-            event = dumper_->takeBinlogEvent();
-    } while (1);
-    //while (1) {
-    //    std::shared_ptr<EventHeader> header = get_header();
-    //    event = parse_event(is, header);
-    //    for (size_t i = 0; i < handlers_.size(); ++i) {
-    //        if (!event) {
-    //            break;
-    //        }
-    //        handlers_[i].handle(event);
-    //    }
-    //    if (event) {
-    //        break;
-    //    }
-    //}
-    return std::shared_ptr<BinlogEvent>();
+
+void NetworkDriver::takeBinlogEvent(std::vector<std::shared_ptr<BinlogEvent> >& event_vec) {
+    shared_ptr<LogEvent> event = dumper_->takeBinlogEvent();
+    shared_ptr<BinlogEventHeader> header = event->get_header();
+    check_point_->process(event);
+    switch (header->event_type) {
+        case log_event_type_t::WRITE_ROWS_EVENT:
+        case log_event_type_t::UPDATE_ROWS_EVENT:
+        case log_event_type_t::DELETE_ROWS_EVENT:
+        case log_event_type_t::WRITE_ROWS_EVENTv2:
+        case log_event_type_t::UPDATE_ROWS_EVENTv2:
+        case log_event_type_t::DELETE_ROWS_EVENTv2: {
+            shared_ptr<RowsEvent> rows_event = std::dynamic_pointer_cast<RowsEvent>(event);
+            rows_event->buildEventProto(event_vec);
+            for (auto &event : event_vec) {
+                Status *status = event->mutable_status();
+                status->set_log_file(check_point_->get_binlog_filename());
+                status->set_offset(header->log_pos);
+                status->set_timestamp(header->timestamp);
+                status->set_host(host_);
+                status->set_port(port_);
+                status->set_progress(check_point_->get_progress());
+            }
+            return;
+        }
+    }
 }
 
 }

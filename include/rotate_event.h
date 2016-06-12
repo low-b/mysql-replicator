@@ -10,6 +10,12 @@ public:
         LogEvent(header) {}
     virtual void fromStream(std::istream&);
     virtual void printPacket();
+    uint64_t get_position() {
+        return position_;
+    }
+    std::string get_next_binlog_name() {
+        return next_binlog_name_;
+    }
 private:
     uint64_t position_;
     std::string next_binlog_name_;

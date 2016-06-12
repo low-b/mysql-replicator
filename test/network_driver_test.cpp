@@ -15,11 +15,18 @@ TEST(TransformerTest,  test_aaaa)
     try {
     driver.init();
     std::shared_ptr<BinlogPosition> bin_pos = std::make_shared<BinlogPosition>();
-    bin_pos->set_binlog_filename("mysql-bin.000018");
-    bin_pos->set_binlog_pos(7931985);
+    bin_pos->set_binlog_filename("mysql-bin.000017");
+    bin_pos->set_binlog_pos(51766);
     bin_pos->set_slave_id(12345);
     driver.sendBinlogDump(bin_pos);
-    driver.takeBinlogEvent();
+    std::vector<std::shared_ptr<BinlogEvent> > event_vec;
+    while (1) {
+        event_vec.clear();
+        driver.takeBinlogEvent(event_vec);
+        for (auto &i : event_vec) {
+            cout << i->DebugString() << endl;
+        }
+    }
     } catch (MyException &e) {
         printf("error:%s", e.what());
     }

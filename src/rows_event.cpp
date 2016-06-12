@@ -105,7 +105,6 @@ void RowsEvent::buildRowProto(std::istream& is,
     uint32_t field_type = 0;
     uint32_t field_len = 0;
     for (size_t i = 0; i < column_count_; ++i) {
-
         if (!columns_before_set_[i]) {
             continue;
         }
@@ -234,7 +233,7 @@ void RowsEvent::buildRowProto(std::istream& is,
                     string decimal_str;
                     BytesHelper::readFixString(is, decimal_str, bin_size);
                     current_size += bin_size;
-                    uchar *ptr = (uchar*)decimal_str.data();
+                    const uchar *ptr = (const uchar*)decimal_str.data();
                     decimal_t dec;
                     bin2decimal(ptr, &dec, precision, decimals);
                     int len= DECIMAL_MAX_STR_LENGTH;
@@ -509,7 +508,6 @@ void RowsEvent::buildRowProto(std::istream& is,
         }
         ++null_index;
     }
-
 }
 void RowsEvent::printPacket() {
     std::cout << "--------rows event packet begin---------" << std::endl;
